@@ -1,0 +1,37 @@
+// @tailwind base;
+// @tailwind components;
+// @tailwind utilities;
+// color pink: #E09B75;
+// color white: #EAE5DC;
+// color brown: #AA5A36;
+// color yellow: #D59427;
+
+body {
+  color: #EAE5DC;
+  background-color: #EAE5DC;
+}
+
+nav {
+  width: 100%;
+  background-color: #AA5A36;
+
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 12px;
+    margin: 12px;
+    list-style: none;
+
+    li {
+      border: 1px solid #EAE5DC;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: 0.2s;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+}
