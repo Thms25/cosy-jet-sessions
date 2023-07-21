@@ -1,6 +1,6 @@
 // color pink: #E09B75;
 // color white: #EAE5DC;
-// color brown: #AA5A36;
+// color brown: rgba(128, 66, 33, 1);
 // color yellow: #D59427;
 
 body {
@@ -17,7 +17,8 @@ body {
 
 nav {
   width: 100%;
-  background-color: #AA5A36;
+  // background-color: #9A6444;
+  background-color: rgba(128, 66, 33, 1);
   position: absolute;
 
   ul {
@@ -49,5 +50,57 @@ header {
   #cjs-banner {
     object-fit: contain;
     width: 80%;
+  }
+}
+
+.media {
+  .title {
+    color: rgba(128, 66, 33, 1);
+    text-align: center;
+    margin: 16px auto;
+    padding: 8px;
+  }
+}
+
+.about {
+  h1 {
+    color: rgba(128, 66, 33, 1);
+  }
+}
+
+.contact {
+  h1 {
+    color: rgba(128, 66, 33, 1);
+  }
+}
+
+section {
+  color: rgba(128, 66, 33, 1);
+  text-align: center;
+
+  h1 {
+    font-size: 30px;
+    letter-spacing: 3px;
+  }
+
+  .concept-section {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .concept-card {
+      font-size: 20px;
+      padding: 20px;
+      margin: 20px;
+      background-color: rgba(128, 66, 33, 0);
+      box-shadow: 0 0 4px rgba(128, 66, 33, 0.5);
+      border: 6px;
+      transition: 0.25s;
+
+      &:hover {
+        background-color: rgba(128, 66, 33, 0.05);
+        box-shadow: 0 0 4px rgba(128, 66, 33, 0.8);
+      }
+    }
   }
 }

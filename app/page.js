@@ -6,14 +6,26 @@ export default function Home() {
     <main>
       <nav>
         <ul>
-          <li>Home</li>
-          <li>About</li>
+          <li>
+          <Link href="/">
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link href="/about">
+              About
+            </Link>
+          </li>
           <li>
             <Link href="/media">
               Media
             </Link>
           </li>
-          <li>Contact</li>
+          <li>
+          <Link href="/contact">
+              Contact
+            </Link>
+          </li>
         </ul>
       </nav>
       <header>
@@ -28,6 +40,22 @@ export default function Home() {
           />
         </div>
       </header>
+      <main>
+        <section>
+          <h1>Browse through all our content</h1>
+          <div className='concept-section'>
+            <div className='concept-card'>
+              Videos
+            </div>
+            <div className='concept-card'>
+              interviews
+            </div>
+            <div className='concept-card'>
+              podcasts
+            </div>
+          </div>
+        </section>
+      </main>
     </main>
   )
 }
