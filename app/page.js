@@ -1,33 +1,7 @@
 import Image from 'next/image'
-import Link from 'next/link'
-
 export default function Home() {
   return (
-    <main>
-      <nav>
-        <ul>
-          <li>
-          <Link href="/">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link href="/about">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/media">
-              Media
-            </Link>
-          </li>
-          <li>
-          <Link href="/contact">
-              Contact
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <div>
       <header>
         <div className='banner'>
           <Image
@@ -40,7 +14,7 @@ export default function Home() {
           />
         </div>
       </header>
-      <main>
+      <div>
         <section>
           <h1>Browse through all our content</h1>
           <div className='concept-section'>
@@ -55,7 +29,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
-    </main>
+      </div>
+    </div>
   )
 }

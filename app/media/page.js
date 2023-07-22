@@ -2,6 +2,7 @@
 // import YouTube from "react-youtube";
 
 import Image from "next/image";
+import styles from "components/media.module.scss"
 
 // export default class YoutubeVideo
 // extends React.Component {
@@ -30,11 +31,12 @@ import Image from "next/image";
 
 export default function Media() {
   return (
-    <div className="media">
-      <div className="title">
-        <h1>Hello Cosy Jet-er</h1>
+    <div className={styles.media}>
+      <div className={styles.title}>
+        <h1>Hello Cosy Jetter</h1>
+        <p>Welcme to the media page</p>
       </div>
-      <div className="images">
+      <div className={styles.images}>
         <Image
           src="/images/decor.png"
           alt='cjs-decor'

@@ -4,41 +4,15 @@
 // color yellow: #D59427;
 
 body {
-  color: #EAE5DC;
+  color: rgba(128, 66, 33, 1);
   background-color: #EAE5DC;
   margin: 0;
   padding: 0;
+  text-align: center;
 
   a {
     text-decoration: none;
     color: #EAE5DC;
-  }
-}
-
-nav {
-  width: 100%;
-  // background-color: #9A6444;
-  background-color: rgba(128, 66, 33, 1);
-  position: absolute;
-
-  ul {
-    display: flex;
-    justify-content: space-evenly;
-    padding: 12px;
-    margin: 12px;
-    list-style: none;
-
-    li {
-      border: 1px solid #EAE5DC;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 8px 12px;
-      border-radius: 4px;
-      transition: 0.2s;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.3);
-      }
-    }
   }
 }
 
@@ -50,34 +24,11 @@ header {
   #cjs-banner {
     object-fit: contain;
     width: 80%;
-  }
-}
-
-.media {
-  .title {
-    color: rgba(128, 66, 33, 1);
-    text-align: center;
-    margin: 16px auto;
-    padding: 8px;
-  }
-}
-
-.about {
-  h1 {
-    color: rgba(128, 66, 33, 1);
-  }
-}
-
-.contact {
-  h1 {
-    color: rgba(128, 66, 33, 1);
+    height: 50vh;
   }
 }
 
 section {
-  color: rgba(128, 66, 33, 1);
-  text-align: center;
-
   h1 {
     font-size: 30px;
     letter-spacing: 3px;
