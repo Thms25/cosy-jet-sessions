@@ -1,18 +1,18 @@
-// color pink: #E09B75;
-// color white: #EAE5DC;
-// color brown: rgba(128, 66, 33, 1);
-// color yellow: #D59427;
+// color white: #eae5dc;
+// color pink: #df9b74;
+// color yellow: #d59429;
+// color brown: #b1582d;
 
 body {
-  color: rgba(128, 66, 33, 1);
-  background-color: #EAE5DC;
+  color: #b1582d;
+  background-color: #eae5dc;
   margin: 0;
   padding: 0;
   text-align: center;
 
   a {
     text-decoration: none;
-    color: #EAE5DC;
+    color: #eae5dc;
   }
 }
 
@@ -25,33 +25,5 @@ header {
     object-fit: contain;
     width: 80%;
     height: 50vh;
-  }
-}
-
-section {
-  h1 {
-    font-size: 30px;
-    letter-spacing: 3px;
-  }
-
-  .concept-section {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-
-    .concept-card {
-      font-size: 20px;
-      padding: 20px;
-      margin: 20px;
-      background-color: rgba(128, 66, 33, 0);
-      box-shadow: 0 0 4px rgba(128, 66, 33, 0.5);
-      border: 6px;
-      transition: 0.25s;
-
-      &:hover {
-        background-color: rgba(128, 66, 33, 0.05);
-        box-shadow: 0 0 4px rgba(128, 66, 33, 0.8);
-      }
-    }
   }
 }

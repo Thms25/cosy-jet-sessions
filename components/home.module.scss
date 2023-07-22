@@ -1,0 +1,37 @@
+.section {
+  h1 {
+    font-size: 30px;
+    letter-spacing: 3px;
+  }
+
+  .concept {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .card {
+      font-size: 20px;
+      padding: 20px;
+      margin: 20px;
+      width: 20%;
+      height: 20vh;
+      background-color: rgba(128, 66, 33, 0);
+      box-shadow: 0 0 4px rgba(128, 66, 33, 0.5);
+      border: 6px;
+      transition: 0.25s;
+
+      &:hover {
+        background-color: rgba(128, 66, 33, 0.05);
+        box-shadow: 0 0 4px rgba(128, 66, 33, 0.8);
+      }
+
+      img {
+        object-fit: contain;
+        width: 75%;
+      }
+    }
+  }
+
+  .concept-card {
+  }
+}
