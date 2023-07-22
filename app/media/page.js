@@ -1,6 +1,8 @@
-// import YouTube from "react-youtube";
+'use client'
+
 // import Image from "next/image";
-import styles from "components/media.module.scss"
+import styles from "components/media.module.scss";
+import YoutubeVideo from '../../components/YoutubeVideo';
 
 export default function Media() {
   return (
@@ -9,6 +11,13 @@ export default function Media() {
         <h1>Hello Cosy Jetter</h1>
         <p>Welcme to the media page</p>
       </div>
+      <div className={styles.videos}>
+        <div className={styles.videos}>
+          <YoutubeVideo videoId="bUnNzb-Floo"/>
+          <YoutubeVideo videoId="1lvytCVdqjE"/>
+          <YoutubeVideo videoId="lGZDjhryorY"/>
+        </div>
+      </div>
       <div className={styles.images}>
         {/* <Image
           src="/images/decor.png"
@@ -16,8 +25,6 @@ export default function Media() {
           width={1850}
           height={1044}
         /> */}
-      </div>
-      <div className={styles.videos}>
       </div>
     </div>
   )
