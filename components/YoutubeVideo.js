@@ -38,6 +38,7 @@ class YoutubeVideo extends Component {
           onReady={this.videoOnReady}
           onPlay={this.videoOnPlay}
           onStateChange={this.videoStateChange}
+          iframeClassName='yt-vid'
         />
     )
   }

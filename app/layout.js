@@ -1,6 +1,7 @@
-import './globals.scss'
+import './styles/globals.scss'
 import Link from 'next/link'
-import styles from 'components/navbar.module.scss'
+import styles from './styles/navbar.module.scss'
+import style from './styles/home.module.scss'
 
 export const metadata = {
   title: 'Cosy Jet Sessions',

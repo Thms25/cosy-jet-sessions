@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import styles from 'components/home.module.scss';
+import styles from './styles/home.module.scss';
 import YoutubeVideo from '../components/YoutubeVideo';
 
 export default function Home() {

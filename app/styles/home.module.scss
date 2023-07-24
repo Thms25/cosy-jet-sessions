@@ -1,4 +1,9 @@
 .section {
+
+  iframe {
+    border-radius: 30px;
+  }
+
   h1 {
     font-size: 30px;
     letter-spacing: 3px;
@@ -7,26 +12,20 @@
   .videos {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 18px;
     margin: 24px auto;
-
-    // vid {
-    //   object-fit: contain;
-    //   width: 50%;
-    // }
   }
 
   @media (max-width: 1200px) {
     .videos {
       grid-template-columns: 1fr;
-      gap: 18px;
     }
   }
 
   @media (min-width: 1850px) {
     .videos {
       grid-template-columns: 1fr 1fr 1fr;
-      gap: 32px;
+      gap: 24px;
     }
   }
 }
