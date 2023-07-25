@@ -1,7 +1,8 @@
 'use client'
+require('dotenv').config();
 
 // import Image from "next/image";
-import styles from "./styles/media.module.scss";
+import styles from "../../styles/media.module.scss";
 import YoutubeVideo from '../../components/YoutubeVideo';
 
 export default function Media() {
