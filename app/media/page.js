@@ -3,7 +3,7 @@
 // import Image from "next/image";
 import styles from "../../styles/media.module.scss";
 import YoutubeVideo from '../../components/YoutubeVideo';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const API_KEY = "AIzaSyAtYwtBDtC4KYMmBt3MiC1_MsjWElk3cho"
 const URL = "https://www.googleapis.com/youtube/v3/search?"
@@ -17,16 +17,21 @@ const fetchUrl = `${URL}key=${API_KEY}&channelId=${CHANNEL}&part=snippet&maxResu
 
 export default function Media() {
 
-  // useEffect(() => {
-  //   fetch(fetchUrl)
-  //     .then((response) => response.json())
-  //       .then((resJson) => {
-  //         const results = resJson.items.map(result => ({
-  //           videoId: result.id.videoId
-  //         }))
-  //         console.log(results);
-  //       })
-  //   })
+  const [videosId, setVideosId] = useState([])
+
+  useEffect(() => {
+    fetch(fetchUrl)
+      .then((response) => response.json())
+        .then((resJson) => {
+          const results = resJson.items.map(result => ({
+            videoId: result.id.videoId
+          }))
+          console.log(results);
+            setVideosId(results)
+        })
+    })
+
+  console.log(videosId);
 
   return (
     <div className={styles.media}>
@@ -36,9 +41,16 @@ export default function Media() {
       </div>
       <div className={styles.videos}>
         <div className={styles.videos}>
-          <YoutubeVideo videoId="bUnNzb-Floo"/>
+
+          {videosId.map((ids) => {
+            return (
+              <YoutubeVideo videoId={ids} />
+            )
+          })}
+
+          {/* <YoutubeVideo videoId="bUnNzb-Floo"/>
           <YoutubeVideo videoId="1lvytCVdqjE"/>
-          <YoutubeVideo videoId="lGZDjhryorY"/>
+          <YoutubeVideo videoId="lGZDjhryorY"/> */}
           {/* {allVideos.map} */}
         </div>
       </div>
