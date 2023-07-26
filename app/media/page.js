@@ -1,11 +1,33 @@
 'use client'
-require('dotenv').config();
 
 // import Image from "next/image";
 import styles from "../../styles/media.module.scss";
 import YoutubeVideo from '../../components/YoutubeVideo';
+import { useEffect } from "react";
+
+const API_KEY = "AIzaSyAtYwtBDtC4KYMmBt3MiC1_MsjWElk3cho"
+const URL = "https://www.googleapis.com/youtube/v3/search?"
+const CHANNEL = "UCdlvOT8isQcuCrxzWgroGZQ"
+
+const fetchUrl = `${URL}key=${API_KEY}&channelId=${CHANNEL}&part=snippet&maxResults=10&order=viewCount`
+
+// "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAtYwtBDtC4KYMmBt3MiC1_MsjWElk3cho&channelId=UCdlvOT8isQcuCrxzWgroGZQ&part=snippet&maxResults=10&order=viewCount"
+
+
 
 export default function Media() {
+
+  // useEffect(() => {
+  //   fetch(fetchUrl)
+  //     .then((response) => response.json())
+  //       .then((resJson) => {
+  //         const results = resJson.items.map(result => ({
+  //           videoId: result.id.videoId
+  //         }))
+  //         console.log(results);
+  //       })
+  //   })
+
   return (
     <div className={styles.media}>
       <div className={styles.title}>
@@ -17,6 +39,7 @@ export default function Media() {
           <YoutubeVideo videoId="bUnNzb-Floo"/>
           <YoutubeVideo videoId="1lvytCVdqjE"/>
           <YoutubeVideo videoId="lGZDjhryorY"/>
+          {/* {allVideos.map} */}
         </div>
       </div>
       <div className={styles.images}>
