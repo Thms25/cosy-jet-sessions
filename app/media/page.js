@@ -5,7 +5,7 @@ import styles from "../../styles/media.module.scss";
 import YoutubeVideo from '../../components/YoutubeVideo';
 import { useEffect, useState } from "react";
 
-const API_KEY = "AIzaSyAtYwtBDtC4KYMmBt3MiC1_MsjWElk3cho"
+const API_KEY = ""
 const URL = "https://www.googleapis.com/youtube/v3/search?"
 const CHANNEL = "UCdlvOT8isQcuCrxzWgroGZQ"
 
@@ -19,19 +19,19 @@ export default function Media() {
 
   const [videosId, setVideosId] = useState([])
 
-  useEffect(() => {
-    fetch(fetchUrl)
-      .then((response) => response.json())
-        .then((resJson) => {
-          const results = resJson.items.map(result => ({
-            videoId: result.id.videoId
-          }))
-          console.log(results);
-            setVideosId(results)
-        })
-    })
+  // useEffect(() => {
+  //   fetch(fetchUrl)
+  //     .then((response) => response.json())
+  //       .then((resJson) => {
+  //         const results = resJson.items.map(result => ({
+  //           videoId: result.id.videoId
+  //         }))
+  //         console.log(results);
+  //           setVideosId(results)
+  //       })
+  //   })
 
-  console.log(videosId);
+  // console.log(videosId);
 
   return (
     <div className={styles.media}>
