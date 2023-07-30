@@ -1,6 +1,9 @@
 import '../styles/globals.scss'
 import Link from 'next/link'
 import styles from '../styles/navbar.module.scss'
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
 
 export const metadata = {
   title: 'Cosy Jet Sessions',
