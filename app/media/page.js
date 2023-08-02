@@ -5,14 +5,11 @@ import styles from "../../styles/media.module.scss";
 import YoutubeVideo from '../../components/YoutubeVideo';
 import { useEffect, useState } from "react";
 
-const API_KEY = ""
+const API_KEY = process.env.YT_API_KEY
 const URL = "https://www.googleapis.com/youtube/v3/search?"
 const CHANNEL = "UCdlvOT8isQcuCrxzWgroGZQ"
 
 const fetchUrl = `${URL}key=${API_KEY}&channelId=${CHANNEL}&part=snippet&maxResults=10&order=viewCount`
-
-// "https://www.googleapis.com/youtube/v3/search?key=AIzaSyAtYwtBDtC4KYMmBt3MiC1_MsjWElk3cho&channelId=UCdlvOT8isQcuCrxzWgroGZQ&part=snippet&maxResults=10&order=viewCount"
-
 
 
 export default function Media() {
