@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@vercel/postgres": "^0.4.1",
     "autoprefixer": "10.4.14",
     "next": "13.4.10",
     "postcss": "8.4.26",
@@ -20,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-youtube": "^10.1.0",
     "sass": "^1.63.6",
+    "vercel": "^31.2.1",
     "video-react": "^0.16.0",
     "youtube-api": "^3.0.1"
   }
