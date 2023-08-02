@@ -1,0 +1,46 @@
+.section {
+
+  h1 {
+    font-size: 30px;
+    letter-spacing: 3px;
+  }
+}
+
+.header {
+  margin-bottom: 80px;
+
+  .banner {
+    text-align: center;
+    width: 100%;
+  }
+
+  #cjsBanner {
+    object-fit: contain;
+    width: 80%;
+    height: 50vh;
+  }
+
+  .bannerDesc {
+    letter-spacing: 2px;
+  }
+}
+
+.footer {
+  .icons {
+    list-style: none;
+    margin: 20px auto;
+    a {
+      color: #b1582d;
+    }
+
+    li {
+      display: inline;
+      margin: 16px 32px;
+      padding: 4px;
+    }
+
+    .icon {
+      font-size: 26px;
+    }
+  }
+}

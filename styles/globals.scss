@@ -1,0 +1,21 @@
+// color white: #eae5dc;
+// color pink: #df9b74;
+// color yellow: #d59429;
+// color brown: #b1582d;
+
+// font
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+body {
+  color: #b1582d;
+  background-color: #eae5dc;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-family: 'DM Serif Display', serif;
+
+  a {
+    text-decoration: none;
+    color: #eae5dc;
+  }
+}
