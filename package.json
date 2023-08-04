@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@prisma/client": "^5.1.1",
     "@vercel/postgres": "^0.4.1",
     "autoprefixer": "10.4.14",
     "next": "13.4.10",
@@ -24,5 +25,8 @@
     "vercel": "^31.2.1",
     "video-react": "^0.16.0",
     "youtube-api": "^3.0.1"
+  },
+  "devDependencies": {
+    "prisma": "^5.1.1"
   }
 }

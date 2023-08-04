@@ -1,0 +1,28 @@
+// schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model YtVideo {
+  id            String     @default(cuid()) @id
+  title         String
+  description   String?
+  publishedAt   String
+  videoId       String
+  artist        Artist?   @relation(fields: [artistId], references: [id])
+  artistId      String?
+}
+
+model Artist {
+  id            String       @default(cuid()) @id
+  name          String?
+  ytVideos      YtVideo[]
+}
