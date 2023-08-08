@@ -8,18 +8,29 @@ import YoutubeVideo from '../components/YoutubeVideo';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faYoutube, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from 'react';
+
 
 async function getVideos() {
   const res = await fetch('api/getVideos')
   return res.json();
 };
 
-
-
 export default function Home() {
+
+  const [videos, setVideos] = useState([]);
+
+  useEffect(() => {
+    async function fetchVideos() {
+      const videoData = await getVideos();
+      setVideos(videoData);
+    }
+
+    fetchVideos();
+  }, []);
+
   return (
     <div className={stylesOne.home}>
-      {console.log(getVideos())}
       <header className={stylesOne.header}>
         <div className={stylesOne.banner}>
           <Image
@@ -29,7 +40,7 @@ export default function Home() {
             alt='cjs-banner'
             width={1710}
             height={751}
-          />
+            />
         </div>
         <div className={stylesOne.bannerDesc}>
           <h3>Cosy Jet Sessions is an intimate acoustic live session media based in Brussels</h3>
@@ -38,11 +49,10 @@ export default function Home() {
       </header>
       <div>
         <section className={stylesOne.section}>
-          {/* <h1>Here are some of the must-watch</h1> */}
           <div className={stylesTwo.videos}>
-              <YoutubeVideo videoId="bUnNzb-Floo" iframeClassName="homeVid" />
-              <YoutubeVideo videoId="1lvytCVdqjE" iframeClassName="homeVid" />
-              <YoutubeVideo videoId="lGZDjhryorY" iframeClassName="homeVid" />
+            {videos.map((video) => (
+              <YoutubeVideo key={video.videoID} videoId={video.videoID} iframeClassName="homeVid" />
+            ))}
           </div>
         </section>
       </div>
