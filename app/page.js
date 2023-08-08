@@ -51,7 +51,7 @@ export default function Home() {
         <section className={stylesOne.section}>
           <div className={stylesTwo.videos}>
             {videos.map((video) => (
-              <YoutubeVideo key={video.videoID} videoId={video.videoID} iframeClassName="homeVid" />
+              <YoutubeVideo key={video["id"]} videoId={video["videoId"]} iframeClassName="homeVid" />
             ))}
           </div>
         </section>
