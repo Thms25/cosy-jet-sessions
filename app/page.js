@@ -9,9 +9,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram, faYoutube, faTiktok } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
+async function getVideos() {
+  const res = await fetch('api/getVideos')
+  return res.json();
+};
+
+
+
 export default function Home() {
   return (
     <div className={stylesOne.home}>
+      {console.log(getVideos())}
       <header className={stylesOne.header}>
         <div className={stylesOne.banner}>
           <Image
@@ -55,7 +63,7 @@ export default function Home() {
               <FontAwesomeIcon icon={faTiktok} className={stylesOne.icon} />
             </li>
           </Link>
-          <Link href="/" target='_blank'>
+          <Link href="/">
             <li>
               <FontAwesomeIcon icon={faEnvelope} className={stylesOne.icon} />
             </li>
