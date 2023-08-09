@@ -1,28 +1,44 @@
 import { PrismaClient } from "@prisma/client";
-import { useState } from "react";
-
-const url = "https://www.googleapis.com/youtube/v3/search?";
-const channel = "UCdlvOT8isQcuCrxzWgroGZQ";
-
-const fetchUrl = `${url}key=${process.env.YT_API_KEY}&channelId=${channel}&part=snippet&maxResults=10&order=viewCount`;
 
 const prisma = new PrismaClient();
 
-// const [videosId, setVideosId] = useState([]);
+async function fetchAndSavePlaylists() {
+  try {
+    const apiKey = process.env.YT_API_KEY;
+    const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
+    const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
 
-// useEffect(() => {
-//   fetch(fetchUrl)
-//     .then((response) => response.json())
-//     .then((resJson) => {
-//       const results = resJson.items.map((result) => ({
-//         videoId: result.id.videoId,
-//       }));
-//       console.log(results);
-//       setVideosId(results);
-//     });
-// });
+    const response = await fetch(
+      `${apiUrl}part=snippet&channelId=${channelId}&maxResults=50&key=${apiKey}`
+    );
 
-// console.log(videosId);
+    const data = await response.json();
+    const videos = data.items.filter((video) => {
+      return video.snippet.videoType !== "short";
+    });
+
+    for (const video of videos) {
+      const { id, snippet } = video;
+      const { videoId, title, description } = snippet;
+
+      await prisma.ytVideo.create({
+        data: {
+          videoId,
+          title,
+          description,
+          // Add other fields you want to populate in your model
+        },
+      });
+    }
+
+    console.log("Playlists saved to the database.");
+  } catch (error) {
+    console.error("Error fetching and saving playlists:", error.message);
+  }
+}
+
+// Call the function with your channel ID
+// fetchAndSavePlaylists();
 
 export async function GET(request) {
   const videos = await prisma.ytVideo.findMany();
