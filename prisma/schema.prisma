@@ -10,20 +10,6 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
-// model YtVideo {
-//   id            Int     @default(autoincrement()) @id
-//   title         String
-//   description   String?
-//   videoId       String
-//   artist        Artist?   @relation(fields: [artistId], references: [id])
-// }
-
-// model Artist {
-//   id            Int       @default(autoincrement()) @id
-//   name          String?
-//   ytVideos      YtVideo[]
-// }
-
 model Artist {
   id         Int         @id @default(autoincrement())
   name       String

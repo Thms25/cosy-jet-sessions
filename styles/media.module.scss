@@ -12,4 +12,22 @@
     object-fit: contain;
     width: 50%;
   }
+
+  .artistList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 12px;
+
+    .artistCard {
+      border: 1px solid #b1592d82;
+      padding: 12px;
+
+      a {
+        color: #b1582d;
+        box-shadow: 0 0 2px #b1582d;
+        padding: 8px 12px;
+        border-radius: 6px;
+      }
+    }
+  }
 }
