@@ -29,7 +29,7 @@ export default function Page({ params }) {
           {artist.videos.map((video) => (
             <div key={video.id}>
               <h2>{video.title}</h2>
-              <YoutubeVideo videoId={video.videoId} iframeClassName="homeVid" />
+              <YoutubeVideo videoId={video.videoId} iframeClassName="" />
             </div>
           ))}
         </div>
