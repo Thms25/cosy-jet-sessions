@@ -4,18 +4,18 @@ const prisma = new PrismaClient();
 
 export async function GET(request) {
   const url = request.url.split("=");
-  const artistName = url[url.length - 1];
-  console.log(artistName);
-  const artist = await prisma.Artist.findFirst({
-    where: {
-      name: artistName,
-    },
-  });
-  console.log(artist);
+  const artistId = url[url.length - 1];
+  // console.log(artistName);
+  // const artist = await prisma.Artist.findFirst({
+  //   where: {
+  //     name: artistName,
+  //   },
+  // });
+  // console.log(artist);
 
   const videos = await prisma.YtVideo.findMany({
     where: {
-      artistId: artist.id,
+      artistId: artistId,
     },
   });
   console.log(videos);
