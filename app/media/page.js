@@ -1,31 +1,26 @@
 "use client";
 
-// import Image from "next/image";
+import Link from "next/link";
 import styles from "../../styles/media.module.scss";
-import YoutubeVideo from "../../components/YoutubeVideo";
 import { useEffect, useState } from "react";
 
-const url = "https://www.googleapis.com/youtube/v3/search?";
-const channel = "UCdlvOT8isQcuCrxzWgroGZQ";
-
-const fetchUrl = `${url}key=${process.env.YT_API_KEY}&channelId=${channel}&part=snippet&maxResults=10&order=viewCount`;
+async function getArtists() {
+  const res = await fetch("api/getArtists");
+  // console.log(res);
+  return res.json();
+}
 
 export default function Media() {
-  const [videosId, setVideosId] = useState([]);
+  const [artists, setArtists] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(fetchUrl)
-  //     .then((response) => response.json())
-  //     .then((resJson) => {
-  //       const results = resJson.items.map((result) => ({
-  //         videoId: result.id.videoId,
-  //       }));
-  //       console.log(results);
-  //       setVideosId(results);
-  //     });
-  // }, []);
+  useEffect(() => {
+    async function fetchArtists() {
+      const artistData = await getArtists();
+      setArtists(artistData);
+    }
 
-  console.log(videosId);
+    fetchArtists();
+  }, []);
 
   return (
     <div className={styles.media}>
@@ -33,25 +28,17 @@ export default function Media() {
         <h1>Hello Cosy Jetter</h1>
         <p>Welcme to the media page</p>
       </div>
-      <div className={styles.videos}>
-        <div className={styles.videos}>
-          {/* {videosId.map((ids) => {
-            return <YoutubeVideo videoId={ids} />;
-          })} */}
-
-          {/* <YoutubeVideo videoId="bUnNzb-Floo"/>
-          <YoutubeVideo videoId="1lvytCVdqjE"/>
-          <YoutubeVideo videoId="lGZDjhryorY"/> */}
-          {/* {allVideos.map} */}
-        </div>
-      </div>
-      <div className={styles.images}>
-        {/* <Image
-          src="/images/decor.png"
-          alt='cjs-decor'
-          width={1850}
-          height={1044}
-        /> */}
+      <div className={styles.artistList}>
+        {artists.map((artist) => {
+          return (
+            <div key={artist.id} className={styles.artistCard}>
+              <h3>{artist.name}</h3>
+              <Link href={`/artist/${artist.id}`}>
+                <p>Click to discover this arist</p>
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
