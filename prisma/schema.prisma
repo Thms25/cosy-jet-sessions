@@ -21,8 +21,8 @@ model YtVideo {
   id          Int         @id @default(autoincrement())
   videoId     String      @unique
   title       String
-  description String?
-  publishedAt DateTime?
+  description String
+  publishedAt DateTime
   artist      Artist?     @relation(fields: [artistId], references: [id])
   artistId    Int?
 }

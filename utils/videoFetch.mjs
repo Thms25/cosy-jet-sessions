@@ -10,10 +10,9 @@ async function deleteExistingData() {
   console.log("Videos deleted.");
 }
 
+await deleteExistingData();
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
-    await deleteExistingData();
-
     const apiKey = process.env.YT_API_KEY;
     const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
     const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
@@ -34,8 +33,8 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       const { title, description, publishedAt } = video.snippet;
       let artistName;
 
-      if (title.includes("cover")) {
-        const match = title.match(/cover by (.*?)\)/);
+      if (/[Cc]over/.test(title)) {
+        const match = title.match(/over by (.*?)\)/);
         artistName = match ? match[1] : "Unknown Artist";
       } else {
         const splitTitle = title.split(" - ");
@@ -47,6 +46,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
       console.log("Artist: ", artistName);
       console.log("Title: ", title);
+      console.log("Published at: ", publishedAt);
 
       const existingArtist = await prisma.artist.findFirst({
         where: { name: artistName },
