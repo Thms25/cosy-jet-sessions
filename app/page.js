@@ -1,17 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import stylesOne from "../styles/home.module.scss";
-import stylesTwo from "../styles/videos.module.scss";
+import styles from "../styles/home.module.scss";
+import videoStyles from "../styles/videos.module.scss";
 import YoutubeVideo from "../components/YoutubeVideo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faInstagram,
-  faYoutube,
-  faTiktok,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 
 async function getVideos() {
@@ -32,11 +24,11 @@ export default function Home() {
   }, []);
 
   return (
-    <div className={stylesOne.home}>
-      <header className={stylesOne.header}>
-        <div className={stylesOne.banner}>
+    <div className={styles.home}>
+      <header className={styles.header}>
+        <div className={styles.banner}>
           <Image
-            id={stylesOne.cjsBanner}
+            id={styles.cjsBanner}
             priority
             src="/images/cjs-banner.png"
             alt="cjs-banner"
@@ -44,7 +36,7 @@ export default function Home() {
             height={751}
           />
         </div>
-        <div className={stylesOne.bannerDesc}>
+        <div className={styles.bannerDesc}>
           <h3>
             Cosy Jet Sessions is an intimate acoustic live session media based
             in Brussels
@@ -53,8 +45,8 @@ export default function Home() {
         </div>
       </header>
       <div>
-        <section className={stylesOne.section}>
-          <div className={stylesTwo.videos}>
+        <section className={styles.section}>
+          <div className={videoStyles.videos}>
             {videos.map((video) => (
               <YoutubeVideo
                 key={video["id"]}
@@ -66,33 +58,6 @@ export default function Home() {
           </div>
         </section>
       </div>
-      <footer className={stylesOne.footer}>
-        <ul className={stylesOne.icons}>
-          <Link
-            href="https://www.instagram.com/cosyjetsessions/"
-            target="_blank"
-          >
-            <li>
-              <FontAwesomeIcon icon={faInstagram} className={stylesOne.icon} />
-            </li>
-          </Link>
-          <Link href="https://www.youtube.com/@cosyjetsessions" target="_blank">
-            <li>
-              <FontAwesomeIcon icon={faYoutube} className={stylesOne.icon} />
-            </li>
-          </Link>
-          <Link href="https://www.tiktok.com/@cosyjetsessions/" target="_blank">
-            <li>
-              <FontAwesomeIcon icon={faTiktok} className={stylesOne.icon} />
-            </li>
-          </Link>
-          <Link href="/">
-            <li>
-              <FontAwesomeIcon icon={faEnvelope} className={stylesOne.icon} />
-            </li>
-          </Link>
-        </ul>
-      </footer>
     </div>
   );
 }

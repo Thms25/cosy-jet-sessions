@@ -1,0 +1,19 @@
+.footer {
+  .icons {
+    list-style: none;
+    margin: 20px auto;
+    a {
+      color: #b1582d;
+    }
+
+    li {
+      display: inline;
+      margin: 16px 32px;
+      padding: 4px;
+    }
+
+    .icon {
+      font-size: 26px;
+    }
+  }
+}
