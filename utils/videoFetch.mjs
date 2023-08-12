@@ -3,8 +3,17 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+async function deleteExistingData() {
+  await prisma.Artist.deleteMany();
+  console.log("Artists deleted.");
+  await prisma.YtVideo.deleteMany();
+  console.log("Videos deleted.");
+}
+
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
+    await deleteExistingData();
+
     const apiKey = process.env.YT_API_KEY;
     const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
     const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
@@ -22,7 +31,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     });
 
     for (const video of videos) {
-      const { title, description } = video.snippet;
+      const { title, description, publishedAt } = video.snippet;
       let artistName;
 
       if (title.includes("cover")) {
@@ -61,6 +70,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
           videoId: video["id"]["videoId"],
           title,
           description,
+          publishedAt,
           artist: {
             connect: { id: artist.id },
           },

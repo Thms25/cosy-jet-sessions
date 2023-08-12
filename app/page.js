@@ -15,7 +15,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
 
 async function getVideos() {
-  const res = await fetch("api/getVideos");
+  const res = await fetch("api/getRecentVideos");
   return res.json();
 }
 
@@ -59,7 +59,8 @@ export default function Home() {
               <YoutubeVideo
                 key={video["id"]}
                 videoId={video["videoId"]}
-                iframeClassName="homeVid"
+                iframeClassName="homeVidFrame"
+                ClassName="homeVid"
               />
             ))}
           </div>
