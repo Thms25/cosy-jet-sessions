@@ -23,6 +23,7 @@ model YtVideo {
   title       String
   description String
   publishedAt DateTime
+  thumbnail   String
   artist      Artist?     @relation(fields: [artistId], references: [id])
   artistId    Int?
 }

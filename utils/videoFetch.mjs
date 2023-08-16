@@ -31,6 +31,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
     for (const video of videos) {
       const { title, description, publishedAt } = video.snippet;
+      const thumbnailUrl = video.snippet.thumbnails.high.url;
       let artistName;
 
       if (/[Cc]over/.test(title)) {
@@ -47,6 +48,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       console.log("Artist: ", artistName);
       console.log("Title: ", title);
       console.log("Published at: ", publishedAt);
+      console.log("url: ", thumbnailUrl);
 
       const existingArtist = await prisma.artist.findFirst({
         where: { name: artistName },
@@ -71,6 +73,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
           title,
           description,
           publishedAt,
+          thumbnail: thumbnailUrl,
           artist: {
             connect: { id: artist.id },
           },

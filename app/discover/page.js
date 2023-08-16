@@ -10,8 +10,12 @@ async function getArtists() {
   return res.json();
 }
 
-export default function Media() {
+export default function Discover() {
   const [artists, setArtists] = useState([]);
+
+  const artistHoverOn = (e) => {
+    // console.log(e.currentTarget);
+  };
 
   useEffect(() => {
     async function fetchArtists() {
@@ -31,10 +35,15 @@ export default function Media() {
       <div className={styles.artistList}>
         {artists.map((artist) => {
           return (
-            <div key={artist.id} className={styles.artistCard}>
-              <h3>{artist.name}</h3>
+            <div
+              key={artist.id}
+              className={styles.artistCard}
+              onMouseEnter={(e) => {
+                artistHoverOn(e);
+              }}
+            >
               <Link href={`/artist/${artist.id}`}>
-                <p>Click to discover this arist</p>
+                <h3>{artist.name}</h3>
               </Link>
             </div>
           );

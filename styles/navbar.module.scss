@@ -23,15 +23,21 @@
     list-style: none;
 
     li {
-      border: 1px solid rgba(var(--cjsWhiteRGB), 0.3);
-      // background-color: rgba(var(--cjsBrown), 0.5);
+      border-bottom: 2px solid rgba(var(--cjsWhiteRGB), 0.5);
       padding: 8px 12px;
-      border-radius: 4px;
-      transition: 0.2s;
+      // border-radius: 4px;
+      // transition: 0.2s;
 
-      &:hover {
-        background-color: rgba(var(--cjsWhiteRGB), 0.1);
+      a {
+        color: rgba(var(--cjsWhiteRGB), 0.8);
+        transition: 0.2s;
+        &:hover {
+          color: rgba(var(--cjsWhiteRGB), 1);
+        }
       }
+      // &:hover {
+      //   background-color: rgba(var(--cjsWhiteRGB), 0.1);
+      // }
     }
   }
 }

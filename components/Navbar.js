@@ -9,13 +9,15 @@ const Navbar = () => {
   return (
     // desktop
     <nav className={styles.nav}>
-      <Image
-        id={styles.cjsIcon}
-        src="/images/cjsIcon.png"
-        alt="cjs icon"
-        width={33}
-        height={34}
-      />
+      <Link href="/">
+        <Image
+          id={styles.cjsIcon}
+          src="/images/cjsIcon.png"
+          alt="cjs icon"
+          width={33}
+          height={34}
+        />
+      </Link>
       <ul>
         <li>
           <Link href="/">Home</Link>
@@ -24,7 +26,13 @@ const Navbar = () => {
           <Link href="/about">About</Link>
         </li>
         <li>
-          <Link href="/media">Media</Link>
+          <Link href="/discover">Discover</Link>
+        </li>
+        <li>
+          <Link href="/events">Events</Link>
+        </li>
+        <li>
+          <Link href="/shop">Shop</Link>
         </li>
         <li>
           <Link href="/contact">Contact</Link>

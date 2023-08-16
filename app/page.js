@@ -8,7 +8,6 @@ import { useState, useEffect } from "react";
 
 async function getVideos() {
   const res = await fetch("api/getRecentVideos");
-  // const res = await fetch("api/getVideos");
   return res.json();
 }
 
