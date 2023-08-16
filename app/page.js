@@ -41,7 +41,7 @@ export default function Home() {
             Cosy Jet Sessions is an intimate acoustic live session media based
             in Brussels
           </h3>
-          <h4>A cosy and relaxing place to discover new talented artists. </h4>
+          <h4>A cosy and relaxing place to discover new talented artists.</h4>
         </div>
       </header>
       <div>
@@ -49,10 +49,9 @@ export default function Home() {
           <div className={videoStyles.videos}>
             {videos.map((video) => (
               <YoutubeVideo
-                key={video["id"]}
-                videoId={video["videoId"]}
+                key={video.id}
+                videoId={video.videoId}
                 iframeClassName="homeVidFrame"
-                ClassName="homeVid"
               />
             ))}
           </div>

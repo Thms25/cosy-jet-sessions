@@ -3,6 +3,15 @@ import YouTube from "react-youtube";
 import styles from "../styles/videos.module.scss";
 
 class YoutubeVideo extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   console.log(this);
+  //   this.state = {
+  //     isVideoVisible: false,
+  //   };
+
+  //   this.videoRef = React.createRef();
+  // }
   videoOnReady(event) {
     const player = event.target;
     // player.seekTo(0);

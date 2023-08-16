@@ -1,12 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import styles from "../../styles/media.module.scss";
+import styles from "../../styles/discover.module.scss";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 async function getArtists() {
   const res = await fetch("api/getArtists");
-  // console.log(res);
   return res.json();
 }
 
@@ -27,10 +27,10 @@ export default function Discover() {
   }, []);
 
   return (
-    <div className={styles.media}>
+    <div className={styles.discover}>
       <div className={styles.title}>
         <h1>Hello Cosy Jetter</h1>
-        <p>Welcme to the media page</p>
+        <p>Discover some of the artists that we hosted</p>
       </div>
       <div className={styles.artistList}>
         {artists.map((artist) => {
@@ -43,7 +43,18 @@ export default function Discover() {
               }}
             >
               <Link href={`/artist/${artist.id}`}>
-                <h3>{artist.name}</h3>
+                <div className={styles.backgroundDiv}>
+                  <h3>{artist.name}</h3>
+                  {artist.videos[0]?.thumbnail && (
+                    <Image
+                      src={artist.videos[0].thumbnail}
+                      alt={`${artist.name} - thumbnail`}
+                      width={480}
+                      height={360}
+                      className={styles.backgroundImage}
+                    />
+                  )}
+                </div>
               </Link>
             </div>
           );

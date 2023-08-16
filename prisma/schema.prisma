@@ -1,29 +1,39 @@
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Artist {
-  id         Int         @id @default(autoincrement())
-  name       String
-  bio        String?
-  videos     YtVideo[]
+  id           String    @id @default(cuid())
+  name         String
+  bio          String?
+  shorttVideos YtShort[]
+  videos       YtVideo[]
 }
 
 model YtVideo {
-  id          Int         @id @default(autoincrement())
-  videoId     String      @unique
+  id          String   @id @default(cuid())
+  videoId     String   @unique
   title       String
   description String
   publishedAt DateTime
   thumbnail   String
-  artist      Artist?     @relation(fields: [artistId], references: [id])
-  artistId    Int?
+  artistId    String?
+  artist      Artist?  @relation(fields: [artistId], references: [id])
+}
+
+model YtShort {
+  id          String   @id @default(cuid())
+  videoId     String   @unique
+  title       String
+  publishedAt DateTime
+  thumbnail   String
+  artistId    String?
+  artist      Artist?  @relation(fields: [artistId], references: [id])
 }
