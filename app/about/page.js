@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 export default function About() {
   const { ref: myRef, inView: elVisible, entry } = useInView();
 
-  console.log(elVisible);
+  // console.log(elVisible);
 
   return (
     <div className={styles.about}>
