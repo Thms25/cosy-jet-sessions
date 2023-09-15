@@ -1,24 +1,37 @@
+"use client";
+
 import React from "react";
 import styles from "../styles/navbar.module.scss";
 import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   return (
     // desktop
     <nav className={styles.nav}>
-      <Link href="/">
-        <Image
-          id={styles.cjsIcon}
-          src="/images/cjsIcon.png"
-          alt="cjs icon"
-          width={33}
-          height={34}
-        />
-      </Link>
-      <ul>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.7 }}
+      >
+        <Link href="/">
+          <Image
+            id={styles.cjsIcon}
+            src="/images/cjsIcon.png"
+            alt="cjs icon"
+            width={33}
+            height={34}
+          />
+        </Link>
+      </motion.div>
+      <motion.ul
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
+      >
         <li>
           <Link href="/">Home</Link>
         </li>
@@ -37,7 +50,7 @@ const Navbar = () => {
         <li>
           <Link href="/contact">Contact</Link>
         </li>
-      </ul>
+      </motion.ul>
       <FontAwesomeIcon icon={faUser} className={styles.icon} />
     </nav>
   );
