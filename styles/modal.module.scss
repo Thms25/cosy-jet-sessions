@@ -1,0 +1,27 @@
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: o;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(var(--cjsBrownRGB), 0.6);
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  padding: 24px;
+  background-color: var(--cjsWhite);
+  color: var(--cjsBrown);
+  max-width: 50%;
+  height: 30vh;
+  border-radius: 8px;
+  box-shadow: 2px 1px 8px rgba(0, 0, 0, 0.3);
+
+  ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    margin: 8px auto;
+  }
+}

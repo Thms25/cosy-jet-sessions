@@ -5,6 +5,8 @@ import styles from "../styles/home.module.scss";
 import videoStyles from "../styles/videos.module.scss";
 import YoutubeVideo from "../components/YoutubeVideo";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Modal from "@/components/Modal";
 
 async function getVideos() {
   const res = await fetch("api/getRecentVideos");
@@ -13,6 +15,10 @@ async function getVideos() {
 
 export default function Home() {
   const [videos, setVideos] = useState([]);
+
+  const [modalOpen, setMOdalOpen] = useState(false);
+  const close = () => setMOdalOpen(false);
+  const open = () => setMOdalOpen(true);
 
   useEffect(() => {
     async function fetchVideos() {
@@ -26,7 +32,12 @@ export default function Home() {
   return (
     <div className={styles.home}>
       <header className={styles.header}>
-        <div className={styles.banner}>
+        <motion.div
+          className={styles.banner}
+          onClick={() => {
+            modalOpen ? close() : open();
+          }}
+        >
           <Image
             id={styles.cjsBanner}
             priority
@@ -35,7 +46,10 @@ export default function Home() {
             width={1710}
             height={751}
           />
-        </div>
+        </motion.div>
+        <AnimatePresence initial={false} mode="wait">
+          {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+        </AnimatePresence>
         <div className={styles.bannerDesc}>
           <h3>
             Cosy Jet Sessions is an intimate acoustic live session media based
