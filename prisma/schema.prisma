@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-  // previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -10,18 +9,30 @@ datasource db {
 }
 
 model Artist {
-  id         Int         @id @default(autoincrement())
-  name       String
-  bio        String?
-  videos     YtVideo[]
+  id           String    @id @default(cuid())
+  name         String
+  bio          String?
+  shorttVideos YtShort[]
+  videos       YtVideo[]
 }
 
 model YtVideo {
-  id          Int         @id @default(autoincrement())
-  videoId     String      @unique
+  id          String   @id @default(cuid())
+  videoId     String   @unique
   title       String
-  description String?
-  // publishedAt DateTime?
-  artist      Artist?     @relation(fields: [artistId], references: [id])
-  artistId    Int?
+  description String
+  publishedAt DateTime
+  thumbnail   String
+  artistId    String?
+  artist      Artist?  @relation(fields: [artistId], references: [id])
+}
+
+model YtShort {
+  id          String   @id @default(cuid())
+  videoId     String   @unique
+  title       String
+  publishedAt DateTime
+  thumbnail   String
+  artistId    String?
+  artist      Artist?  @relation(fields: [artistId], references: [id])
 }

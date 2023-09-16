@@ -3,6 +3,14 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+async function deleteExistingData() {
+  await prisma.Artist.deleteMany();
+  console.log("Artists deleted.");
+  await prisma.YtVideo.deleteMany();
+  console.log("Videos deleted.");
+}
+
+await deleteExistingData();
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
     const apiKey = process.env.YT_API_KEY;
@@ -22,11 +30,12 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     });
 
     for (const video of videos) {
-      const { title, description } = video.snippet;
+      const { title, description, publishedAt } = video.snippet;
+      const thumbnailUrl = video.snippet.thumbnails.high.url;
       let artistName;
 
-      if (title.includes("cover")) {
-        const match = title.match(/cover by (.*?)\)/);
+      if (/[Cc]over/.test(title)) {
+        const match = title.match(/over by (.*?)\)/);
         artistName = match ? match[1] : "Unknown Artist";
       } else {
         const splitTitle = title.split(" - ");
@@ -38,6 +47,8 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
       console.log("Artist: ", artistName);
       console.log("Title: ", title);
+      console.log("Published at: ", publishedAt);
+      console.log("url: ", thumbnailUrl);
 
       const existingArtist = await prisma.artist.findFirst({
         where: { name: artistName },
@@ -61,6 +72,8 @@ async function fetchVideosAndArtists(nextPageToken = null) {
           videoId: video["id"]["videoId"],
           title,
           description,
+          publishedAt,
+          thumbnail: thumbnailUrl,
           artist: {
             connect: { id: artist.id },
           },

@@ -2,13 +2,24 @@
 // color pink: #df9b74;
 // color yellow: #d59429;
 // color brown: #b1582d;
-
 // font
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
 
+:root {
+  --cjsWhite: #eae5dc;
+  --cjsWhiteRGB: 234, 229, 220;
+  --cjsPink: #DF9C76;
+  --cjsPinkRGB: 223, 156, 118;
+  --cjsYellow: #d59429;
+  --cjsYellowRGB: 214, 148, 41;
+  --cjsBrown: #b1582d;
+  --cjsBrownRGB: 177, 88, 45;
+  --cjsBgBrown: linear-gradient(0.25turn, #b1582d, #b1592ddb, #b1582d);
+}
+
 body {
-  color: #b1582d;
-  background-color: #eae5dc;
+  color: var(--cjsBrown);
+  background-color: var(--cjsWhite);
   margin: 0;
   padding: 0;
   text-align: center;
@@ -16,6 +27,6 @@ body {
 
   a {
     text-decoration: none;
-    color: #eae5dc;
+    color: var(--cjsWhite);
   }
 }
