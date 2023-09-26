@@ -7,12 +7,11 @@ export async function GET(request) {
   const artistId = url[url.length - 1];
   const artist = await prisma.Artist.findFirst({
     where: {
-      id: parseInt(artistId),
+      id: artistId,
     },
     include: {
       videos: true,
     },
   });
-  console.log(artist);
   return new Response(JSON.stringify(artist));
 }

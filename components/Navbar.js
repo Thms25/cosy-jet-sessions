@@ -41,12 +41,12 @@ const Navbar = () => {
         <li>
           <Link href="/discover">Discover</Link>
         </li>
-        <li>
+        {/* <li>
           <Link href="/events">Events</Link>
         </li>
         <li>
           <Link href="/shop">Shop</Link>
-        </li>
+        </li> */}
         <li>
           <Link href="/contact">Contact</Link>
         </li>

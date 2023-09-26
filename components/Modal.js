@@ -1,6 +1,9 @@
 import styles from "styles/modal.module.scss";
 import Backdrop from "./Backdrop";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 const DropIn = {
   init: {
@@ -35,13 +38,36 @@ const Modal = ({ handleClose }) => {
         transition="trs"
         exit="exit"
       >
-        <h1>Follow us on our social medias</h1>
-        <ul>
-          <li>Youtube</li>
-          <li>Instagram</li>
-          <li>TikTok</li>
-        </ul>
-        <button onClick={handleClose}>Close</button>
+        <div className={styles.crossDiv}>
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={handleClose}
+            className={styles.cross}
+          />
+        </div>
+        <div className={styles.modalContent}>
+          <h1>Follow us on our social medias</h1>
+          <ul onClick={handleClose}>
+            <Link
+              href="https://www.youtube.com/@cosyjetsessions"
+              target="_blank"
+            >
+              <li>Youtube</li>
+            </Link>
+            <Link
+              href="https://www.instagram.com/cosyjetsessions/"
+              target="_blank"
+            >
+              <li>Instagram</li>
+            </Link>
+            <Link
+              href="https://www.tiktok.com/@cosyjetsessions/"
+              target="_blank"
+            >
+              <li>TikTok</li>
+            </Link>
+          </ul>
+        </div>
       </motion.div>
     </Backdrop>
   );
