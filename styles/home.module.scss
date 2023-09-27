@@ -1,7 +1,35 @@
 .section {
+  text-align: left;
+  h4 {
+    margin-left: 8px;
+    font-size: 24px;
+  }
+  .recent {
+    margin: 8px;
+    h4 {
+      margin-left: 64px;
+    }
+    .recentVideosWrap {
+      display: flex;
+      align-items: center;
+      .icon {
+        font-size: 32px;
+        margin: 0 16px;
+      }
+    }
+  }
 
+  .carouselSection {
+    margin-top: 64px;
+    text-align: center;
+    .carouseContainer {
+      min-width: 40%;
+      max-width: 720px;
+      margin: auto;
+    }
+  }
   h1 {
-    font-size: 30px;
+    font-size: 50px;
     letter-spacing: 3px;
   }
 }
@@ -18,6 +46,7 @@
     object-fit: contain;
     width: 80%;
     height: 50vh;
+    cursor: pointer;
   }
 
   .bannerDesc {

@@ -7,6 +7,10 @@ import YoutubeVideo from "../components/YoutubeVideo";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "@/components/Modal";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from "react-responsive-carousel";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 
 async function getVideos() {
   const res = await fetch("api/getRecentVideos");
@@ -25,7 +29,6 @@ export default function Home() {
       const videoData = await getVideos();
       setVideos(videoData);
     }
-
     fetchVideos();
   }, []);
 
@@ -60,14 +63,144 @@ export default function Home() {
       </header>
       <div>
         <section className={styles.section}>
-          <div className={videoStyles.videos}>
-            {videos.map((video) => (
-              <YoutubeVideo
-                key={video.id}
-                videoId={video.videoId}
-                iframeClassName="homeVidFrame"
-              />
-            ))}
+          <div className={styles.carouselSection}>
+            <h4>Listen to our most popular videos</h4>
+            <div className={styles.carouseContainer}>
+              <Carousel
+                showStatus={false}
+                className={styles.carousel}
+                infiniteLoop={true}
+              >
+                <div>
+                  <YoutubeVideo
+                    key="rms"
+                    videoId="XzcQ57UC_to"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="Mewhy"
+                    videoId="z_xtKDmpf-g"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="doriaD"
+                    videoId="Yy5O8y-oQvY"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="sundayCharmers"
+                    videoId="6zC4i1Yk4mw"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="colineBLF"
+                    videoId="N8u9388y_z4"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="ozya"
+                    videoId="V6jLw0yO_DI"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="samBosman"
+                    videoId="9fohTKZe4f8"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="milla"
+                    videoId="0AaN7NkujJE"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="tyanaP"
+                    videoId="gty3SR2XJ_s"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="colt"
+                    videoId="1lvytCVdqjE"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="amyMorrey"
+                    videoId="lGZDjhryorY"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="essyla"
+                    videoId="agUYbCeuzdY"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="satchel"
+                    videoId="2g7VMpnYlQ4"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="loBailly"
+                    videoId="q9B_gC4Hoqc"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="wayi"
+                    videoId="-uNRs5BL4zA"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+                <div>
+                  <YoutubeVideo
+                    key="juneRoad"
+                    videoId="YTsN2L4SrD8"
+                    iframeClassName="homeVidFrame"
+                  />
+                </div>
+              </Carousel>
+            </div>
+          </div>
+          <div className={styles.recent}>
+            <h4>Check out our most recent uploads</h4>
+            <div className={styles.recentVideosWrap}>
+              <FontAwesomeIcon icon={faAngleLeft} className={styles.icon} />
+              <div className={videoStyles.recentVideos}>
+                {videos.map((video) => (
+                  <YoutubeVideo
+                    key={video.id}
+                    videoId={video.videoId}
+                    iframeClassName="homeVidFrame"
+                  />
+                ))}
+              </div>
+              <FontAwesomeIcon icon={faAngleRight} className={styles.icon} />
+            </div>
           </div>
         </section>
       </div>

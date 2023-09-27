@@ -6,7 +6,18 @@
     display: grid;
     place-items: center;
 
+    &:hover {
+      .backgroundImage {
+        filter: blur(0);
+      }
+      h3 {
+        font-size: 25px;
+        opacity: 0;
+      }
+    }
+
     .backgroundImage {
+      border-radius: 16px;
       object-fit: cover;
       object-position: center;
       position: absolute;
@@ -15,10 +26,8 @@
       width: 100%;
       height: 100%;
       z-index: 0;
+      transition: 0.2s;
       filter: blur(4px);
-      &:hover {
-        filter: blur(0);
-      }
     }
 
     h3 {
@@ -28,13 +37,6 @@
       color: var(--cjsWhite);
       opacity: 0.9;
       transition: 0.3s;
-    }
-
-    &:hover {
-      h3 {
-        font-size: 25px;
-        opacity: 0;
-      }
     }
   }
 
@@ -48,17 +50,13 @@
   .artistList {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin: 24px;
+    gap: 16px;
+    margin: 32px 48px;
 
     .artistCard {
-      // border: 1px solid var(--cjsBrown);
-      // padding: 12px;
-
       a {
         color: var(--cjsBrown);
         box-shadow: 0 0 2px var(--cjsBrown);
-        // padding: 8px 12px;
         border-radius: 6px;
       }
     }

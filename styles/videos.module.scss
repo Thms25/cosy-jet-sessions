@@ -1,29 +1,14 @@
-.videos {
+.recentVideos {
   display: flex;
   overflow: scroll;
-  margin: 24px auto;
 }
 
-.videos::-webkit-scrollbar {
+.recentVideos::-webkit-scrollbar {
   display: none;
 }
 
-@media (max-width: 1200px) {
-  // .videos {
-  //   grid-template-columns: 1fr;
-  // }
-}
-
-@media (min-width: 1850px) {
-  // .videos {
-  //   display: flex;
-  // }
-}
-
-.homeVidFrame {
+.homeVidFrame, .video {
   border-radius: 24px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
   margin: 12px;
-  // width: 800%;
-  // height: 80%;
 }

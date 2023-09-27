@@ -30,3 +30,26 @@ body {
     color: var(--cjsWhite);
   }
 }
+
+
+// caroussel design //
+
+.control-arrow {
+  background-color: var(--cjsBrown) !important;
+  height: 30px !important;
+  width: 30px !important;
+  margin: auto !important;
+  color: red !important;
+  display: grid;
+  place-items: center;
+  border-radius: 24px;
+}
+
+.control-dots {
+  li {
+    background-color: var(--cjsBrown) !important;
+
+  }
+}
+
+// end of caroussel //
