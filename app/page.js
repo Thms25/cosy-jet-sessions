@@ -11,8 +11,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import LazyLoad from "react-lazyload";
 
-async function getVideos() {
+async function getRecentVideos() {
   const res = await fetch("api/getRecentVideos");
   return res.json();
 }
@@ -20,17 +21,50 @@ async function getVideos() {
 export default function Home() {
   const [videos, setVideos] = useState([]);
 
+  const [carouLoaded, setCarouLoaded] = useState(false);
+  const [recentVidsLoaded, setRecentVidsLoaded] = useState(false);
+
+  const [firstVideLoaded, setFirstVidLoaded] = useState(false);
+  const handleVideoLoaded = (loaded) => {
+    setFirstVidLoaded(loaded);
+  };
+
   const [modalOpen, setMOdalOpen] = useState(false);
   const close = () => setMOdalOpen(false);
   const open = () => setMOdalOpen(true);
 
+  const popularVideos = [
+    { key: "rms", videoId: "XzcQ57UC_to" },
+    { key: "mewhy", videoId: "z_xtKDmpf-g" },
+    { key: "doriaD", videoId: "Yy5O8y-oQvY" },
+    { key: "sundayCharmers", videoId: "6zC4i1Yk4mw" },
+    { key: "colineBlf", videoId: "N8u9388y_z4" },
+    { key: "ozya", videoId: "V6jLw0yO_DI" },
+    { key: "samBosman", videoId: "9fohTKZe4f8" },
+    { key: "milla", videoId: "0AaN7NkujJE" },
+    { key: "tyanaP", videoId: "gty3SR2XJ_s" },
+    { key: "colt", videoId: "1lvytCVdqjE" },
+    { key: "amyMorrey", videoId: "lGZDjhryorY" },
+    { key: "essyla", videoId: "agUYbCeuzdY" },
+    { key: "satchel", videoId: "2g7VMpnYlQ4" },
+    { key: "laBailly", videoId: "q9B_gC4Hoqc" },
+    { key: "Wayi", videoId: "-uNRs5BL4zA" },
+    { key: "juneRoad", videoId: "YTsN2L4SrD8" },
+  ];
+
   useEffect(() => {
+    setTimeout(() => {
+      setCarouLoaded(true);
+    }, 1000);
     async function fetchVideos() {
-      const videoData = await getVideos();
+      const videoData = await getRecentVideos();
       setVideos(videoData);
+      setRecentVidsLoaded(true);
     }
-    fetchVideos();
-  }, []);
+    if (carouLoaded) {
+      fetchVideos();
+    }
+  }, [carouLoaded]);
 
   return (
     <div className={styles.home}>
@@ -70,137 +104,57 @@ export default function Home() {
                 showStatus={false}
                 className={styles.carousel}
                 infiniteLoop={true}
+                useKeyboardArrows={true}
               >
-                <div>
-                  <YoutubeVideo
-                    key="rms"
-                    videoId="XzcQ57UC_to"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="Mewhy"
-                    videoId="z_xtKDmpf-g"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="doriaD"
-                    videoId="Yy5O8y-oQvY"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="sundayCharmers"
-                    videoId="6zC4i1Yk4mw"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="colineBLF"
-                    videoId="N8u9388y_z4"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="ozya"
-                    videoId="V6jLw0yO_DI"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="samBosman"
-                    videoId="9fohTKZe4f8"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="milla"
-                    videoId="0AaN7NkujJE"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="tyanaP"
-                    videoId="gty3SR2XJ_s"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="colt"
-                    videoId="1lvytCVdqjE"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="amyMorrey"
-                    videoId="lGZDjhryorY"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="essyla"
-                    videoId="agUYbCeuzdY"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="satchel"
-                    videoId="2g7VMpnYlQ4"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="loBailly"
-                    videoId="q9B_gC4Hoqc"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="wayi"
-                    videoId="-uNRs5BL4zA"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
-                <div>
-                  <YoutubeVideo
-                    key="juneRoad"
-                    videoId="YTsN2L4SrD8"
-                    iframeClassName="homeVidFrame"
-                  />
-                </div>
+                {popularVideos.map((video, index) => (
+                  <div key={video.key}>
+                    {index === 0 ? (
+                      <LazyLoad height={200} offset={100} once>
+                        <YoutubeVideo
+                          videoId={video.videoId}
+                          iframeClassName="homeVidFrame"
+                          onVideoLoaded={handleVideoLoaded}
+                        />
+                      </LazyLoad>
+                    ) : (
+                      firstVideLoaded && (
+                        <LazyLoad
+                          height={200}
+                          offset={100}
+                          key={video.videoId}
+                          once
+                        >
+                          <YoutubeVideo
+                            videoId={video.videoId}
+                            iframeClassName="homeVidFrame"
+                            onVideoLoaded={handleVideoLoaded}
+                          />
+                        </LazyLoad>
+                      )
+                    )}
+                  </div>
+                ))}
               </Carousel>
             </div>
           </div>
           <div className={styles.recent}>
             <h4>Check out our most recent uploads</h4>
-            <div className={styles.recentVideosWrap}>
-              <FontAwesomeIcon icon={faAngleLeft} className={styles.icon} />
-              <div className={videoStyles.recentVideos}>
-                {videos.map((video) => (
-                  <YoutubeVideo
-                    key={video.id}
-                    videoId={video.videoId}
-                    iframeClassName="homeVidFrame"
-                  />
-                ))}
+            {recentVidsLoaded && (
+              <div className={styles.recentVideosWrap}>
+                <FontAwesomeIcon icon={faAngleLeft} className={styles.icon} />
+                <div className={videoStyles.recentVideos}>
+                  {videos.map((video) => (
+                    <YoutubeVideo
+                      key={video.id}
+                      videoId={video.videoId}
+                      iframeClassName="homeVidFrame"
+                      onVideoLoaded={handleVideoLoaded}
+                    />
+                  ))}
+                </div>
+                <FontAwesomeIcon icon={faAngleRight} className={styles.icon} />
               </div>
-              <FontAwesomeIcon icon={faAngleRight} className={styles.icon} />
-            </div>
+            )}
           </div>
         </section>
       </div>
