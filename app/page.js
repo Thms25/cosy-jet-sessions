@@ -11,7 +11,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import LazyLoad from "react-lazyload";
 
 async function getRecentVideos() {
   const res = await fetch("api/getRecentVideos");
@@ -109,27 +108,19 @@ export default function Home() {
                 {popularVideos.map((video, index) => (
                   <div key={video.key}>
                     {index === 0 ? (
-                      <LazyLoad height={200} offset={100} once>
+                      <YoutubeVideo
+                        videoId={video.videoId}
+                        iframeClassName="homeVidFrame"
+                        onVideoLoaded={handleVideoLoaded}
+                      />
+                    ) : (
+                      firstVideLoaded && (
                         <YoutubeVideo
                           videoId={video.videoId}
                           iframeClassName="homeVidFrame"
                           onVideoLoaded={handleVideoLoaded}
-                        />
-                      </LazyLoad>
-                    ) : (
-                      firstVideLoaded && (
-                        <LazyLoad
-                          height={200}
-                          offset={100}
                           key={video.videoId}
-                          once
-                        >
-                          <YoutubeVideo
-                            videoId={video.videoId}
-                            iframeClassName="homeVidFrame"
-                            onVideoLoaded={handleVideoLoaded}
-                          />
-                        </LazyLoad>
+                        />
                       )
                     )}
                   </div>
