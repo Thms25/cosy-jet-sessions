@@ -15,6 +15,11 @@ async function getArtist(id) {
 
 export default function Page({ params }) {
   const [artist, setArtist] = useState([]);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+
+  const handleVideoLoaded = (loaded) => {
+    setVideoLoaded(loaded);
+  };
 
   useEffect(() => {
     async function fetchArtist() {
@@ -39,13 +44,23 @@ export default function Page({ params }) {
               </p>
             </div>
             <Carousel className={styles.caroussel} showStatus={false}>
-              {artist.videos.map((video) => (
+              {artist.videos.map((video, index) => (
                 <div key={video.id}>
-                  <YoutubeVideo
-                    videoId={video.videoId}
-                    iframeClassName="video"
-                  />
-                  {/* <h2>{video.title}</h2> */}
+                  {index === 0 ? (
+                    <YoutubeVideo
+                      videoId={video.videoId}
+                      iframeClassName="video"
+                      onVideoLoaded={handleVideoLoaded}
+                    />
+                  ) : (
+                    videoLoaded && (
+                      <YoutubeVideo
+                        videoId={video.videoId}
+                        iframeClassName="video"
+                        onVideoLoaded={handleVideoLoaded}
+                      />
+                    )
+                  )}
                 </div>
               ))}
             </Carousel>
