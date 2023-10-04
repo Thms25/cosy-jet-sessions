@@ -1,30 +1,15 @@
-"use client";
-
 import Link from "next/link";
 import styles from "../../styles/discover.module.scss";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 
 async function getArtists() {
-  const res = await fetch("api/getArtists");
-  return res.json();
+  const res = await fetch("http://localhost:3000/api/getArtists");
+  const data = await res.json();
+  return data;
 }
 
-export default function Discover() {
-  const [artists, setArtists] = useState([]);
-
-  const artistHoverOn = (e) => {
-    // console.log(e.currentTarget);
-  };
-
-  useEffect(() => {
-    async function fetchArtists() {
-      const artistData = await getArtists();
-      setArtists(artistData);
-    }
-
-    fetchArtists();
-  }, []);
+export default async function Discover() {
+  const artists = await getArtists();
 
   return (
     <div className={styles.discover}>
@@ -35,13 +20,7 @@ export default function Discover() {
       <div className={styles.artistList}>
         {artists.map((artist) => {
           return (
-            <div
-              key={artist.id}
-              className={styles.artistCard}
-              onMouseEnter={(e) => {
-                artistHoverOn(e);
-              }}
-            >
+            <div key={artist.id} className={styles.artistCard}>
               <Link href={`/artist/${artist.id}`}>
                 <div className={styles.backgroundDiv}>
                   <h3>{artist.name}</h3>
