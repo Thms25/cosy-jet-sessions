@@ -28,7 +28,7 @@
     "react-signature-canvas": "^1.0.6",
     "react-youtube": "^10.1.0",
     "sass": "^1.63.6",
-    "vercel": "^31.2.2",
+    "vercel": "^32.4.1",
     "video-react": "^0.16.0",
     "youtube-api": "^3.0.1"
   },
