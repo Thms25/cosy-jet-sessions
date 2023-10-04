@@ -2,14 +2,13 @@ import Link from "next/link";
 import styles from "../../styles/discover.module.scss";
 import Image from "next/image";
 
-async function getArtists() {
-  const res = await fetch("http://localhost:3000/api/getArtists");
+async function fetchArtists() {
+  const res = await fetch(`${process.env.URL}/api/getArtists`);
   const data = await res.json();
   return data;
 }
-
 export default async function Discover() {
-  const artists = await getArtists();
+  const artists = await fetchArtists();
 
   return (
     <div className={styles.discover}>
@@ -18,7 +17,7 @@ export default async function Discover() {
         <p>Discover some of the artists that we hosted</p>
       </div>
       <div className={styles.artistList}>
-        {artists.map((artist) => {
+        {artists?.map((artist) => {
           return (
             <div key={artist.id} className={styles.artistCard}>
               <Link href={`/artist/${artist.id}`}>
