@@ -42,14 +42,15 @@
     width: 100%;
   }
 
-  #cjsBanner {
-    object-fit: contain;
-    width: 80%;
-    height: 50vh;
-    cursor: pointer;
-  }
 
   .bannerDesc {
     letter-spacing: 2px;
   }
+}
+
+#cjsBanner {
+  object-fit: contain;
+  width: 80%;
+  height: 50vh;
+  cursor: pointer;
 }
