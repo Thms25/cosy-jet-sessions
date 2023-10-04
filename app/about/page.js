@@ -3,6 +3,7 @@
 import Image from "next/image";
 import styles from "../../styles/about.module.scss";
 import { useInView } from "react-intersection-observer";
+import CjsBanner from "@/components/CjsBanner";
 
 export default function About() {
   const { ref: myRef, inView: elVisible, entry } = useInView();
@@ -12,14 +13,15 @@ export default function About() {
   return (
     <div className={styles.about}>
       <header>
-        <Image
+        <CjsBanner />
+        {/* <Image
           id={styles.cjsBanner}
           priority
           src="/images/cjs-banner.png"
           alt="cjs-banner"
           width={1710}
           height={751}
-        />
+        /> */}
       </header>
       <h2>Welcome to Cosy Jet Sessions</h2>
       <h3>Scroll Down to learn about us</h3>
