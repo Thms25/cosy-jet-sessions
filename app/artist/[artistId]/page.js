@@ -2,7 +2,7 @@
 
 import YoutubeVideo from "../../../components/YoutubeVideo";
 import { useEffect, useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import styles from "/styles/artistPage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

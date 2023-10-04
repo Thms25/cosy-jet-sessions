@@ -5,13 +5,13 @@ import styles from "../styles/videos.module.scss";
 export default function YoutubeVideo({
   videoId,
   iframeClassName,
-  onVideoLoaded,
+  // onVideoLoaded,
 }) {
   const videoOnReady = (event) => {
     const player = event.target;
     // player.seekTo(0);
     // player.playVideo();
-    onVideoLoaded(true);
+    // onVideoLoaded(true);
   };
 
   const videoOnPlay = (event) => {

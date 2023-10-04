@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request) {
   const videos = await prisma.YtVideo.findMany({
-    take: 20,
+    take: 10,
     orderBy: {
       id: "asc",
     },

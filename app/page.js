@@ -7,7 +7,7 @@ import YoutubeVideo from "../components/YoutubeVideo";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Modal from "@/components/Modal";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -23,10 +23,10 @@ export default function Home() {
   const [carouLoaded, setCarouLoaded] = useState(false);
   const [recentVidsLoaded, setRecentVidsLoaded] = useState(false);
 
-  const [firstVideLoaded, setFirstVidLoaded] = useState(false);
-  const handleVideoLoaded = (loaded) => {
-    setFirstVidLoaded(loaded);
-  };
+  // const [firstVideLoaded, setFirstVidLoaded] = useState(false);
+  // const handleVideoLoaded = (loaded) => {
+  //   setFirstVidLoaded(loaded);
+  // };
 
   const [modalOpen, setMOdalOpen] = useState(false);
   const close = () => setMOdalOpen(false);
@@ -36,19 +36,19 @@ export default function Home() {
     { key: "rms", videoId: "XzcQ57UC_to" },
     { key: "mewhy", videoId: "z_xtKDmpf-g" },
     { key: "doriaD", videoId: "Yy5O8y-oQvY" },
-    { key: "sundayCharmers", videoId: "6zC4i1Yk4mw" },
+    // { key: "sundayCharmers", videoId: "6zC4i1Yk4mw" },
     { key: "colineBlf", videoId: "N8u9388y_z4" },
-    { key: "ozya", videoId: "V6jLw0yO_DI" },
-    { key: "samBosman", videoId: "9fohTKZe4f8" },
-    { key: "milla", videoId: "0AaN7NkujJE" },
+    // { key: "ozya", videoId: "V6jLw0yO_DI" },
+    // { key: "samBosman", videoId: "9fohTKZe4f8" },
+    // { key: "milla", videoId: "0AaN7NkujJE" },
     { key: "tyanaP", videoId: "gty3SR2XJ_s" },
     { key: "colt", videoId: "1lvytCVdqjE" },
-    { key: "amyMorrey", videoId: "lGZDjhryorY" },
-    { key: "essyla", videoId: "agUYbCeuzdY" },
+    // { key: "amyMorrey", videoId: "lGZDjhryorY" },
+    // { key: "essyla", videoId: "agUYbCeuzdY" },
     { key: "satchel", videoId: "2g7VMpnYlQ4" },
-    { key: "laBailly", videoId: "q9B_gC4Hoqc" },
-    { key: "Wayi", videoId: "-uNRs5BL4zA" },
-    { key: "juneRoad", videoId: "YTsN2L4SrD8" },
+    // { key: "laBailly", videoId: "q9B_gC4Hoqc" },
+    // { key: "Wayi", videoId: "-uNRs5BL4zA" },
+    // { key: "juneRoad", videoId: "YTsN2L4SrD8" },
   ];
 
   useEffect(() => {
@@ -64,6 +64,12 @@ export default function Home() {
       fetchVideos();
     }
   }, [carouLoaded]);
+
+  const customRenderItem = (item, props) => {
+    if (props.isSelected) {
+      return <item.type {...item.props} {...props} />;
+    }
+  };
 
   return (
     <div className={styles.home}>
@@ -104,26 +110,34 @@ export default function Home() {
                 className={styles.carousel}
                 infiniteLoop={true}
                 useKeyboardArrows={true}
+                renderItem={customRenderItem}
               >
                 {popularVideos.map((video, index) => (
                   <div key={video.key}>
-                    {index === 0 ? (
-                      <YoutubeVideo
-                        videoId={video.videoId}
-                        iframeClassName="homeVidFrame"
-                        onVideoLoaded={handleVideoLoaded}
-                      />
-                    ) : (
-                      firstVideLoaded && (
-                        <YoutubeVideo
-                          videoId={video.videoId}
-                          iframeClassName="homeVidFrame"
-                          onVideoLoaded={handleVideoLoaded}
-                          key={video.videoId}
-                        />
-                      )
-                    )}
+                    <YoutubeVideo
+                      videoId={video.videoId}
+                      iframeClassName="homeVidFrame"
+                      // onVideoLoaded={handleVideoLoaded}
+                    />
                   </div>
+                  // <div key={video.key}>
+                  //   {index === 0 ? (
+                  //     <YoutubeVideo
+                  //       videoId={video.videoId}
+                  //       iframeClassName="homeVidFrame"
+                  //       onVideoLoaded={handleVideoLoaded}
+                  //     />
+                  //   ) : (
+                  //     firstVideLoaded && (
+                  //       <YoutubeVideo
+                  //         videoId={video.videoId}
+                  //         iframeClassName="homeVidFrame"
+                  //         onVideoLoaded={handleVideoLoaded}
+                  //         key={video.videoId}
+                  //       />
+                  //     )
+                  //   )}
+                  // </div>
                 ))}
               </Carousel>
             </div>
@@ -139,7 +153,7 @@ export default function Home() {
                       key={video.id}
                       videoId={video.videoId}
                       iframeClassName="homeVidFrame"
-                      onVideoLoaded={handleVideoLoaded}
+                      // onVideoLoaded={handleVideoLoaded}
                     />
                   ))}
                 </div>
