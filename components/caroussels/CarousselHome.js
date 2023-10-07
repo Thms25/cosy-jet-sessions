@@ -37,7 +37,7 @@ export default function CarousselHome() {
       useKeyboardArrows={true}
       renderItem={customRenderItem}
     >
-      {popularVideos.map((video) => (
+      {popularVideos?.map((video) => (
         <div key={video.key}>
           <YoutubeVideo
             videoId={video.videoId}
