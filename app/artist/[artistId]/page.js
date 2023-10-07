@@ -10,11 +10,10 @@ async function getArtist(id) {
 
 export default async function Page({ params }) {
   const artist = await getArtist(params.artistId);
-  console.log(artist);
 
   return (
     <div>
-      {artist.videos && (
+      {artist?.videos && (
         <div>
           <div>
             <h1>{artist.name}</h1>
@@ -26,7 +25,7 @@ export default async function Page({ params }) {
                 <FontAwesomeIcon icon={faShare} rotation={90} />
               </p>
             </div>
-            <CarousselArtist videos={artist.videos} />
+            <CarousselArtist videos={artist?.videos} />
           </div>
         </div>
       )}
