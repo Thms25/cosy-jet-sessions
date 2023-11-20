@@ -3,15 +3,27 @@ import AboutStory from "@/components/AboutStory";
 import CjsBanner from "@/components/CjsBanner";
 
 export default function About() {
-  // const { ref: myRef, inView: elVisible, entry } = useInView();
-
   return (
     <div className={styles.about}>
-      <header>
-        <CjsBanner />
-      </header>
-      <h2>Welcome to Cosy Jet Sessions</h2>
-      <h3>Scroll Down to learn about us</h3>
+      <div className={styles.aboutHeader}>
+        <header>
+          <CjsBanner />
+        </header>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className={styles.arrowDown}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </div>
       <div>
         <AboutStory />
       </div>
