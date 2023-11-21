@@ -25,11 +25,18 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     const response = await fetch(url);
 
     const data = await response.json();
-    const videos = data["items"].filter((video) => {
-      return !video["snippet"]["title"].includes("#");
+    const videos = [];
+    const shorts = [];
+
+    data["items"].forEach((video) => {
+      video["snippet"]["title"].includes("#")
+        ? shorts.push(video)
+        : videos.push(video);
     });
 
     for (const video of videos) {
+      console.log("\napi res: ", video);
+
       const { title, description, publishedAt } = video.snippet;
       const thumbnailUrl = video.snippet.thumbnails.high.url;
       let artistName;
@@ -81,12 +88,66 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         update: {},
       });
     }
+    for (const video of shorts) {
+      console.log("\napi res: ", video);
+
+      // const { title, description, publishedAt } = video.snippet;
+      // const thumbnailUrl = video.snippet.thumbnails.high.url;
+      // let artistName;
+
+      // if (/[Cc]over/.test(title)) {
+      //   const match = title.match(/over by (.*?)\)/);
+      //   artistName = match ? match[1] : "Unknown Artist";
+      // } else {
+      //   const splitTitle = title.split(" - ");
+      //   artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
+      // }
+      // const artistName = title.includes("cover")
+      //   ? title.match(/cover by (.*?)\)/)[1]
+      //   : title.split(" - ")[0];
+
+      // console.log("Artist: ", artistName);
+      // console.log("Title: ", title);
+      // console.log("Published at: ", publishedAt);
+      // console.log("url: ", thumbnailUrl);
+
+      // const existingArtist = await prisma.artist.findFirst({
+      //   where: { name: artistName },
+      // });
+
+      // let artist;
+
+      // if (existingArtist) {
+      //   artist = existingArtist;
+      // } else {
+      //   artist = await prisma.artist.create({
+      //     data: {
+      //       name: artistName,
+      //     },
+      //   });
+      // }
+
+      // await prisma.ytVideo.upsert({
+      //   where: { videoId: video["id"]["videoId"] },
+      //   create: {
+      //     videoId: video["id"]["videoId"],
+      //     title,
+      //     description,
+      //     publishedAt,
+      //     thumbnail: thumbnailUrl,
+      //     artist: {
+      //       connect: { id: artist.id },
+      //     },
+      //   },
+      //   update: {},
+      // });
+    }
 
     if (data.nextPageToken) {
       await fetchVideosAndArtists(data.nextPageToken);
     }
 
-    console.log("Artist and Video saved to the database.");
+    console.log("Artist and Video saved to the database.\n\n");
   } catch (error) {
     console.error("Error fetching: ", error.message);
   }
