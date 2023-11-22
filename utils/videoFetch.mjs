@@ -11,6 +11,7 @@ async function deleteExistingData() {
 }
 
 await deleteExistingData();
+
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
     const apiKey = process.env.YT_API_KEY;
@@ -48,45 +49,46 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         const splitTitle = title.split(" - ");
         artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
       }
-      // const artistName = title.includes("cover")
-      //   ? title.match(/cover by (.*?)\)/)[1]
-      //   : title.split(" - ")[0];
 
-      console.log("Artist: ", artistName);
+      console.log("\nArtist: ", artistName);
       console.log("Title: ", title);
       console.log("Published at: ", publishedAt);
       console.log("url: ", thumbnailUrl);
 
-      const existingArtist = await prisma.artist.findFirst({
-        where: { name: artistName },
-      });
-
-      let artist;
-
-      if (existingArtist) {
-        artist = existingArtist;
-      } else {
-        artist = await prisma.artist.create({
-          data: {
-            name: artistName,
-          },
+      if (artistName !== "Cosy Jet sessions") {
+        const existingArtist = await prisma.artist.findFirst({
+          where: { name: artistName },
         });
-      }
 
-      await prisma.ytVideo.upsert({
-        where: { videoId: video["id"]["videoId"] },
-        create: {
-          videoId: video["id"]["videoId"],
-          title,
-          description,
-          publishedAt,
-          thumbnail: thumbnailUrl,
-          artist: {
-            connect: { id: artist.id },
+        let artist;
+
+        if (existingArtist) {
+          artist = existingArtist;
+        } else {
+          artist = await prisma.artist.create({
+            data: {
+              name: artistName,
+            },
+          });
+        }
+
+        await prisma.ytVideo.upsert({
+          where: { videoId: video["id"]["videoId"] },
+          create: {
+            videoId: video["id"]["videoId"],
+            title,
+            description,
+            publishedAt,
+            thumbnail: thumbnailUrl,
+            artist: {
+              connect: { id: artist.id },
+            },
           },
-        },
-        update: {},
-      });
+          update: {},
+        });
+
+        console.log("\nArtsit seved\n");
+      }
     }
     for (const video of shorts) {
       console.log("\napi res: ", video);
@@ -146,11 +148,10 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     if (data.nextPageToken) {
       await fetchVideosAndArtists(data.nextPageToken);
     }
-
-    console.log("Artist and Video saved to the database.\n\n");
   } catch (error) {
     console.error("Error fetching: ", error.message);
   }
 }
 
-fetchVideosAndArtists();
+await fetchVideosAndArtists();
+console.log("Artist and Video saved to the database.\n\n");
