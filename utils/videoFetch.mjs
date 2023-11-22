@@ -36,26 +36,24 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     });
 
     for (const video of videos) {
-      console.log("\napi res: ", video);
+      if (video.id.kind === "youtube#video") {
+        const { title, description, publishedAt } = video.snippet;
+        const thumbnailUrl = video.snippet.thumbnails.high.url;
+        let artistName;
 
-      const { title, description, publishedAt } = video.snippet;
-      const thumbnailUrl = video.snippet.thumbnails.high.url;
-      let artistName;
+        if (/[Cc]over/.test(title)) {
+          const match = title.match(/over by (.*?)\)/);
+          artistName = match ? match[1] : "Unknown Artist";
+        } else {
+          const splitTitle = title.split(" - ");
+          artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
+        }
 
-      if (/[Cc]over/.test(title)) {
-        const match = title.match(/over by (.*?)\)/);
-        artistName = match ? match[1] : "Unknown Artist";
-      } else {
-        const splitTitle = title.split(" - ");
-        artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
-      }
+        console.log("\nArtist: ", artistName);
+        console.log("Title: ", title);
+        console.log("Published at: ", publishedAt);
+        console.log("url: ", thumbnailUrl);
 
-      console.log("\nArtist: ", artistName);
-      console.log("Title: ", title);
-      console.log("Published at: ", publishedAt);
-      console.log("url: ", thumbnailUrl);
-
-      if (artistName !== "Cosy Jet sessions") {
         const existingArtist = await prisma.artist.findFirst({
           where: { name: artistName },
         });
@@ -90,8 +88,11 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         console.log("\nArtsit seved\n");
       }
     }
+
     for (const video of shorts) {
-      console.log("\napi res: ", video);
+      if (video.id.kind === "youtube#video") {
+        console.log("\napi res: ", video);
+      }
 
       // const { title, description, publishedAt } = video.snippet;
       // const thumbnailUrl = video.snippet.thumbnails.high.url;
