@@ -8,6 +8,8 @@ async function deleteExistingData() {
   console.log("Artists deleted.");
   await prisma.YtVideo.deleteMany();
   console.log("Videos deleted.");
+  await prisma.YtShort.deleteMany();
+  console.log("Shorts deleted.");
 }
 
 await deleteExistingData();
@@ -38,6 +40,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     for (const video of videos) {
       if (video.id.kind === "youtube#video") {
         const { title, description, publishedAt } = video.snippet;
+        const videoId = video.id.videoId;
         const thumbnailUrl = video.snippet.thumbnails.high.url;
         let artistName;
 
@@ -71,9 +74,9 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         }
 
         await prisma.ytVideo.upsert({
-          where: { videoId: video["id"]["videoId"] },
+          where: { videoId: videoId },
           create: {
-            videoId: video["id"]["videoId"],
+            videoId: videoId,
             title,
             description,
             publishedAt,
@@ -85,65 +88,59 @@ async function fetchVideosAndArtists(nextPageToken = null) {
           update: {},
         });
 
-        console.log("\nArtsit seved\n");
+        console.log(`\nArtsit seved: ${artist}\n`);
       }
     }
 
     for (const video of shorts) {
       if (video.id.kind === "youtube#video") {
         console.log("\napi res: ", video);
+
+        const { title, publishedAt } = video.snippet;
+        const videoId = video.id.videoId;
+        const thumbnailUrl = video.snippet.thumbnails.high.url;
+        let artistName;
+
+        if (/[Cc]over /.test(title)) {
+          const match = title.match(/over by (.*?)\)/);
+          artistName = match ? match[1] : "Unknown Artist";
+        } else {
+          const splitTitle = title.split(" | ");
+          artistName =
+            splitTitle.length > 0
+              ? splitTitle[0].split(" - ")[1]
+              : "Unknown Artist";
+        }
+
+        console.log("Artist: ", artistName);
+        console.log("Title: ", title);
+        console.log("Published at: ", publishedAt);
+        console.log("url: ", thumbnailUrl);
+
+        const existingArtist = await prisma.artist.findFirst({
+          where: { name: artistName },
+        });
+
+        console.log("existingArtsit", existingArtist);
+
+        if (existingArtist) {
+          await prisma.YtShort.upsert({
+            where: { videoId: videoId },
+            create: {
+              videoId: videoId,
+              title,
+              publishedAt,
+              thumbnail: thumbnailUrl,
+              artist: {
+                connect: { id: existingArtist.id },
+              },
+            },
+            update: {},
+          });
+
+          console.log(`\nArtsit seved: ${existingArtist}\n`);
+        }
       }
-
-      // const { title, description, publishedAt } = video.snippet;
-      // const thumbnailUrl = video.snippet.thumbnails.high.url;
-      // let artistName;
-
-      // if (/[Cc]over/.test(title)) {
-      //   const match = title.match(/over by (.*?)\)/);
-      //   artistName = match ? match[1] : "Unknown Artist";
-      // } else {
-      //   const splitTitle = title.split(" - ");
-      //   artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
-      // }
-      // const artistName = title.includes("cover")
-      //   ? title.match(/cover by (.*?)\)/)[1]
-      //   : title.split(" - ")[0];
-
-      // console.log("Artist: ", artistName);
-      // console.log("Title: ", title);
-      // console.log("Published at: ", publishedAt);
-      // console.log("url: ", thumbnailUrl);
-
-      // const existingArtist = await prisma.artist.findFirst({
-      //   where: { name: artistName },
-      // });
-
-      // let artist;
-
-      // if (existingArtist) {
-      //   artist = existingArtist;
-      // } else {
-      //   artist = await prisma.artist.create({
-      //     data: {
-      //       name: artistName,
-      //     },
-      //   });
-      // }
-
-      // await prisma.ytVideo.upsert({
-      //   where: { videoId: video["id"]["videoId"] },
-      //   create: {
-      //     videoId: video["id"]["videoId"],
-      //     title,
-      //     description,
-      //     publishedAt,
-      //     thumbnail: thumbnailUrl,
-      //     artist: {
-      //       connect: { id: artist.id },
-      //     },
-      //   },
-      //   update: {},
-      // });
     }
 
     if (data.nextPageToken) {
@@ -155,4 +152,5 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 }
 
 await fetchVideosAndArtists();
-console.log("Artist and Video saved to the database.\n\n");
+
+console.log("\nArtist and Video saved to the database.\n");
