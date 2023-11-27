@@ -18,16 +18,14 @@ export default function CarousselArtist({ videos }) {
       showStatus={false}
       useKeyboardArrows={true}
       renderItem={customRenderItem}
+      showThumbs={false}
     >
       {videos?.map((video) => (
-        <div>
-          <YoutubeVideo
-            key={video.id}
-            videoId={video.videoId}
-            iframeClassName="video"
-          />
-          {/* <h3>{video.title}</h3> */}
-        </div>
+        <YoutubeVideo
+          key={video.id}
+          videoId={video.videoId}
+          iframeClassName="video"
+        />
       ))}
     </Carousel>
   );

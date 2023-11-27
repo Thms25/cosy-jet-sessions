@@ -11,6 +11,7 @@ export async function GET(request) {
     },
     include: {
       videos: true,
+      shorttVideos: true,
     },
   });
   return new Response(JSON.stringify(artist));

@@ -5,17 +5,24 @@ import styles from "../styles/about.module.scss";
 import { useInView } from "react-intersection-observer";
 
 export default function AboutStory() {
-  const { ref: myRef, inView: elVisible, entry } = useInView();
+  const { ref: ref1, inView: el1Visible } = useInView();
+  const { ref: ref2, inView: el2Visible } = useInView();
+  const { ref: ref3, inView: el3Visible } = useInView();
+  const { ref: ref4, inView: el4Visible } = useInView();
 
   return (
     <main>
-      <div className={styles.section}>
+      <div
+        className={`${styles.section} ${
+          el1Visible ? styles.appear : styles.disappear
+        }`}
+      >
         <div className={styles.text}>
           <h3>
             Cosy Jet Sessions is a unique music platform showcasing raw talent
             in a vintage and warm setting
           </h3>
-          <p>
+          <p ref={ref1}>
             Cosy Jet Sessions, nestled in the heart of Brussels, invites you to
             experience the magic of music in its purest form. As an intimate
             acoustic live session media, we curate a haven where melodies take
@@ -37,7 +44,11 @@ export default function AboutStory() {
           height={1044}
         />
       </div>
-      <div className={styles.section}>
+      <div
+        className={`${styles.section} ${
+          el2Visible ? styles.appear : styles.disappear
+        }`}
+      >
         <Image
           id={styles.cjsLights}
           // priority
@@ -47,7 +58,7 @@ export default function AboutStory() {
           height={1206}
         />
         <div className={styles.text}>
-          <p>
+          <p ref={ref2}>
             Ladies and gentlemen, music enthusiasts, and fellow creatives, allow
             me to take you on a journey into the heart and soul of Cosy Jet
             Sessions – a musical haven that was born out of a passionate desire
@@ -62,9 +73,13 @@ export default function AboutStory() {
           </p>
         </div>
       </div>
-      <div className={styles.section}>
+      <div
+        className={`${styles.section} ${
+          el3Visible ? styles.appear : styles.disappear
+        }`}
+      >
         <div className={styles.text}>
-          <p>
+          <p ref={ref3}>
             You might wonder, why did we embark on this musical odyssey? Well,
             my friends, it all began with a fervent belief in the power of
             simplicity. In an era of grand stages and elaborate productions, we
@@ -96,7 +111,7 @@ export default function AboutStory() {
       </div>
       <div
         className={`${styles.section} ${
-          elVisible ? styles.appear : styles.disappear
+          el4Visible ? styles.appear : styles.disappear
         }`}
       >
         <Image
@@ -107,7 +122,7 @@ export default function AboutStory() {
           height={1206}
         />
         <div>
-          <p ref={myRef}>
+          <p ref={ref4}>
             But it's not just about the artists; it's about you – the listeners
             who crave an escape from the chaos of the world, who seek solace in
             the serenity of acoustic sounds. Our purpose is to curate an
