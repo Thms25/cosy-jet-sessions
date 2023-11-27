@@ -36,6 +36,7 @@ export default function CarousselHome() {
       infiniteLoop={true}
       useKeyboardArrows={true}
       renderItem={customRenderItem}
+      showThumbs={false}
     >
       {popularVideos?.map((video) => (
         <div key={video.key}>

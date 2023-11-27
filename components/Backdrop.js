@@ -2,9 +2,6 @@ import { motion } from "framer-motion";
 import styles from "styles/modal.module.scss";
 
 const Backdrop = ({ children, onClick }) => {
-  // const onClick = () => {
-  //   console.log("backdrop clicked");
-  // };
   return (
     <motion.div
       className={styles.backdrop}
