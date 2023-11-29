@@ -1,9 +1,12 @@
-import "../styles/globals.css";
+// Styles
+import "../styles/globals.scss";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false;
+
+// Components
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-config.autoAddCss = false;
 
 export const metadata = {
   title: "Cosy Jet Sessions",
@@ -15,6 +18,7 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         <Navbar />
+        <h1 className="text-8xl font-bold underline">Hello world!</h1>
         <main>{children}</main>
         <Footer />
       </body>
