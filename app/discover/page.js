@@ -25,6 +25,7 @@ export default async function Discover() {
                   <h3>{artist.name}</h3>
                   {artist.videos[0]?.thumbnail && (
                     <Image
+                      priority
                       src={artist.videos[0].thumbnail}
                       alt={`${artist.name} - thumbnail`}
                       width={480}
