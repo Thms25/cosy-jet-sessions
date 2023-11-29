@@ -18,7 +18,6 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         <Navbar />
-        <h1 className="text-8xl font-bold underline">Hello world!</h1>
         <main>{children}</main>
         <Footer />
       </body>

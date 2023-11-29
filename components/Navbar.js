@@ -1,17 +1,20 @@
 "use client";
 
-import React from "react";
+// Styles
 import styles from "../styles/navbar.module.scss";
-import Link from "next/link";
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { motion } from "framer-motion";
 
-const Navbar = () => {
+// Components
+import Link from "next/link";
+import Image from "next/image";
+
+// --------------------------------------------------------------
+
+export default function Navbar() {
   return (
-    // desktop
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav}`}>
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -54,6 +57,4 @@ const Navbar = () => {
       <FontAwesomeIcon icon={faUser} className={styles.icon} />
     </nav>
   );
-};
-
-export default Navbar;
+}

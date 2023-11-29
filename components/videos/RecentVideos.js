@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "../../styles/videos.module.scss";
-import YoutubeVideo from "../YoutubeVideo";
+import YoutubeVideo from "./YoutubeVideo";
 
 // Utils
 import { getRecentVideos } from "@/utils/fetchUtils";
@@ -26,6 +26,8 @@ export default function RecentVideos() {
           key={video.id}
           videoId={video.videoId}
           iframeClassName="homeVidFrame"
+          width={640}
+          height={390}
         />
       ))}
     </div>

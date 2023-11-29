@@ -1,11 +1,13 @@
 "use client";
 
 import YouTube from "react-youtube";
-import styles from "../styles/videos.module.scss";
+import styles from "styles/videos.module.scss";
 
 export default function YoutubeVideo({
   videoId,
   iframeClassName,
+  height,
+  width,
   // onVideoLoaded,
 }) {
   // const videoOnReady = (event) => {
@@ -20,8 +22,8 @@ export default function YoutubeVideo({
   // };
 
   const opts = {
-    height: "390",
-    width: "640",
+    height: height,
+    width: width,
     playerVars: {
       autoplay: 0,
     },

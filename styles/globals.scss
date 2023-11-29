@@ -29,31 +29,75 @@ body {
   text-align: center;
   font-family: 'DM Serif Display', serif;
 
-}
-
-a {
-  text-decoration: none;
-  color: var(--cjsWhite);
-}
-
-/* caroussel design */
-
-.control-arrow {
-  background-color: var(--cjsBrown) !important;
-  height: 30px !important;
-  width: 30px !important;
-  margin: auto !important;
-  color: red !important;
-  display: grid;
-  place-items: center;
-  border-radius: 24px;
-}
-
-.control-dots {
-  li {
-    background-color: var(--cjsBrown) !important;
-
+  a {
+    text-decoration: none;
+    color: var(--cjsWhite);
   }
 }
 
-/* end of caroussel */
+/* swiper caroussel design */
+
+.swiper {
+  max-width: 800px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .swiper-wrapper {
+    width: 100%;
+    height: 300px;
+  }
+
+  .swiper-slide {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 15px;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+
+  .swiper {
+    --swiper-pagination-color: rgba(var(--cjsBrownRGB), 1);
+    --swiper-pagination-bullet-inactive-color: var(--cjsWhite);
+  }
+
+  .button-next,
+  .button-prev {
+    position: absolute;
+    top: 50%;
+    width: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(var(--cjsBrownRGB), 0.2);
+    background-color: rgba(var(--cjsBrownRGB), 0.2);
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+  }
+  :is(.button-next, .button-prev):hover {
+    background-color: rgba(var(--cjsBrownRGB), 0.4);
+  }
+
+  .button-next {
+    right: 10px;
+  }
+  .button-prev {
+    left: 10px;
+  }
+
+}
