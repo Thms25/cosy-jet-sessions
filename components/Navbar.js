@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-// Components
+// COmponents
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,7 +14,7 @@ import Image from "next/image";
 
 export default function Navbar() {
   return (
-    <nav className={`${styles.nav}`}>
+    <nav className={`${styles.nav} fixed z-50`}>
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -44,12 +44,6 @@ export default function Navbar() {
         <li>
           <Link href="/discover">Discover</Link>
         </li>
-        {/* <li>
-          <Link href="/events">Events</Link>
-        </li>
-        <li>
-          <Link href="/shop">Shop</Link>
-        </li> */}
         <li>
           <Link href="/contact">Contact</Link>
         </li>

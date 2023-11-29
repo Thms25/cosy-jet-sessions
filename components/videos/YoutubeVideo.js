@@ -10,12 +10,13 @@ export default function YoutubeVideo({
   width,
   // onVideoLoaded,
 }) {
-  // const videoOnReady = (event) => {
-  //   const player = event.target;
-  //   // player.seekTo(0);
-  //   // player.playVideo();
-  //   // onVideoLoaded(true);
-  // };
+  const videoOnReady = (event) => {
+    const player = event.target;
+    console.log(event.target);
+    // player.seekTo(0);
+    // player.playVideo();
+    // onVideoLoaded(true);
+  };
 
   // const videoOnPlay = (event) => {
   //   const player = event.target;
@@ -31,9 +32,10 @@ export default function YoutubeVideo({
 
   return (
     <YouTube
+      id="yt-video"
       videoId={videoId}
       opts={opts}
-      // onReady={videoOnReady}
+      onReady={videoOnReady}
       // onPlay={videoOnPlay}
       iframeClassName={styles[iframeClassName]}
     />

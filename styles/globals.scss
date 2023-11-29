@@ -37,6 +37,27 @@ body {
 
 /* swiper caroussel design */
 
+.swiper-pagination {
+  .swiper-pagination-bullet {
+    background: var(--cjsBrown);
+    opacity: 0.2;
+    transition: 0.2;
+    &:hover {
+      opacity: 0.4;
+    }
+  }
+  .swiper-pagination-bullet-active {
+    border-radius: 18px;
+    transition: width 0.2s ease;
+    background: var(--cjsBrown);
+    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+
 .swiper {
   max-width: 800px;
   height: 500px;
@@ -44,60 +65,42 @@ body {
   justify-content: center;
   align-items: center;
 
-
   .swiper-wrapper {
     width: 100%;
-    height: 300px;
+    height: 100%;
   }
 
   .swiper-slide {
-    width: 300px;
-    height: 300px;
+    width: 80%;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  .swiper-pagination-bullet-active {
-    width: 15px;
-    border-radius: 10px;
-    transition: width 0.3s ease;
-  }
-
-  .swiper {
-    --swiper-pagination-color: rgba(var(--cjsBrownRGB), 1);
-    --swiper-pagination-bullet-inactive-color: var(--cjsWhite);
-  }
 
   .button-next,
   .button-prev {
     position: absolute;
     top: 50%;
-    width: 50px;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgba(var(--cjsBrownRGB), 0.2);
-    background-color: rgba(var(--cjsBrownRGB), 0.2);
-    transform: translateY(-50%);
+    color: rgba(var(--cjsBrownRGB), 0.6);
+    color: rgba(var(--cjsBrownRGB), 0.6);
     cursor: pointer;
     z-index: 10;
-  }
-  :is(.button-next, .button-prev):hover {
-    background-color: rgba(var(--cjsBrownRGB), 0.4);
+    transition: 0.2s;
+
+    &:is(.button-next, .button-prev):hover {
+      color: rgba(var(--cjsBrownRGB), 1);
+    }
   }
 
   .button-next {
     right: 10px;
+    // transform: translateX(50%);
   }
   .button-prev {
     left: 10px;
+    // transform: translateX(-50%);
   }
 
 }

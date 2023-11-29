@@ -5,7 +5,6 @@ export const arrowDown = (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="animate-bounce w-6 h-6"
   >
     <path
       strokeLinecap="round"
@@ -22,7 +21,6 @@ export const arrowLeft = (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-6 h-6"
   >
     <path
       strokeLinecap="round"
@@ -39,7 +37,6 @@ export const arrowRight = (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="w-6 h-6"
   >
     <path
       strokeLinecap="round"

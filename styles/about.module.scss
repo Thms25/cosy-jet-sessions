@@ -4,27 +4,6 @@
     height: 100vh;
     display: grid;
     align-items: center;
-
-    .arrowDown {
-      width: 2%;
-      margin: auto;
-      animation: moveUpDown 2s ease-in-out infinite;
-    }
-
-    @keyframes moveUpDown {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(20px);
-      }
-    }
-  }
-
-  header {
-    p {
-      font-size: 20px;
-    }
   }
 
   .disappear {

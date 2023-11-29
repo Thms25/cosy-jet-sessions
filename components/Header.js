@@ -9,17 +9,18 @@ import { useRef } from "react";
 // Components
 import YoutubeVideo from "./videos/YoutubeVideo";
 import { arrowDown } from "@/utils/data/svgData";
+import Image from "next/image";
 
 // ----------------------------------------------------------------
 
-export default function Header() {
+export default function Header({ className }) {
   const targetRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
   });
 
   return (
-    <section ref={targetRef} className="bg-cjsWhite h-[350vh]">
+    <section ref={targetRef} className={`bg-cjsWhite h-[350vh] ${className}`}>
       <div className="h-screen sticky top-0 z-0 grid grid-cols-3 grid-rows-3 gap-4 p-4 overflow-hidden">
         <Background scrollYProgress={scrollYProgress} />
         <Images scrollYProgress={scrollYProgress} />
@@ -58,13 +59,21 @@ const Background = ({ scrollYProgress }) => {
         scale: copyScale,
         opacity: copyOpacity,
         y: copyY,
-        backgroundImage: "url('/images/cjs-banner.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        // backgroundImage: "url('/images/cjs-banner.png')",
+        // backgroundSize: "cover",
+        // backgroundPosition: "center",
       }}
       className="absolute px-8 w-full h-screen flex flex-col items-center justify-end pb-24"
     >
-      {arrowDown}
+      <Image
+        priority
+        src="/images/cjs-banner.png"
+        alt="cjs-banner"
+        width={1710}
+        height={751}
+        className="object-contain"
+      />
+      <div className="w-6 h-6 animate-bounce">{arrowDown}</div>
     </motion.div>
   );
 };
@@ -152,22 +161,14 @@ const Images = ({ scrollYProgress }) => {
       <motion.div
         className="relative z-10"
         style={{
-          // backgroundImage:
-          //   "url(https://plus.unsplash.com/premium_photo-1668790459004-780996a6404c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80)",
-          // backgroundSize: "cover",
-          // backgroundPosition: "center",
+          backgroundImage: "url('/images/decor.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           scale,
           x: image6OffsetX,
           y: image6OffsetY,
         }}
-      >
-        <YoutubeVideo
-          videoId="XzcQ57UC_to"
-          width={480}
-          height={264}
-          iframeClassName=""
-        />
-      </motion.div>
+      />
     </>
   );
 };

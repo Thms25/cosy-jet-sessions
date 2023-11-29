@@ -3,15 +3,13 @@
 // Hooks
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
-// import { useState } from "react";
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// Styles
-import styles from "styles/carousel.module.scss";
+// Utils
 import { arrowLeft, arrowRight } from "@/utils/data/svgData";
 
 // Components
@@ -22,7 +20,6 @@ import YoutubeVideo from "../videos/YoutubeVideo";
 export default function SmoothCarousel({ slides }) {
   return (
     <Swiper
-      className={styles.swiper}
       modules={[EffectCoverflow, Navigation, Pagination]}
       navigation={{
         prevEl: ".button-prev",
@@ -31,12 +28,19 @@ export default function SmoothCarousel({ slides }) {
       pagination={{
         clickable: true,
       }}
-      speed={1000}
+      speed={800}
       slidesPerView={"auto"}
       centeredSlides
+      initialSlide={2}
+      preventClicks={true}
       effect={"coverflow"}
+      lazyPreloadPrevNext={2}
+      keyboard={{
+        enabled: true,
+        onlyInViewport: false,
+      }}
       coverflowEffect={{
-        rotate: 50,
+        rotate: 80,
         stretch: 0,
         depth: 100,
         modifier: 1,
@@ -44,12 +48,18 @@ export default function SmoothCarousel({ slides }) {
       }}
     >
       {slides.map((slide, index) => (
-        <SwiperSlide key={index} className={styles.slideInner}>
-          <img src={slide} alt="" />
+        <SwiperSlide key={index}>
+          <YoutubeVideo
+            key={index}
+            videoId={slide.videoId}
+            iframeClassName="homeVidFrame"
+            width={640}
+            height={390}
+          />
         </SwiperSlide>
       ))}
-      <div className="button-prev">{arrowLeft}</div>
-      <div className="button-next">{arrowRight}</div>
+      <div className="button-prev w-10 h-10 hidden md:block">{arrowLeft}</div>
+      <div className="button-next w-10 h-10 hidden md:block">{arrowRight}</div>
     </Swiper>
   );
 }
