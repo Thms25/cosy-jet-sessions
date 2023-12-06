@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Modal from "@/components/Modal";
 import Image from "next/image";
 import { useState } from "react";
-import styles from "../styles/home.module.scss";
+import styles from "/styles/home.module.scss";
 import { arrowDown } from "@/utils/data/svgData";
 
 const CjsBanner = ({ className }) => {

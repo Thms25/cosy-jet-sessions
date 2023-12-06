@@ -21,32 +21,13 @@ export default function Header({ className }) {
 
   return (
     <section ref={targetRef} className={`bg-cjsWhite h-[350vh] ${className}`}>
-      <div className="h-screen sticky top-0 z-0 grid grid-cols-3 grid-rows-3 gap-4 p-4 overflow-hidden">
+      <div className="h-screen sticky top-0 z-0 grid grid-cols-3 grid-rows-3 gap-4 px-4 overflow-hidden">
         <Background scrollYProgress={scrollYProgress} />
         <Images scrollYProgress={scrollYProgress} />
       </div>
     </section>
   );
 }
-//   const background = useTransform(scrollYProgress, (i) =>
-//     i === 1 ? "rgb(13,10,9)" : "transparent"
-//   );
-
-//   return (
-//     <motion.nav
-//       style={{ background }}
-//       className="px-4 py-2 flex items-center justify-between fixed top-0 left-0 right-0 z-40 transition-colors"
-//     >
-//       <div className="flex items-center gap-2 text-lg text-white">
-//         <AiFillFileImage className="text-xl" />
-//         <span className="font-bold">PIXII</span>
-//       </div>
-//       <button className="text-sm bg-white text-black hover:opacity-90 transition-opacity font-semibold flex items-center gap-1.5 px-3 py-1.5">
-//         <AiFillApple className="text-lg" />
-//         <span>Download</span>
-//       </button>
-//     </motion.nav>
-//   );
 
 const Background = ({ scrollYProgress }) => {
   const copyScale = useTransform(scrollYProgress, [0, 0.75], [1, 0.5]);
@@ -59,9 +40,6 @@ const Background = ({ scrollYProgress }) => {
         scale: copyScale,
         opacity: copyOpacity,
         y: copyY,
-        // backgroundImage: "url('/images/cjs-banner.png')",
-        // backgroundSize: "cover",
-        // backgroundPosition: "center",
       }}
       className="absolute px-8 w-full h-screen flex flex-col items-center justify-end pb-24"
     >

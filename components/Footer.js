@@ -1,41 +1,61 @@
-import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faInstagram,
-  faYoutube,
-  faTiktok,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
-import styles from "../styles/footer.module.scss";
+import { CiInstagram, CiYoutube, CiMail } from "react-icons/ci";
+import { FaTiktok } from "react-icons/fa";
 
-const Footer = () => {
+import Link from "next/link";
+
+import Image from "next/image";
+
+const socialLinks = [
+  {
+    icon: <CiInstagram />,
+    link: "https://www.instagram.com/cosyjetsessions",
+  },
+  {
+    icon: <CiYoutube />,
+    link: "https://www.youtube.com/@cosyjetsessions",
+  },
+  {
+    icon: <FaTiktok />,
+    link: "https://www.tiktok.com/@cosyjetsessions",
+  },
+  {
+    icon: <CiMail />,
+    link: "mailto:contact@cosyjetsessions.com",
+  },
+];
+
+export default function Footer() {
   return (
-    <footer className={styles.footer}>
-      <ul className={styles.icons}>
-        <Link href="https://www.instagram.com/cosyjetsessions/" target="_blank">
-          <li>
-            <FontAwesomeIcon icon={faInstagram} className={styles.icon} />
+    <footer className="z-20 w-full px-8 py-1 border-t border-cjsBrown shadow flex items-center justify-between ">
+      <Link href="/" className="flex items-center">
+        <Image
+          src="/images/cjsLogo.png"
+          alt="cjs icon"
+          width={30}
+          height={30}
+          className="mr-4 hidden md:block"
+        />
+        <Image
+          src="/images/cjsText.png"
+          alt="cjs text title"
+          className="w-full object-contain hidden md:block"
+          width={190}
+          height={40}
+        />
+      </Link>
+      <ul className="flex justify-evenly items-center text-3xl w-full md:w-1/2 lg:w-1/3">
+        {socialLinks.map((social, index) => (
+          <li key={index}>
+            <Link
+              target="_blank"
+              href={social.link}
+              className="text-cjsBrown px-3"
+            >
+              {social.icon}
+            </Link>
           </li>
-        </Link>
-        <Link href="https://www.youtube.com/@cosyjetsessions" target="_blank">
-          <li>
-            <FontAwesomeIcon icon={faYoutube} className={styles.icon} />
-          </li>
-        </Link>
-        <Link href="https://www.tiktok.com/@cosyjetsessions/" target="_blank">
-          <li>
-            <FontAwesomeIcon icon={faTiktok} className={styles.icon} />
-          </li>
-        </Link>
-        <Link href="/">
-          <li>
-            <FontAwesomeIcon icon={faEnvelope} className={styles.icon} />
-          </li>
-        </Link>
+        ))}
       </ul>
     </footer>
   );
-};
-
-export default Footer;
+}

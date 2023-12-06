@@ -1,18 +1,14 @@
-import styles from "/styles/artistPage.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShare } from "@fortawesome/free-solid-svg-icons";
-
 // Utils
 import { getArtist } from "@/utils/fetchUtils";
-import ArtistAccordeon from "@/components/Accordeons/ArtistAccordeon";
+
+// Components
 import VideoAccordeon from "@/components/Accordeons/VideoAccordeon";
 
 export default async function Page({ params }) {
   const artist = await getArtist(params.artistId);
-  console.log(artist.videos);
 
   return (
-    <div className="p-24">
+    <div className="p-24 h-screen">
       {artist?.videos && (
         <div>
           <div>
@@ -20,7 +16,6 @@ export default async function Page({ params }) {
           </div>
           <div className="">
             <VideoAccordeon videos={artist.videos} />
-            {/* <ArtistAccordeon videos={artist.videos} /> */}
           </div>
         </div>
       )}

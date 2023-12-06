@@ -1,5 +1,5 @@
 // Components
-import CjsBanner from "@/components/CjsBanner";
+import CjsBanner from "@/components/Banners/CjsBanner";
 import Header from "@/components/Header";
 import SmoothCarousel from "@/components/caroussels/SmoothCarousel";
 

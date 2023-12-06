@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "../../styles/discover.module.scss";
 import Image from "next/image";
+import DynamicBanner from "@/components/Banners/DynamicBanner";
 
 async function fetchArtists() {
   const res = await fetch(`${process.env.URL}/api/getArtists`);
@@ -11,12 +12,13 @@ export default async function Discover() {
   const artists = await fetchArtists();
 
   return (
-    <div className={styles.discover}>
-      <div className={styles.title}>
-        <h1>Hello Cosy Jetter</h1>
-        <p>Discover some of the artists that we hosted</p>
-      </div>
-      <div className={styles.artistList}>
+    <section className="py-24">
+      <DynamicBanner
+        title="We love discovering artist"
+        subtitle="Our mission is to let those talents be discovered as they should"
+        caption="Let yourself go and have a listen to the artists we have hosted"
+      />
+      <div className="grid p-4 md:p-12 gap-2 lg:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {artists?.map((artist) => {
           return (
             <div key={artist.id} className={styles.artistCard}>
@@ -39,6 +41,6 @@ export default async function Discover() {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }

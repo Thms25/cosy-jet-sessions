@@ -12,7 +12,7 @@ export default function YoutubeVideo({
 }) {
   const videoOnReady = (event) => {
     const player = event.target;
-    console.log(event.target);
+    // console.log(event.target);
     // player.seekTo(0);
     // player.playVideo();
     // onVideoLoaded(true);
