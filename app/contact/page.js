@@ -10,7 +10,11 @@ export default function Contact() {
   return (
     <section className="p-32">
       <div className="w-2/3 max-w-6xl mx-auto shadow-lg flex flex-col-reverse lg:flex-row rounded-lg overflow-hidden">
-        <Form selected={selected} setSelected={setSelected} />
+        <Form
+          selected={selected}
+          setSelected={setSelected}
+          className="p-8 w-full xl:max-w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+        />
         <Image
           className="object-contain w-full hidden lg:block"
           priority
@@ -24,12 +28,9 @@ export default function Contact() {
   );
 }
 
-const Form = ({ selected, setSelected }) => {
+const Form = ({ selected, setSelected, className }) => {
   return (
-    <form
-      onSubmit={(e) => e.preventDefault()}
-      className="p-8 w-full xl:max-w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
-    >
+    <form onSubmit={(e) => e.preventDefault()} className={className}>
       <h3 className="text-4xl font-bold mb-6">Contact us</h3>
 
       {/* Name input */}
@@ -46,7 +47,7 @@ const Form = ({ selected, setSelected }) => {
       <div className="mb-6">
         <p className="text-2xl mb-2">Your message...</p>
         <textarea
-          placeholder="Whatever your heart desires :)"
+          placeholder="Feel free to ask any questions"
           className={`bg-cjsPink transition-colors duration-[750ms] min-h-[150px] resize-none placeholder-cjsWhite p-2 rounded-md w-full focus:outline-0`}
         />
       </div>

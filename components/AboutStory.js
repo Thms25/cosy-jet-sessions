@@ -11,13 +11,11 @@ export default function AboutStory() {
   const { ref: ref4, inView: el4Visible } = useInView();
 
   return (
-    <main>
+    <main className="p-12">
       <div
-        className={`${styles.section} ${
-          el1Visible ? styles.appear : styles.disappear
-        }`}
+        className={`p-12 flex ${el1Visible ? styles.appear : styles.disappear}`}
       >
-        <div className={styles.text}>
+        <div className="p-8 w-1/2">
           <h3>
             Cosy Jet Sessions is a unique music platform showcasing raw talent
             in a vintage and warm setting
@@ -45,9 +43,7 @@ export default function AboutStory() {
         />
       </div>
       <div
-        className={`${styles.section} ${
-          el2Visible ? styles.appear : styles.disappear
-        }`}
+        className={`p-12 flex ${el2Visible ? styles.appear : styles.disappear}`}
       >
         <Image
           id={styles.cjsLights}
@@ -56,8 +52,9 @@ export default function AboutStory() {
           alt="cjs studio lights"
           width={732}
           height={1206}
+          className="object-contain"
         />
-        <div className={styles.text}>
+        <div className="p-8 w-1/2">
           <p ref={ref2}>
             Ladies and gentlemen, music enthusiasts, and fellow creatives, allow
             me to take you on a journey into the heart and soul of Cosy Jet
@@ -74,11 +71,9 @@ export default function AboutStory() {
         </div>
       </div>
       <div
-        className={`${styles.section} ${
-          el3Visible ? styles.appear : styles.disappear
-        }`}
+        className={`p-12 flex ${el3Visible ? styles.appear : styles.disappear}`}
       >
-        <div className={styles.text}>
+        <div className="p-8 w-1/2">
           <p ref={ref3}>
             You might wonder, why did we embark on this musical odyssey? Well,
             my friends, it all began with a fervent belief in the power of
@@ -110,9 +105,7 @@ export default function AboutStory() {
         />
       </div>
       <div
-        className={`${styles.section} ${
-          el4Visible ? styles.appear : styles.disappear
-        }`}
+        className={`p-12 flex ${el4Visible ? styles.appear : styles.disappear}`}
       >
         <Image
           id={styles.cjsLights}
@@ -120,8 +113,9 @@ export default function AboutStory() {
           alt="cjs studio lights"
           width={732}
           height={1206}
+          className="object-contain"
         />
-        <div>
+        <div className="p-8 w-1/2">
           <p ref={ref4}>
             But it's not just about the artists; it's about you – the listeners
             who crave an escape from the chaos of the world, who seek solace in
