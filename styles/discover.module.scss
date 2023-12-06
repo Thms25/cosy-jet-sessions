@@ -1,79 +1,48 @@
-.discover {
-  .backgroundDiv {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    display: grid;
-    place-items: center;
+.artistCard {
+  a {
+    color: var(--cjsBrown);
+    box-shadow: 0 0 2px var(--cjsBrown);
+    border-radius: 6px;
+  }
+}
 
-    &:hover {
-      .backgroundImage {
-        filter: blur(0);
-      }
-      h3 {
-        font-size: 25px;
-        opacity: 0;
-      }
-    }
+.backgroundDiv {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  display: grid;
+  place-items: center;
 
+  &:hover {
     .backgroundImage {
-      border-radius: 16px;
-      object-fit: cover;
-      object-position: center;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      transition: 0.2s;
-      filter: blur(4px);
+      filter: blur(0);
     }
-
     h3 {
-      z-index: 1;
-      position: absolute;
-      font-size: 35px;
-      color: var(--cjsWhite);
-      opacity: 0.9;
-      transition: 0.3s;
+      font-size: 25px;
+      opacity: 0;
     }
   }
 
-
-  .title {
-    text-align: center;
-    margin: 16px auto;
-    padding: 8px;
+  .backgroundImage {
+    border-radius: 16px;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    transition: 0.2s;
+    filter: blur(4px);
   }
 
-  .artistList {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin: 32px 48px;
-
-    .artistCard {
-      a {
-        color: var(--cjsBrown);
-        box-shadow: 0 0 2px var(--cjsBrown);
-        border-radius: 6px;
-      }
-    }
-  }
-  @media (min-width: 1900px) {
-    .artistList {
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-  }
-  @media (max-width: 1300px) {
-    .artistList {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  @media (max-width: 800px) {
-    .artistList {
-      grid-template-columns: 1fr;
-    }
+  h3 {
+    z-index: 1;
+    position: absolute;
+    font-size: 35px;
+    color: var(--cjsWhite);
+    opacity: 0.9;
+    transition: 0.3s;
   }
 }

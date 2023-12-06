@@ -1,7 +1,9 @@
-import React from "react";
+import EventsContent from "./comonents/eventsContent";
 
-const Events = () => {
-  return <h1>This is the event page</h1>;
-};
-
-export default Events;
+export default function Events() {
+  return (
+    <section>
+      <EventsContent />
+    </section>
+  );
+}

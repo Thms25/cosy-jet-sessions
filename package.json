@@ -16,23 +16,27 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@prisma/client": "^5.1.1",
     "@vercel/postgres": "^0.4.1",
-    "autoprefixer": "10.4.14",
     "framer-motion": "^10.16.4",
     "next": "13.4.10",
     "node-fetch": "^3.3.2",
-    "postcss": "8.4.26",
+    "prettier": "^3.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icons": "^4.12.0",
     "react-intersection-observer": "^9.5.2",
     "react-responsive-carousel": "^3.2.23",
     "react-signature-canvas": "^1.0.6",
     "react-youtube": "^10.1.0",
     "sass": "^1.63.6",
+    "swiper": "^11.0.5",
     "vercel": "^32.5.5",
     "video-react": "^0.16.0",
     "youtube-api": "^3.0.1"
   },
   "devDependencies": {
-    "prisma": "^5.1.1"
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "prisma": "^5.1.1",
+    "tailwindcss": "^3.3.5"
   }
 }
