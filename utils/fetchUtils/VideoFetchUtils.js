@@ -1,6 +1,6 @@
 const URL = process.env.URL;
 
-export async function getRecentVideos() {
+export async function getVideos() {
   try {
     const res = await fetch("/api/video", {
       method: "GET",
