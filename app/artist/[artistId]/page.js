@@ -1,5 +1,5 @@
 // Utils
-import { getArtist } from "@/utils/fetchUtils";
+import { getArtist } from "@/utils/fetchUtils/ArtistFetchUtils";
 
 // Components
 import VideoAccordeon from "@/components/Accordeons/VideoAccordeon";

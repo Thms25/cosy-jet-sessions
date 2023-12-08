@@ -2,14 +2,10 @@ import Link from "next/link";
 import styles from "../../styles/discover.module.scss";
 import Image from "next/image";
 import DynamicBanner from "@/components/Banners/DynamicBanner";
+import { getArtists } from "@/utils/fetchUtils/ArtistFetchUtils";
 
-async function fetchArtists() {
-  const res = await fetch(`${process.env.URL}/api/getArtists`);
-  const data = await res.json();
-  return data;
-}
 export default async function Discover() {
-  const artists = await fetchArtists();
+  const artists = await getArtists();
 
   return (
     <section className="py-24">
