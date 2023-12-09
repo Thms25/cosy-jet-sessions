@@ -11,6 +11,11 @@ import Footer from "@/components/Footer";
 export const metadata = {
   title: "Cosy Jet Sessions",
   description: "The coziest acoutsic sessions",
+  icons: {
+    icon: "/images/cjsIcon.png",
+    width: "auto",
+    height: "auto",
+  },
 };
 
 export default function RootLayout({ children }) {

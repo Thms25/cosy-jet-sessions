@@ -16,6 +16,7 @@ export default function Navbar() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.7 }}
+        className="w-1/5"
       >
         <Link href="/" className="flex">
           <Image
@@ -28,7 +29,7 @@ export default function Navbar() {
           <Image
             src="/images/cjsText.png"
             alt="cjs text title"
-            className="w-full object-contain hidden md:block"
+            className="object-contain hidden md:block"
             width={190}
             height={40}
           />
@@ -38,7 +39,7 @@ export default function Navbar() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="flex justify-evenly min-w-1/3 p-2"
+        className="flex justify-evenly"
       >
         {navItems.map((item) => (
           <li className="px-3 lg:px-4" key={item.title}>
@@ -51,13 +52,15 @@ export default function Navbar() {
           </li>
         ))}
       </motion.ul>
-      <Image
-        src="/images/cjsLogo.png"
-        alt="cjs icon"
-        width={50}
-        height={50}
-        className="hidden md:block"
-      />
+      <div className="w-1/5 lg:flex justify-end hidden">
+        <Image
+          src="/images/cjsLogo.png"
+          alt="cjs icon"
+          width={50}
+          height={50}
+          className="hidden md:block"
+        />
+      </div>
     </nav>
   );
 }
