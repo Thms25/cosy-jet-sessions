@@ -1,11 +1,19 @@
+import Image from "next/image";
+
 const Loading = () => {
   return (
     <div className="grid items-center p-48">
-      <div className="animate-pulse grid place-items-center bg-cjsBrown bg-opacity-50 w-1/2 m-auto p-24 text-cjsWhite rounded-lg">
-        <h1 className="p-6">... Loading ...</h1>
-        <h2 className="p-2">Fetching Artist's data</h2>
-        <p>Please wait just a few seconds</p>
-        <p>:)</p>
+      <div className="animate-pulse grid place-items-center  w-1/2 m-auto rounded-lg">
+        <Image
+          priority
+          className="m-auto animate-pulse opacity-50 w-full h-full"
+          src="/images/cjs-banner.png"
+          alt="cjs-banner"
+          objectPosition="contain"
+          width={1710}
+          height={751}
+          objectFit="contain"
+        />
       </div>
     </div>
   );

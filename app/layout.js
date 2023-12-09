@@ -5,7 +5,7 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 // Components
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Nav/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata = {

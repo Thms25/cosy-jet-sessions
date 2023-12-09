@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 // COmponents
 import Link from "next/link";
 import Image from "next/image";
+import NavDropdown from "./NavDropdown";
 
 // --------------------------------------------------------------
 
@@ -39,13 +40,13 @@ export default function Navbar() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="flex justify-evenly"
+        className="hidden sm:flex justify-evenly"
       >
         {navItems.map((item) => (
           <li className="px-3 lg:px-4" key={item.title}>
             <Link
               href={item.link}
-              className="text-cjsPink text-lg lg:text-xl tracking-wide hover:text-cjsBrown transition duration-250"
+              className="text-cjsPink text-lg lg:text-xl tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
             >
               {item.title}
             </Link>
@@ -60,6 +61,9 @@ export default function Navbar() {
           height={50}
           className="hidden md:block"
         />
+      </div>
+      <div className="sm:hidden">
+        <NavDropdown navItems={navItems} />
       </div>
     </nav>
   );
