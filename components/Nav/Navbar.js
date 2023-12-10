@@ -10,6 +10,33 @@ import NavDropdown from "./NavDropdown";
 
 // --------------------------------------------------------------
 
+const navItems = [
+  {
+    title: "Home",
+    link: "/",
+  },
+  // {
+  //   title: "About",
+  //   link: "/about",
+  // },
+  {
+    title: "Discover",
+    link: "/discover",
+  },
+  {
+    title: "Events",
+    link: "/events",
+  },
+  // {
+  //   title: "Shop",
+  //   link: "/shop",
+  // },
+  {
+    title: "Contact",
+    link: "/contact",
+  },
+];
+
 export default function Navbar() {
   return (
     <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-50 flex justify-between items-center text-cjsBorwn px-8 py-3">
@@ -68,26 +95,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-const navItems = [
-  {
-    title: "Home",
-    link: "/",
-  },
-  {
-    title: "About",
-    link: "/about",
-  },
-  {
-    title: "Discover",
-    link: "/discover",
-  },
-  {
-    title: "Events",
-    link: "/events",
-  },
-  {
-    title: "Contact",
-    link: "/contact",
-  },
-];

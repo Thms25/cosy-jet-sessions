@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function deleteExistingData() {
+  console.log("starting deleting existing data");
   await prisma.Artist.deleteMany();
   console.log("Artists deleted.");
   await prisma.YtVideo.deleteMany();
@@ -39,6 +40,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
     for (const video of videos) {
       if (video.id.kind === "youtube#video") {
+        console.log("\n", video);
         const { title, description, publishedAt } = video.snippet;
         const videoId = video.id.videoId;
         const thumbnailUrl = video.snippet.thumbnails.high.url;

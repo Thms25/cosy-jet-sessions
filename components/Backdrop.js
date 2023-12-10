@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import styles from "styles/modal.module.scss";
 
 const Backdrop = ({ children, onClick }) => {
   return (
     <motion.div
-      className={styles.backdrop}
+      className="fixed top-0 left-0 h-screen w-full bg-cjsBrown bg-opacity-50 z-50 grid place-items-center"
       onClick={onClick}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

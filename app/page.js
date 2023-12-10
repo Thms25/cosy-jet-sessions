@@ -1,6 +1,5 @@
 // Components
-import CjsBanner from "@/components/Banners/CjsBanner";
-import Header from "@/components/Header";
+import CjsBanner from "@/components/Banners/Banner";
 import SmoothCarousel from "@/components/caroussels/SmoothCarousel";
 
 // Utils
@@ -12,8 +11,7 @@ export default async function Home() {
   return (
     <section>
       <header>
-        <Header className="hidden md:block" />
-        <CjsBanner className="md:hidden" />
+        <CjsBanner />
       </header>
       <div className="p-16">
         <h3 className="text-4xl">Most popular videos</h3>

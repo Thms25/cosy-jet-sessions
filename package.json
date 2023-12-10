@@ -10,11 +10,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.4.0",
-    "@fortawesome/free-brands-svg-icons": "^6.4.0",
-    "@fortawesome/free-solid-svg-icons": "^6.4.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@prisma/client": "^5.1.1",
+    "@react-spring/parallax": "^9.7.3",
     "@vercel/postgres": "^0.4.1",
     "framer-motion": "^10.16.4",
     "next": "13.4.10",
