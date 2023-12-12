@@ -39,7 +39,7 @@ const navItems = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-50 flex justify-between items-center text-cjsBorwn px-8 py-3">
+    <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-10 flex justify-between items-center text-cjsBorwn px-8 py-3">
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
@@ -53,11 +53,13 @@ export default function Navbar() {
             width={50}
             height={50}
             className="md:hidden"
+            priority
           />
           <Image
+            priority
             src="/images/cjsText.png"
             alt="cjs text title"
-            className="object-contain hidden md:block"
+            className="hidden md:block"
             width={190}
             height={40}
           />
@@ -87,6 +89,7 @@ export default function Navbar() {
           width={50}
           height={50}
           className="hidden md:block"
+          priority
         />
       </div>
       <div className="sm:hidden">

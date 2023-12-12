@@ -27,6 +27,7 @@ export default function NavDropdown({ navItems }) {
         >
           {navItems.map((item) => (
             <motion.li
+              key={item.title}
               variants={itemVariants}
               onClick={() => {
                 router.push(item.link);

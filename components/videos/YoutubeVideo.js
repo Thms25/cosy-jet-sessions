@@ -38,6 +38,7 @@ export default function YoutubeVideo({
       onReady={videoOnReady}
       // onPlay={videoOnPlay}
       iframeClassName={styles[iframeClassName]}
+      loading="lazy"
     />
   );
 }
