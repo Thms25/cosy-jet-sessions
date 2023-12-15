@@ -1,6 +1,19 @@
 import fetch from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 
+import { google } from "googleapis";
+const youtube = google.youtube("v3");
+
+async function getFullDescription(videoId) {
+  const response = await youtube.videos.list({
+    id: videoId,
+    part: "snippet",
+    key: process.env.YT_API_KEY,
+  });
+
+  return response.data.items[0].snippet.description;
+}
+
 const prisma = new PrismaClient();
 
 async function deleteExistingData() {
@@ -17,22 +30,33 @@ await deleteExistingData();
 
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
-    const apiKey = process.env.YT_API_KEY;
-    const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
-    const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
-    let url = `${apiUrl}part=snippet&channelId=${channelId}&maxResults=50&order=date&key=${apiKey}`;
+    // const apiKey = process.env.YT_API_KEY;
+    // const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
+    // const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
+    // let url = `${apiUrl}part=snippet&channelId=${channelId}&maxResults=50&order=date&key=${apiKey}`;
+
+    // const response = await fetch(url);
+
+    const options = {
+      part: "snippet",
+      channelId: channelId,
+      maxResults: 50,
+      order: "date",
+      key: apiKey,
+      key: process.env.YT_API_KEY,
+    };
 
     if (nextPageToken) {
-      url += `&pageToken=${nextPageToken}`;
+      options.pageToken = nextPageToken;
     }
 
-    const response = await fetch(url);
+    const response = await google.youtube("v3").search.list(options);
 
     const data = await response.json();
     const videos = [];
     const shorts = [];
 
-    data["items"].forEach((video) => {
+    data.items.forEach((video) => {
       video["snippet"]["title"].includes("#")
         ? shorts.push(video)
         : videos.push(video);
@@ -41,8 +65,9 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     for (const video of videos) {
       if (video.id.kind === "youtube#video") {
         console.log("\n", video);
-        const { title, description, publishedAt } = video.snippet;
+        const { title, publishedAt } = video.snippet;
         const videoId = video.id.videoId;
+        const description = await getFullDescription(videoId);
         const thumbnailUrl = video.snippet.thumbnails.high.url;
         let artistName;
 
