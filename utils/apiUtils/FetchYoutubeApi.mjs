@@ -82,7 +82,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         console.log("\nArtist: ", artistName);
         console.log("Title: ", title);
         console.log("Published at: ", publishedAt);
-        console.log("url: ", thumbnailUrl);
+        console.log("description: ", description);
 
         const existingArtist = await prisma.artist.findFirst({
           where: { name: artistName },
@@ -142,7 +142,6 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         console.log("Artist: ", artistName);
         console.log("Title: ", title);
         console.log("Published at: ", publishedAt);
-        console.log("url: ", thumbnailUrl);
 
         const existingArtist = await prisma.artist.findFirst({
           where: { name: artistName },

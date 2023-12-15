@@ -14,6 +14,12 @@ export async function GET(request) {
 
     return new Response(JSON.stringify(artists), { status: 200 });
   } catch (error) {
-    return new Response("failed to fetch artists", { status: 500 });
+    return new Response(
+      JSON.stringify({
+        message: "failed to fetch artists",
+        error: error.message,
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }
