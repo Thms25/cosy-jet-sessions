@@ -25,6 +25,7 @@ model YtVideo {
   thumbnail   String
   artistId    String?
   artist      Artist?  @relation(fields: [artistId], references: [id])
+  playlists   Playlist[]
 }
 
 model YtShort {
@@ -35,4 +36,23 @@ model YtShort {
   thumbnail   String
   artistId    String?
   artist      Artist?  @relation(fields: [artistId], references: [id])
+}
+
+model User {
+  id         String   @id @default(cuid())
+  name       String
+  email      String   @unique
+  password   String
+  role       String   @default("user")
+  userName   String   @unique
+  imgUrl     String
+  playlists  Playlist[]
+}
+
+model Playlist {
+  id        String   @id @default(cuid())
+  name      String
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  videos    YtVideo[]
 }

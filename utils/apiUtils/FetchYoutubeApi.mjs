@@ -1,4 +1,3 @@
-import fetch from "node-fetch";
 import { PrismaClient } from "@prisma/client";
 
 import { google } from "googleapis";
@@ -30,13 +29,6 @@ await deleteExistingData();
 
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
-    // const apiKey = process.env.YT_API_KEY;
-    // const apiUrl = "https://www.googleapis.com/youtube/v3/search?";
-    // const channelId = "UCdlvOT8isQcuCrxzWgroGZQ";
-    // let url = `${apiUrl}part=snippet&channelId=${channelId}&maxResults=50&order=date&key=${apiKey}`;
-
-    // const response = await fetch(url);
-
     const options = {
       part: "snippet",
       channelId: channelId,
@@ -50,9 +42,9 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       options.pageToken = nextPageToken;
     }
 
-    const response = await google.youtube("v3").search.list(options);
+    const res = await google.youtube("v3").search.list(options);
 
-    const data = await response.json();
+    const data = await res.json();
     const videos = [];
     const shorts = [];
 
