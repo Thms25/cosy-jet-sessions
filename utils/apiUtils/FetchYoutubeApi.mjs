@@ -3,8 +3,10 @@ import { PrismaClient } from "@prisma/client";
 import { google } from "googleapis";
 const youtube = google.youtube("v3");
 
+const prisma = new PrismaClient();
+
 async function getFullDescription(videoId) {
-  const response = await youtube.videos.list({
+  const response = youtube.videos.list({
     id: videoId,
     part: "snippet",
     key: process.env.YT_API_KEY,
@@ -12,8 +14,6 @@ async function getFullDescription(videoId) {
 
   return response.data.items[0].snippet.description;
 }
-
-const prisma = new PrismaClient();
 
 async function deleteExistingData() {
   console.log("starting deleting existing data");
@@ -42,7 +42,7 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       options.pageToken = nextPageToken;
     }
 
-    const res = await google.youtube("v3").search.list(options);
+    const res = google.youtube("v3").search.list(options);
 
     const data = await res.json();
     const videos = [];
