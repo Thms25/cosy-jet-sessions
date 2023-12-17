@@ -9,7 +9,7 @@ import Image from "next/image";
 import NavDropdown from "./NavDropdown";
 
 // Auth
-import { useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 // --------------------------------------------------------------
 
@@ -82,24 +82,23 @@ export default function Navbar() {
             </Link>
           </li>
         ))}
+        {/* <li>
+          {session ? (
+            <button onClick={() => signOut()}>Signout</button>
+          ) : (
+            <button onClick={() => signIn()}>Signin</button>
+          )}
+        </li> */}
       </motion.ul>
       <div className="w-1/5 lg:flex justify-end hidden">
         <Image
-          src={session?.user?.image || "/images/cjsIcon.png"}
-          alt="cjs icon"
-          width={50}
-          height={50}
-          className="hidden md:block rounded-full"
-          priority
-        />
-        {/* <Image
           src="/images/cjsLogo.png"
           alt="cjs icon"
           width={50}
           height={50}
           className="hidden md:block"
           priority
-        /> */}
+        />
       </div>
       <div className="sm:hidden">
         <NavDropdown navItems={navItems} />

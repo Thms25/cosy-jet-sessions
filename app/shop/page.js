@@ -3,11 +3,19 @@ import { ratingStar } from "@/utils/data/svgData";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Shop() {
+// Auth
+import { getServerSession } from "next-auth";
+
+export default async function Shop() {
+  const session = await getServerSession();
+
   return (
     <section>
       <div className="h-screen p-24 text-2xl">
-        <h1>Check out our cozy merch</h1>
+        <h1>
+          {session?.user ? `Hello ${session.user.name}, ` : ""}Check out our
+          cozy merch
+        </h1>
         <div className="my-8 grid grid-cols-3 gap-6">
           {fakeMerch.map((merch, index) => (
             <div

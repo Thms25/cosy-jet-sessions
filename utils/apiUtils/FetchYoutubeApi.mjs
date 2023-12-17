@@ -5,36 +5,36 @@ const youtube = google.youtube("v3");
 
 const prisma = new PrismaClient();
 
+async function deleteExistingData() {
+  console.log("starting deleting existing data \n");
+
+  await prisma.artist.deleteMany();
+  console.log("Artists deleted.");
+
+  await prisma.ytVideo.deleteMany();
+  console.log("Videos deleted.");
+
+  await prisma.ytShort.deleteMany();
+  console.log("Shorts deleted.");
+}
+
 async function getFullDescription(videoId) {
-  const response = youtube.videos.list({
+  const { data } = youtube.videos.list({
     id: videoId,
     part: "snippet",
     key: process.env.YT_API_KEY,
   });
 
-  return response.data.items[0].snippet.description;
+  return data.items[0].snippet.description;
 }
-
-async function deleteExistingData() {
-  console.log("starting deleting existing data");
-  await prisma.Artist.deleteMany();
-  console.log("Artists deleted.");
-  await prisma.YtVideo.deleteMany();
-  console.log("Videos deleted.");
-  await prisma.YtShort.deleteMany();
-  console.log("Shorts deleted.");
-}
-
-await deleteExistingData();
 
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
     const options = {
       part: "snippet",
-      channelId: channelId,
+      channelId: "UCdlvOT8isQcuCrxzWgroGZQ",
       maxResults: 50,
       order: "date",
-      key: apiKey,
       key: process.env.YT_API_KEY,
     };
 
@@ -42,21 +42,19 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       options.pageToken = nextPageToken;
     }
 
-    const res = google.youtube("v3").search.list(options);
+    const { data } = google.youtube("v3").search.list(options);
 
-    const data = await res.json();
-    const videos = [];
+    const fullVideos = [];
     const shorts = [];
 
     data.items.forEach((video) => {
       video["snippet"]["title"].includes("#")
         ? shorts.push(video)
-        : videos.push(video);
+        : fullVideos.push(video);
     });
 
-    for (const video of videos) {
+    for (const video of fullVideos) {
       if (video.id.kind === "youtube#video") {
-        console.log("\n", video);
         const { title, publishedAt } = video.snippet;
         const videoId = video.id.videoId;
         const description = await getFullDescription(videoId);
@@ -113,8 +111,6 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
     for (const video of shorts) {
       if (video.id.kind === "youtube#video") {
-        console.log("\napi res: ", video);
-
         const { title, publishedAt } = video.snippet;
         const videoId = video.id.videoId;
         const thumbnailUrl = video.snippet.thumbnails.high.url;
@@ -162,12 +158,15 @@ async function fetchVideosAndArtists(nextPageToken = null) {
     }
 
     if (data.nextPageToken) {
+      console.log("\nfetching next page\n");
       await fetchVideosAndArtists(data.nextPageToken);
     }
   } catch (error) {
     console.error("Error fetching: ", error.message);
   }
 }
+
+await deleteExistingData();
 
 await fetchVideosAndArtists();
 
