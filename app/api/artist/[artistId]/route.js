@@ -5,7 +5,7 @@ export const revalidate = 86400;
 
 export async function GET(request, { params }) {
   try {
-    const artist = await prisma.Artist.findFirst({
+    const artist = await prisma.artist.findFirst({
       where: {
         id: params.artistId,
       },
@@ -14,6 +14,8 @@ export async function GET(request, { params }) {
         shorttVideos: true,
       },
     });
+    console.log(artist);
+
     return new Response(JSON.stringify(artist), { status: 200 });
   } catch (error) {
     return new Response("Failed to fetch artist", { status: 500 });
