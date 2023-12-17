@@ -3,10 +3,13 @@
 // Styles
 import { motion } from "framer-motion";
 
-// COmponents
+// Components
 import Link from "next/link";
 import Image from "next/image";
 import NavDropdown from "./NavDropdown";
+
+// Auth
+import { useSession } from "next-auth/react";
 
 // --------------------------------------------------------------
 
@@ -24,6 +27,10 @@ const navItems = [
     link: "/discover",
   },
   {
+    title: "Playlists",
+    link: "/",
+  },
+  {
     title: "Events",
     link: "/events",
   },
@@ -38,6 +45,8 @@ const navItems = [
 ];
 
 export default function Navbar() {
+  const { data: session } = useSession();
+
   return (
     <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-10 flex justify-between items-center text-cjsBorwn px-8 py-3">
       <motion.div
@@ -48,18 +57,10 @@ export default function Navbar() {
       >
         <Link href="/" className="flex">
           <Image
-            src="/images/cjsLogo.png"
-            alt="cjs icon"
-            width={50}
-            height={50}
-            className="md:hidden"
-            priority
-          />
-          <Image
             priority
             src="/images/cjsText.png"
             alt="cjs text title"
-            className="hidden md:block"
+            className=""
             width={190}
             height={40}
           />
@@ -75,7 +76,7 @@ export default function Navbar() {
           <li className="px-3 lg:px-4" key={item.title}>
             <Link
               href={item.link}
-              className="text-cjsPink text-lg lg:text-xl tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+              className="text-cjsPink text-md lg:text-lg tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
             >
               {item.title}
             </Link>
@@ -84,13 +85,21 @@ export default function Navbar() {
       </motion.ul>
       <div className="w-1/5 lg:flex justify-end hidden">
         <Image
+          src={session?.user?.image || "/images/cjsIcon.png"}
+          alt="cjs icon"
+          width={50}
+          height={50}
+          className="hidden md:block rounded-full"
+          priority
+        />
+        {/* <Image
           src="/images/cjsLogo.png"
           alt="cjs icon"
           width={50}
           height={50}
           className="hidden md:block"
           priority
-        />
+        /> */}
       </div>
       <div className="sm:hidden">
         <NavDropdown navItems={navItems} />

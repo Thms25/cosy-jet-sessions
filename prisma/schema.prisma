@@ -42,10 +42,9 @@ model User {
   id         String   @id @default(cuid())
   name       String
   email      String   @unique
-  password   String
   role       String   @default("user")
   userName   String   @unique
-  imgUrl     String
+  image      String
   playlists  Playlist[]
 }
 

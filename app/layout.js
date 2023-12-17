@@ -1,7 +1,11 @@
 // Styles
 import "../styles/globals.scss";
 
+// Auth
+import { getServerSession } from "next-auth";
+
 // Components
+import Provider from "@/components/auth/Provider";
 import Navbar from "@/components/Nav/Navbar";
 import Footer from "@/components/Footer";
 
@@ -15,13 +19,17 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession();
+
   return (
     <html>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <Provider session={session}>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </Provider>
       </body>
     </html>
   );
