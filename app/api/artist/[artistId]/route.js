@@ -14,10 +14,18 @@ export async function GET(request, { params }) {
         shorttVideos: true,
       },
     });
-    console.log(artist);
 
-    return new Response(JSON.stringify(artist), { status: 200 });
+    return new Response(JSON.stringify(artist), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
-    return new Response("Failed to fetch artist", { status: 500 });
+    return new Response(
+      JSON.stringify({
+        message: "Failed to fetch artist",
+        error: error.message,
+      }),
+      { status: 500, headers: { "Content-Type": "application/json" } }
+    );
   }
 }

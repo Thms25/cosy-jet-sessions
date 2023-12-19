@@ -90,8 +90,6 @@ async function fetchVideosAndArtists(nextPageToken = null) {
           where: { name: artistName },
         });
 
-        console.log("artist found", artist?.name);
-
         if (artist === null) {
           artist = await prisma.artist.create({
             data: {
@@ -143,30 +141,31 @@ async function fetchVideosAndArtists(nextPageToken = null) {
 
         console.log("Artist: ", artistName);
         console.log("Title: ", title);
-        console.log("Published at: ", publishedAt);
 
-        const existingArtist = await prisma.artist.findFirst({
+        const artist = await prisma.artist.findFirst({
           where: { name: artistName },
         });
 
-        console.log("existingArtsit", existingArtist);
-
-        if (existingArtist) {
-          await prisma.YtShort.upsert({
-            where: { videoId: videoId },
-            create: {
-              videoId: videoId,
-              title,
-              publishedAt,
-              thumbnail: thumbnailUrl,
-              artist: {
-                connect: { id: existingArtist.id },
+        if (artist) {
+          try {
+            await prisma.ytShort.upsert({
+              where: { videoId: videoId },
+              create: {
+                videoId: videoId,
+                title,
+                publishedAt,
+                thumbnail: thumbnailUrl,
+                artist: {
+                  connect: { id: existingArtist.id },
+                },
               },
-            },
-            update: {},
-          });
+              update: {},
+            });
 
-          console.log(`\nArtsit seved: ${existingArtist}\n`);
+            console.log(`\nArtsit seved: ${artist.name}\n`);
+          } catch (error) {
+            console.error("Error upserting video:", error);
+          }
         }
       }
     }
