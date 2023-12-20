@@ -37,6 +37,62 @@ function decodeHtml(text) {
     .replace(/&#39;/g, "'");
 }
 
+function getArtistName(title) {
+  if (/[Cc]over/.test(title)) {
+    const match = title.match(/over by (.*?)\)/);
+    return match ? match[1] : "Unknown Artist";
+  } else {
+    const splitTitle = title.split(" - ");
+    return splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
+  }
+}
+
+async function findOrCreateArtist(artistName) {
+  let artist = await prisma.artist.findFirst({
+    where: { name: artistName },
+  });
+
+  if (artist === null) {
+    artist = await prisma.artist.create({
+      data: {
+        name: artistName,
+      },
+    });
+  }
+
+  return artist;
+}
+
+async function upsertVideo(
+  videoId,
+  title,
+  description,
+  publishedAt,
+  thumbnailUrl,
+  artist
+) {
+  try {
+    await prisma.ytVideo.upsert({
+      where: { videoId: videoId },
+      create: {
+        videoId: videoId,
+        title,
+        description,
+        publishedAt,
+        thumbnail: thumbnailUrl,
+        artist: {
+          connect: { id: artist.id },
+        },
+      },
+      update: {},
+    });
+
+    console.log(`\nArtsit seved: ${artist?.name}\n`);
+  } catch (error) {
+    console.error("Error upserting video:", error);
+  }
+}
+
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
     const options = {
@@ -51,6 +107,8 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       options.pageToken = nextPageToken;
     }
 
+    console.log("\nFetching videos\n");
+
     const { data } = await google.youtube("v3").search.list(options);
 
     const fullVideos = [];
@@ -62,111 +120,54 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         : fullVideos.push(video);
     });
 
+    console.log("\nStarting full videos\n");
+
     for (const video of fullVideos) {
       if (video.id.kind === "youtube#video") {
         let { title, publishedAt } = video.snippet;
         title = decodeHtml(title);
 
+        console.log("Title: ", title);
+
         const videoId = video.id.videoId;
         const description = await getFullDescription(videoId);
         const thumbnailUrl = video.snippet.thumbnails.high.url;
-        let artistName;
+        const artistName = getArtistName(title);
 
-        if (/[Cc]over/.test(title)) {
-          const match = title.match(/over by (.*?)\)/);
-          artistName = match ? match[1] : "Unknown Artist";
-
-          console.log("matched title: ", title);
-        } else {
-          const splitTitle = title.split(" - ");
-          artistName = splitTitle.length > 0 ? splitTitle[0] : "Unknown Artist";
-          console.log("split title: ", splitTitle[0]);
-        }
-
-        console.log("\nArtist: ", artistName);
-        console.log("Title: ", title);
-
-        let artist = await prisma.artist.findFirst({
-          where: { name: artistName },
-        });
-
-        if (artist === null) {
-          artist = await prisma.artist.create({
-            data: {
-              name: artistName,
-            },
-          });
-        }
-
-        try {
-          await prisma.ytVideo.upsert({
-            where: { videoId: videoId },
-            create: {
-              videoId: videoId,
-              title,
-              description,
-              publishedAt,
-              thumbnail: thumbnailUrl,
-              artist: {
-                connect: { id: artist.id },
-              },
-            },
-            update: {},
-          });
-        } catch (error) {
-          console.error("Error upserting video:", error);
-        }
-
-        console.log(`\nArtsit seved: ${artist?.name}\n`);
+        const artist = await findOrCreateArtist(artistName);
+        await upsertVideo(
+          videoId,
+          title,
+          description,
+          publishedAt,
+          thumbnailUrl,
+          artist
+        );
       }
     }
 
+    console.log("\nStarting shorts\n");
+
     for (const video of shorts) {
       if (video.id.kind === "youtube#video") {
-        const { title, publishedAt } = video.snippet;
-        const videoId = video.id.videoId;
-        const thumbnailUrl = video.snippet.thumbnails.high.url;
-        let artistName;
+        let { title, publishedAt } = video.snippet;
+        title = decodeHtml(title);
 
-        if (/[Cc]over /.test(title)) {
-          const match = title.match(/over by (.*?)\)/);
-          artistName = match ? match[1] : "Unknown Artist";
-        } else {
-          const splitTitle = title.split(" | ");
-          artistName =
-            splitTitle.length > 0
-              ? splitTitle[0].split(" - ")[1]
-              : "Unknown Artist";
-        }
-
-        console.log("Artist: ", artistName);
         console.log("Title: ", title);
 
-        const artist = await prisma.artist.findFirst({
-          where: { name: artistName },
-        });
+        const videoId = video.id.videoId;
+        const thumbnailUrl = video.snippet.thumbnails.high.url;
+        const artistName = getArtistName(title);
 
-        if (artist) {
-          try {
-            await prisma.ytShort.upsert({
-              where: { videoId: videoId },
-              create: {
-                videoId: videoId,
-                title,
-                publishedAt,
-                thumbnail: thumbnailUrl,
-                artist: {
-                  connect: { id: existingArtist.id },
-                },
-              },
-              update: {},
-            });
-
-            console.log(`\nArtsit seved: ${artist.name}\n`);
-          } catch (error) {
-            console.error("Error upserting video:", error);
-          }
-        }
+        const artist = await findOrCreateArtist(artistName);
+        await upsertVideo(
+          videoId,
+          title,
+          "",
+          publishedAt,
+          thumbnailUrl,
+          artist
+        );
       }
     }
 
