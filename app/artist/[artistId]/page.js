@@ -8,7 +8,7 @@ export default async function Artist({ params }) {
   const artist = await getArtist(params.artistId);
 
   return (
-    <div className="p-24 h-screen">
+    <div className="p-24">
       {artist?.videos && (
         <div>
           <div>

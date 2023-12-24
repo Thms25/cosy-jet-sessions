@@ -48,22 +48,31 @@ function getArtistName(title) {
 }
 
 async function findOrCreateArtist(artistName) {
-  let artist = await prisma.artist.findFirst({
-    where: { name: artistName },
-  });
-
-  if (artist === null) {
-    artist = await prisma.artist.create({
-      data: {
-        name: artistName,
-      },
+  try {
+    let artist = await prisma.artist.findFirst({
+      where: { name: artistName },
     });
-  }
+    if (artist) {
+      console.log(`Artist found: ${artist.name}`);
+    }
 
-  return artist;
+    if (artist === null) {
+      artist = await prisma.artist.create({
+        data: {
+          name: artistName,
+        },
+      });
+      console.log(`Artist created: ${artist.name}`);
+    }
+
+    return artist;
+  } catch (error) {
+    console.error("Error finding or creating artist:", error);
+  }
 }
 
 async function upsertVideo(
+  model,
   videoId,
   title,
   description,
@@ -72,7 +81,7 @@ async function upsertVideo(
   artist
 ) {
   try {
-    await prisma.ytVideo.upsert({
+    await prisma[model].upsert({
       where: { videoId: videoId },
       create: {
         videoId: videoId,
@@ -87,11 +96,14 @@ async function upsertVideo(
       update: {},
     });
 
-    console.log(`\nArtsit seved: ${artist?.name}\n`);
+    console.log(`Video seved for: ${artist?.name}`);
   } catch (error) {
     console.error("Error upserting video:", error);
   }
 }
+
+const SHORTS = [];
+const ARTISTS = [];
 
 async function fetchVideosAndArtists(nextPageToken = null) {
   try {
@@ -107,27 +119,26 @@ async function fetchVideosAndArtists(nextPageToken = null) {
       options.pageToken = nextPageToken;
     }
 
-    console.log("\nFetching videos\n");
+    console.log("\n\nFetching videos\n");
 
     const { data } = await google.youtube("v3").search.list(options);
 
-    const fullVideos = [];
-    const shorts = [];
+    const videos = [];
 
     data.items.forEach((video) => {
       decodeHtml(video.snippet.title).includes("#")
-        ? shorts.push(video)
-        : fullVideos.push(video);
+        ? SHORTS.push(video)
+        : videos.push(video);
     });
 
     console.log("\nStarting full videos\n");
 
-    for (const video of fullVideos) {
+    for (const video of videos) {
       if (video.id.kind === "youtube#video") {
         let { title, publishedAt } = video.snippet;
         title = decodeHtml(title);
 
-        console.log("Title: ", title);
+        console.log("\nTitle: ", title);
 
         const videoId = video.id.videoId;
         const description = await getFullDescription(videoId);
@@ -135,35 +146,13 @@ async function fetchVideosAndArtists(nextPageToken = null) {
         const artistName = getArtistName(title);
 
         const artist = await findOrCreateArtist(artistName);
+        ARTISTS.push(artist.name);
+
         await upsertVideo(
+          "ytVideo",
           videoId,
           title,
           description,
-          publishedAt,
-          thumbnailUrl,
-          artist
-        );
-      }
-    }
-
-    console.log("\nStarting shorts\n");
-
-    for (const video of shorts) {
-      if (video.id.kind === "youtube#video") {
-        let { title, publishedAt } = video.snippet;
-        title = decodeHtml(title);
-
-        console.log("Title: ", title);
-
-        const videoId = video.id.videoId;
-        const thumbnailUrl = video.snippet.thumbnails.high.url;
-        const artistName = getArtistName(title);
-
-        const artist = await findOrCreateArtist(artistName);
-        await upsertVideo(
-          videoId,
-          title,
-          "",
           publishedAt,
           thumbnailUrl,
           artist
@@ -180,8 +169,46 @@ async function fetchVideosAndArtists(nextPageToken = null) {
   }
 }
 
+async function addShorts(shorts) {
+  try {
+    console.log("\nStarting shorts\n");
+
+    for (const video of shorts) {
+      if (video.id.kind === "youtube#video") {
+        let { title, publishedAt } = video.snippet;
+        title = decodeHtml(title);
+
+        console.log("Title: ", title);
+
+        const videoId = video.id.videoId;
+        const thumbnailUrl = video.snippet.thumbnails.high.url;
+
+        let artistName = ARTISTS.find((artist) => title.includes(artist));
+        if (!artistName) {
+          artistName = "Unknown Artist";
+        }
+
+        const artist = await findOrCreateArtist(artistName);
+        await upsertVideo(
+          "ytShort",
+          videoId,
+          title,
+          "",
+          publishedAt,
+          thumbnailUrl,
+          artist
+        );
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching: ", error.message);
+  }
+}
+
+// ------------------------------------
+
 await deleteExistingData();
-
 await fetchVideosAndArtists();
+await addShorts(SHORTS);
 
-console.log("\nArtist and Video saved to the database.\n");
+console.log("\n\nArtist and Video saved to the database.\n");

@@ -32,6 +32,7 @@ model YtShort {
   id          String   @id @default(cuid())
   videoId     String   @unique
   title       String
+  description String
   publishedAt DateTime
   thumbnail   String
   artistId    String?

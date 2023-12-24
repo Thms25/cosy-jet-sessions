@@ -6,8 +6,8 @@ import styles from "styles/videos.module.scss";
 export default function YoutubeVideo({
   videoId,
   iframeClassName,
-  height,
-  width,
+  height = "360",
+  width = "520",
   // onVideoLoaded,
 }) {
   const videoOnReady = (event) => {
