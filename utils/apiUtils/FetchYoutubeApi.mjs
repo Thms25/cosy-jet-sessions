@@ -205,7 +205,7 @@ async function addShorts(shorts) {
   }
 }
 
-// ------------------------------------
+// -------------------------------------------------------------
 
 await deleteExistingData();
 await fetchVideosAndArtists();
