@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-export const revalidate = 86400;
+export const revalidate = 60 * 60 * 24 * 7; // 1 week
 
 export async function GET(request, { params }) {
   try {
@@ -20,6 +20,7 @@ export async function GET(request, { params }) {
       headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
+    console.log("artist error", error.message);
     return new Response(
       JSON.stringify({
         message: "Failed to fetch artist",

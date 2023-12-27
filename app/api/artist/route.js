@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-export const revalidate = 60 * 60 * 24 * 7;
+export const revalidate = 60 * 60 * 24 * 7; // 1 week
 
 export async function GET(request) {
   try {
