@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(request, { params }) {
-  if (!params.id) {
+  if (!params.mail) {
     return new Response(JSON.stringify({ message: "id is required" }), {
       status: 400,
       headers: { "Content-Type": "application/json" },
@@ -11,9 +11,9 @@ export async function GET(request, { params }) {
   }
 
   try {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.user.findUnique({
       where: {
-        id: params.id,
+        email: params.mail,
       },
     });
 
