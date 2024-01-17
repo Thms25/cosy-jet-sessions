@@ -76,7 +76,7 @@ export default function Navbar() {
           <li className="px-3 lg:px-4" key={item.title}>
             <Link
               href={item.link}
-              className="text-cjsPink text-md lg:text-lg tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+              className="text-cjsPink font-secondary text-md lg:text-lg tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
             >
               {item.title}
             </Link>

@@ -12,6 +12,12 @@ module.exports = {
         cjsYellow: "#d59429",
         cjsBrown: "#b1582d",
       },
+      fontFamily: {
+        subtitle: ["Montserrat", "sans-serif"],
+        title: ["DM Serif Display", "serif"],
+        main: ["Lato", "sans-serif"],
+        caption: ["Roboto", "sans-serif"],
+      },
     },
   },
   plugins: [],

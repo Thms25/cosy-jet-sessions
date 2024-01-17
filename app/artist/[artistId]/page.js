@@ -12,7 +12,9 @@ export default async function Artist({ params }) {
       {artist?.videos && (
         <div>
           <div>
-            <h1 className="text-6xl m-8 tracking-wider">{artist.name}</h1>
+            <h1 className="text-6xl font-title m-8 tracking-wider">
+              {artist.name}
+            </h1>
           </div>
           <div className="">
             <VideoAccordeon videos={artist.videos} />
