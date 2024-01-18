@@ -10,7 +10,7 @@ export async function POST(request) {
       From: process.env.CJS_EMAIL, // sender email address
       To: process.env.CJS_EMAIL, // your email address
       Subject: `New message from ${name}`,
-      TextBody: message,
+      TextBody: `${message}\n\nReply to: ${email}`,
     };
 
     client.sendEmail(content);
