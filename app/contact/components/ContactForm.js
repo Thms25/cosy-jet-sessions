@@ -1,5 +1,6 @@
 "use client";
 
+import { sendEmail } from "@/utils/fetchUtils/EmailFetchUtils";
 // Animate
 import { motion } from "framer-motion";
 
@@ -10,8 +11,8 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function ContactForm() {
-  const handleSubmit = (data) => {
-    console.info("form data", data);
+  const handleSubmit = async (data) => {
+    const res = await sendEmail(data);
   };
   return (
     <div className="w-full md:w-2/3 mx-auto shadow-lg flex flex-col-reverse lg:flex-row rounded-lg overflow-hidden">
