@@ -26,14 +26,14 @@ const navItems = [
     title: "Discover",
     link: "/discover",
   },
-  {
-    title: "Playlists",
-    link: "/",
-  },
-  {
-    title: "Events",
-    link: "/events",
-  },
+  // {
+  //   title: "Playlists",
+  //   link: "/",
+  // },
+  // {
+  //   title: "Events",
+  //   link: "/events",
+  // },
   // {
   //   title: "Shop",
   //   link: "/shop",
@@ -76,19 +76,19 @@ export default function Navbar() {
           <li className="px-3 lg:px-4" key={item.title}>
             <Link
               href={item.link}
-              className="text-cjsPink font-secondary text-md lg:text-lg tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+              className="text-cjsPink font-secondary text-xs lg:text-sm tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
             >
               {item.title}
             </Link>
           </li>
         ))}
-        <li>
+        {/* <li>
           {session ? (
             <button onClick={() => signOut()}>Signout</button>
           ) : (
             <button onClick={() => signIn()}>Signin</button>
           )}
-        </li>
+        </li> */}
       </motion.ul>
       <div className="w-1/5 lg:flex justify-end hidden">
         <Image

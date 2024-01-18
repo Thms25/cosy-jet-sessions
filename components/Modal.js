@@ -41,7 +41,7 @@ const Modal = ({ handleClose }) => {
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
-        className="grid place-items-center p-6 bg-cjsWhite text-cjsPink min-w-1/3  h-1/2 lg:max-h-1/3 rounded-lg shadow-lg"
+        className="fixed z-50 grid place-items-center p-6 bg-cjsWhite border border-cjsPink text-cjsPink min-w-1/3  h-1/2 lg:max-h-1/3 rounded-lg shadow-md"
         onClick={(e) => e.stopPropagation()}
         variants={DropIn}
         initial="init"
@@ -57,6 +57,7 @@ const Modal = ({ handleClose }) => {
           <ul onClick={handleClose} className="p-4 flex justify-evenly">
             {mediaLinks.map((media) => (
               <Link
+                key={media.name}
                 href={media.link}
                 target="_blank"
                 className="text-cjsPink text-lg lgtext-xl border border-cjsPink rounded-full mx-2 lg:mx-4 px-4 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:text-cjsBrown"
