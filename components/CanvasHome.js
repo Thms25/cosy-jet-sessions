@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@react-three/fiber";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import LoadSimple from "./loaders/LoadSimple";
 
 // models
@@ -10,9 +10,13 @@ import CjsTitle from "@/models/CjsTitle";
 // ---------------------------------------------------------------------
 
 export default function CanvasHome() {
+  const [isRotating, setIsRotating] = useState(false);
   return (
     <div className="h-screen w-full p-16">
-      <Canvas camera={{ near: 0.1, far: 1000 }} className="mx-auto">
+      <Canvas
+        camera={{ near: 0.1, far: 1000 }}
+        className={`${isRotating ? "cursor-grabbing" : "cursor-grab"} w-full`}
+      >
         <Suspense fallback={<LoadSimple />}>
           <ambientLight intensity={1} />
           {/* <spotLight

@@ -17,14 +17,13 @@ export default function Homeview() {
   return (
     <section className="">
       <CanvasHome />
-
       {/* <header>
         <CjsBanner />
-      </header>
+      </header> */}
 
       <div className="p-8 md:p-16">
         <SmoothCarousel slides={popularVideos} />
-      </div> */}
+      </div>
     </section>
   );
 }
