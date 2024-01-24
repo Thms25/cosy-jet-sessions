@@ -14,11 +14,11 @@ export default function DynamicBanner({ title, subtitle, caption }) {
           height={751}
         />
         <div className="w-1/2 m-auto">
-          <h2 className="lg:text-xl text-cjsBrown font-title">{title}</h2>
-          <h4 className="text-lg text-cjsPink font-title my-4">{subtitle}</h4>
+          <h2 className="lg:text-lg text-cjsBrown font-title">{title}</h2>
+          <h4 className="text-md text-cjsPink font-title my-4">{subtitle}</h4>
         </div>
       </div>
-      <p className="text-md text-cjsBrown font-main mb-6">{caption}</p>
+      <p className="text-sm text-cjsBrown font-main mb-6">{caption}</p>
       <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div>
     </section>
   );

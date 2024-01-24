@@ -22,12 +22,12 @@ export default async function Discover() {
             <div key={artist.id} className={styles.artistCard}>
               <Link href={`/artist/${artist.id}`}>
                 <div className={styles.backgroundDiv}>
-                  <h3>{artist.name}</h3>
+                  <h3 className="">{artist.name}</h3>
                   {artist.videos[0]?.thumbnail && (
                     <Image
                       priority
                       src={artist.videos[0].thumbnail}
-                      alt={`${artist.name} - thumbnail`}
+                      alt={`${artist.name}_thumbnail`}
                       width={480}
                       height={360}
                       className={styles.backgroundImage}

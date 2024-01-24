@@ -2,6 +2,7 @@
 
 // Components
 import CjsBanner from "@/components/Banners/Banner";
+import CanvasHome from "@/components/CanvasHome";
 import SmoothCarousel from "@/components/caroussels/SmoothCarousel";
 
 // Utils
@@ -15,6 +16,9 @@ import { popularVideos } from "@/utils/data/videoData";
 export default function Homeview() {
   return (
     <section className="">
+      <div>
+        <CanvasHome />
+      </div>
       <header>
         <CjsBanner />
       </header>
