@@ -50,9 +50,7 @@ const Modal = ({ handleClose }) => {
         exit="exit"
       >
         <div className="w-full">
-          <h1 className="text-2xl lg:text-3xl tracking-wider">
-            FOLLOW US HERE
-          </h1>
+          <h1 className="text-lg tracking-wider">FOLLOW US HERE</h1>
           <div className="w-6 h-6 mx-auto my-8 ">{arrowDown}</div>
           <ul onClick={handleClose} className="p-4 flex justify-evenly">
             {mediaLinks.map((media) => (
@@ -60,7 +58,7 @@ const Modal = ({ handleClose }) => {
                 key={media.name}
                 href={media.link}
                 target="_blank"
-                className="text-cjsPink text-lg lgtext-xl border border-cjsPink rounded-full mx-2 lg:mx-4 px-4 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:text-cjsBrown"
+                className="text-cjsPink text-xs lgtext-xl border border-cjsPink rounded-full mx-2 lg:mx-4 px-4 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:text-cjsBrown"
               >
                 <li>{media.name}</li>
               </Link>
