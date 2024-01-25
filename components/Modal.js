@@ -37,11 +37,11 @@ const mediaLinks = [
   },
 ];
 
-const Modal = ({ handleClose }) => {
+export default function Modal({ handleClose }) {
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
-        className="fixed z-50 grid place-items-center p-6 bg-cjsWhite border border-cjsPink text-cjsPink min-w-1/3  h-1/2 lg:max-h-1/3 rounded-lg shadow-md"
+        className="fixed z-50 grid place-items-center p-12 bg-cjsWhite border border-cjsBrown text-cjsBrown min-w-32 max-w-96 rounded-lg shadow-md"
         onClick={(e) => e.stopPropagation()}
         variants={DropIn}
         initial="init"
@@ -50,15 +50,15 @@ const Modal = ({ handleClose }) => {
         exit="exit"
       >
         <div className="w-full">
-          <h1 className="text-lg tracking-wider">FOLLOW US HERE</h1>
-          <div className="w-6 h-6 mx-auto my-8 ">{arrowDown}</div>
-          <ul onClick={handleClose} className="p-4 flex justify-evenly">
+          <h1 className="text-md tracking-wider">FOLLOW US HERE</h1>
+          <div className="w-6 h-6 mx-auto my-8 animate-bounce">{arrowDown}</div>
+          <ul onClick={handleClose} className="px-2 flex justify-evenly">
             {mediaLinks.map((media) => (
               <Link
                 key={media.name}
                 href={media.link}
                 target="_blank"
-                className="text-cjsPink text-xs lgtext-xl border border-cjsPink rounded-full mx-2 lg:mx-4 px-4 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:text-cjsBrown"
+                className="text-cjsBrown text-xs border border-cjsBrown rounded-full mx-2 lg:mx-4 px-4 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:bg-cjsBrown hover:text-cjsWhite"
               >
                 <li>{media.name}</li>
               </Link>
@@ -68,6 +68,4 @@ const Modal = ({ handleClose }) => {
       </motion.div>
     </Backdrop>
   );
-};
-
-export default Modal;
+}
