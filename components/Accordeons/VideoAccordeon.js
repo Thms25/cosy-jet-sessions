@@ -81,7 +81,7 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
         className="relative z-0 flex w-full transition-colors md:flex-col my-2"
       >
         <span
-          className={`max-w-full text-start text-md tracking-wider transition-colors md:text-2xl ${
+          className={`max-w-full text-start text-md tracking-wider transition-colors ${
             selected
               ? "text-cjsBrown"
               : "text-cjsPink group-hover:text-cjsBrown"

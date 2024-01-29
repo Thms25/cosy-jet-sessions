@@ -18,7 +18,6 @@
       filter: blur(0);
     }
     h3 {
-      font-size: 25px;
       opacity: 0;
     }
   }
@@ -40,7 +39,7 @@
   h3 {
     z-index: 1;
     position: absolute;
-    font-size: 35px;
+    font-size: 24px;
     color: var(--cjsWhite);
     opacity: 0.9;
     transition: 0.3s;
