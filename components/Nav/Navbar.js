@@ -19,8 +19,8 @@ const navItems = [
     link: '/',
   },
   // {
-  //   title: "About",
-  //   link: "/about",
+  //   title: 'About',
+  //   link: '/about',
   // },
   {
     title: 'Discover',
@@ -34,14 +34,14 @@ const navItems = [
   //   title: "Events",
   //   link: "/events",
   // },
-  {
-    title: 'Shop',
-    link: '/shop',
-  },
   // {
-  //   title: "Contact",
-  //   link: "/contact",
+  //   title: 'Shop',
+  //   link: '/shop',
   // },
+  {
+    title: 'Contact',
+    link: '/contact',
+  },
 ]
 
 export default function Navbar() {
@@ -84,9 +84,19 @@ export default function Navbar() {
         ))}
         {/* <li>
           {session ? (
-            <button onClick={() => signOut()}>Signout</button>
+            <button
+              onClick={() => signOut()}
+              className="text-cjsPink font-secondary text-xs tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+            >
+              Signout
+            </button>
           ) : (
-            <button onClick={() => signIn()}>Signin</button>
+            <button
+              onClick={() => signIn()}
+              className="text-cjsPink font-secondary text-xs tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+            >
+              Signin
+            </button>
           )}
         </li> */}
       </motion.ul>
