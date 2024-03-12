@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import YouTube from "react-youtube";
-import styles from "styles/videos.module.scss";
+import YouTube from 'react-youtube'
+import styles from '@/styles/videos.module.scss'
 
 export default function YoutubeVideo({
   videoId,
   iframeClassName,
-  height = "360",
-  width = "520",
+  height = '360',
+  width = '520',
   // onVideoLoaded,
 }) {
-  const videoOnReady = (event) => {
-    const player = event.target;
+  const videoOnReady = event => {
+    const player = event.target
     // console.log(event.target);
     // player.seekTo(0);
     // player.playVideo();
     // onVideoLoaded(true);
-  };
+  }
 
   // const videoOnPlay = (event) => {
   //   const player = event.target;
@@ -28,7 +28,7 @@ export default function YoutubeVideo({
     playerVars: {
       autoplay: 0,
     },
-  };
+  }
 
   return (
     <YouTube
@@ -40,5 +40,5 @@ export default function YoutubeVideo({
       iframeClassName={styles[iframeClassName]}
       loading="lazy"
     />
-  );
+  )
 }

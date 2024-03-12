@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
-import YoutubeVideo from "@/components/videos/YoutubeVideo";
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
+import YoutubeVideo from '@/components/videos/YoutubeVideo'
 
 export default function VideoAccordeon({ videos }) {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0)
 
   return (
     <section className="mx-auto max-w-full flex-col-reverse items-start gap-6 py-4 md:flex-row md:gap-12 md:px-8">
@@ -28,7 +28,7 @@ export default function VideoAccordeon({ videos }) {
                   iframeClassName="artistPageVideo"
                 />
               </motion.div>
-            ) : undefined;
+            ) : undefined
           })}
         </AnimatePresence>
         <AnimatePresence mode="wait">
@@ -41,18 +41,18 @@ export default function VideoAccordeon({ videos }) {
                 key={index}
                 className="w-full text-left px-4 h-[480px] overflow-y-scroll"
               >
-                {video.description.split("\n").map((line, index) => (
+                {video.description.split('\n').map((line, index) => (
                   <p key={index} className="">
-                    {line === "" ? <br /> : line}
+                    {line === '' ? <br /> : line}
                   </p>
                 ))}
               </motion.div>
-            ) : undefined;
+            ) : undefined
           })}
         </AnimatePresence>
       </div>
     </section>
-  );
+  )
 }
 
 const Tabs = ({ selected, setSelected, videos }) => {
@@ -67,11 +67,11 @@ const Tabs = ({ selected, setSelected, videos }) => {
             title={video.title}
             tabNum={index}
           />
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
 const Tab = ({ selected, title, setSelected, tabNum }) => {
   return (
@@ -81,13 +81,15 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
         className="relative z-0 flex w-full transition-colors md:flex-col my-2"
       >
         <span
-          className={`max-w-full text-start text-md tracking-wider transition-colors ${
+          className={`max-w-full text-start text-sm tracking-wider transition-colors ${
             selected
-              ? "text-cjsBrown"
-              : "text-cjsPink group-hover:text-cjsBrown"
+              ? 'text-cjsBrown'
+              : 'text-cjsPink group-hover:text-cjsBrown'
           }`}
         >
-          {title.includes("cover") ? "Cover" : "Original"}
+          {title.match(/over by (.*?)\)/) || title.includes('(')
+            ? 'Cover'
+            : 'Original'}
         </span>
       </button>
       {selected && (
@@ -97,5 +99,5 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
         />
       )}
     </div>
-  );
-};
+  )
+}

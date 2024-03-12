@@ -26,10 +26,10 @@ const navItems = [
     title: 'Discover',
     link: '/discover',
   },
-  {
-    title: 'Playlists',
-    link: '/',
-  },
+  // {
+  //   title: 'Playlists',
+  //   link: '/',
+  // },
   // {
   //   title: "Events",
   //   link: "/events",
@@ -76,7 +76,7 @@ export default function Navbar() {
           <li className="px-3 lg:px-4" key={item.title}>
             <Link
               href={item.link}
-              className="text-cjsPink font-secondary text-sm tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
+              className="text-cjsPink font-secondary text-xs tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm"
             >
               {item.title}
             </Link>
