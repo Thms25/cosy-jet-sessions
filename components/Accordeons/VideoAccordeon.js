@@ -57,7 +57,7 @@ export default function VideoAccordeon({ videos }) {
 
 const Tabs = ({ selected, setSelected, videos }) => {
   return (
-    <div className="w-full flex overflow-scroll md:w-fit">
+    <div className="w-full flex  md:w-fit pb-2">
       {videos.map((video, index) => {
         return (
           <Tab
@@ -75,10 +75,10 @@ const Tabs = ({ selected, setSelected, videos }) => {
 
 const Tab = ({ selected, title, setSelected, tabNum }) => {
   return (
-    <div className="group relative w-full md:w-fit my-4 mx-4">
+    <div className="group relative w-full md:w-fit m-2">
       <button
         onClick={() => setSelected(tabNum)}
-        className="relative z-0 flex w-full transition-colors md:flex-col my-2"
+        className="relative z-0 flex w-full transition-colors md:flex-col mb-1"
       >
         <span
           className={`max-w-full text-start text-sm tracking-wider transition-colors ${

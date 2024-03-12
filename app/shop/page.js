@@ -1,19 +1,19 @@
-import { fakeMerch } from "@/utils/data/fakeData";
-import { ratingStar } from "@/utils/data/svgData";
-import Image from "next/image";
-import Link from "next/link";
+import { fakeMerch } from '@/utils/data/fakeData'
+import { ratingStar } from '@/utils/data/svgData'
+import Image from 'next/image'
+import Link from 'next/link'
 
 // Auth
-import { getServerSession } from "next-auth";
+import { getServerSession } from 'next-auth'
 
 export default async function Shop() {
-  const session = await getServerSession();
+  const session = await getServerSession()
 
   return (
     <section>
-      <div className="h-screen p-24 text-2xl">
+      <div className="h-screen p-24 text-md">
         <h1>
-          {session?.user ? `Hello ${session.user.name}, ` : ""}Check out our
+          {session?.user ? `Hello ${session.user.name}, ` : ''}Check out our
           cozy merch
         </h1>
         <div className="my-8 grid grid-cols-3 gap-6">
@@ -32,9 +32,9 @@ export default async function Shop() {
                   height={1200}
                 />
               </Link>
-              <div className="px-4 py-4">
+              <div className="px-4 py-4 text-sm">
                 <a href="#">
-                  <h5 className="text-xl font-semibold tracking-tight text-cjsWhite">
+                  <h5 className="font-semibold tracking-tight text-cjsWhite">
                     {merch.name}
                   </h5>
                 </a>
@@ -53,12 +53,12 @@ export default async function Shop() {
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-3xl font-bold text-cjsWhite">
+                  <span className=" font-bold text-cjsWhite">
                     {merch.price}€
                   </span>
                   <a
                     href="#"
-                    className="text-cjsBrown bg-cjsWhite hover:bg-cjsPink font-medium rounded-lg text-sm px-5 py-2.5 text-center transition duration-250"
+                    className="text-cjsBrown bg-cjsWhite hover:bg-cjsPink font-medium rounded-lg text-xs px-5 py-2.5 text-center transition duration-250"
                   >
                     Add to cart
                   </a>
@@ -69,5 +69,5 @@ export default async function Shop() {
         </div>
       </div>
     </section>
-  );
+  )
 }
