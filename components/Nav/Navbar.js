@@ -9,7 +9,7 @@ import Image from 'next/image'
 import NavDropdown from './NavDropdown'
 
 // Auth
-import { signIn, signOut, useSession } from 'next-auth/react'
+// import { signIn, signOut, useSession } from 'next-auth/react'
 
 // --------------------------------------------------------------
 
@@ -45,27 +45,11 @@ const navItems = [
 ]
 
 export default function Navbar() {
-  const { data: session } = useSession()
+  // const { data: session } = useSession()
+  const smallScreen = window.innerWidth < 640
 
   return (
     <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-10 flex justify-between items-center text-cjsBorwn px-8 py-3">
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 0.7 }}
-        className="w-1/5"
-      >
-        <Link href="/" className="flex">
-          <Image
-            priority
-            src="/images/cjsText.png"
-            alt="cjs_text_title"
-            className=""
-            width={190}
-            height={40}
-          />
-        </Link>
-      </motion.div>
       <motion.ul
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
