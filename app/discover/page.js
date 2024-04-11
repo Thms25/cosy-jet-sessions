@@ -16,7 +16,6 @@ export default async function Discover() {
   const artists = await getArtists()
   const notionData = await getNotionDiscover()
 
-  // return <DiscoverView artists={artists} notionData={notionData} />
   return (
     <section className="py-24">
       <DynamicBanner

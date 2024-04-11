@@ -12,7 +12,6 @@ export default function Homeview() {
   return (
     <section className="">
       <header>
-        {/* <CanvasHome /> */}
         <HomeBanner />
       </header>
 
