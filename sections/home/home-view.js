@@ -1,6 +1,6 @@
 // Components
 import { HomeBanner } from '@/components/Banners/HomeBanner'
-import CanvasHome from '@/components/CanvasHome'
+// import CanvasHome from '@/components/CanvasHome'
 import SmoothCarousel from '@/components/caroussels/SmoothCarousel'
 
 // Utils

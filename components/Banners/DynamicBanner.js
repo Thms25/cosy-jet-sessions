@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
 // Hooks
-import { useState } from "react";
+import { useState } from 'react'
 
 // Utils
-import { arrowDown } from "@/utils/data/svgData";
+import { arrowDown } from '@/utils/data/svgData'
 
 // Components
-import Image from "next/image";
-import Modal from "@/components/Modal";
+import Image from 'next/image'
+import Modal from '@/components/Modal'
 
 // Motion
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function DynamicBanner({ title, subtitle, caption }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const close = () => setModalOpen(false);
-  const open = () => setModalOpen(true);
+  const [modalOpen, setModalOpen] = useState(false)
+  const close = () => setModalOpen(false)
+  const open = () => setModalOpen(true)
 
   return (
     <>
@@ -47,5 +47,5 @@ export default function DynamicBanner({ title, subtitle, caption }) {
         {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
       </AnimatePresence>
     </>
-  );
+  )
 }
