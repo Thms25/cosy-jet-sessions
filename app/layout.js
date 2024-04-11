@@ -22,17 +22,17 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const session = await getServerSession(AuthOptions)
+  // const session = await getServerSession(AuthOptions)
   // const user = await findUser(session?.user?.email);
 
   return (
     <html>
       <body>
-        <Provider session={session}>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-        </Provider>
+        {/* <Provider session={session}> */}
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        {/* </Provider> */}
       </body>
     </html>
   )
