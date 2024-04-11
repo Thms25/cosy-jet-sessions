@@ -1,19 +1,19 @@
-"use client";
+'use client'
 
-import { sendEmail } from "@/utils/fetchUtils/EmailFetchUtils";
+import { sendEmail } from '@/utils/fetchUtils/EmailFetchUtils'
 // Animate
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion'
 
 // Components
-import Image from "next/image";
+import Image from 'next/image'
 
 // Hooks
-import { useState } from "react";
+import { useState } from 'react'
 
 export default function ContactForm() {
-  const handleSubmit = async (data) => {
-    const res = await sendEmail(data);
-  };
+  const handleSubmit = async data => {
+    const res = await sendEmail(data)
+  }
   return (
     <div className="w-full md:w-2/3 mx-auto shadow-lg flex flex-col-reverse lg:flex-row rounded-lg overflow-hidden">
       <Form
@@ -29,21 +29,21 @@ export default function ContactForm() {
         height={603}
       />
     </div>
-  );
+  )
 }
 
 const Form = ({ className, onSubmit }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    message: "",
-    email: "",
-  });
+    name: '',
+    message: '',
+    email: '',
+  })
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSubmit(formData);
-        alert("Thanks for your message! We'll be in touch soon.");
+      onSubmit={e => {
+        e.preventDefault()
+        onSubmit(formData)
+        alert("Thanks for your message! We'll be in touch soon.")
       }}
       className={`${className} text-left`}
     >
@@ -55,7 +55,7 @@ const Form = ({ className, onSubmit }) => {
         <input
           required
           value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          onChange={e => setFormData({ ...formData, name: e.target.value })}
           type="text"
           placeholder="Your name..."
           className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
@@ -68,7 +68,7 @@ const Form = ({ className, onSubmit }) => {
         <input
           required
           value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          onChange={e => setFormData({ ...formData, email: e.target.value })}
           type="text"
           placeholder="Your email..."
           className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
@@ -80,9 +80,7 @@ const Form = ({ className, onSubmit }) => {
         <p className="text-sm mb-2">Your message...</p>
         <textarea
           value={formData.message}
-          onChange={(e) =>
-            setFormData({ ...formData, message: e.target.value })
-          }
+          onChange={e => setFormData({ ...formData, message: e.target.value })}
           placeholder="Feel free to ask any questions"
           className={`bg-cjsPink text-xs min-h-[150px] resize-none placeholder-cjsWhite p-2 rounded-md w-full focus:outline-0`}
         />
@@ -104,5 +102,5 @@ const Form = ({ className, onSubmit }) => {
         </motion.button>
       </div>
     </form>
-  );
-};
+  )
+}

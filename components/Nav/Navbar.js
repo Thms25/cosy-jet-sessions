@@ -46,7 +46,8 @@ const navItems = [
 
 export default function Navbar() {
   // const { data: session } = useSession()
-  const smallScreen = window.innerWidth < 640
+  // const smallScreen = window.innerWidth < 640
+  const smallScreen = false
 
   return (
     <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-10 flex justify-between items-center text-cjsBorwn px-8 py-3">
