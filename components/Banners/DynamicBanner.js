@@ -8,10 +8,11 @@ import { arrowDown } from '@/utils/data/svgData'
 
 // Components
 import Image from 'next/image'
-import Modal from '@/components/Modal'
+// import Modal from '@/components/Modal'
 
 // Motion
 import { motion, AnimatePresence } from 'framer-motion'
+import MediaModal from '@/components/media-modal'
 
 export default function DynamicBanner({ title, subtitle, caption }) {
   const [modalOpen, setModalOpen] = useState(false)
@@ -44,7 +45,7 @@ export default function DynamicBanner({ title, subtitle, caption }) {
         <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div>
       </section>
       <AnimatePresence initial={false} mode="wait">
-        {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+        {modalOpen && <MediaModal modalOpen={modalOpen} handleClose={close} />}
       </AnimatePresence>
     </>
   )

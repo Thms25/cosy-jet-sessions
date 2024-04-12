@@ -12,17 +12,21 @@ import { useState } from 'react'
 
 export default function ContactForm() {
   const handleSubmit = async data => {
-    const res = await sendEmail(data)
+    try {
+      await sendEmail(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
   return (
-    <div className="w-full md:w-2/3 mx-auto shadow-lg flex flex-col-reverse lg:flex-row rounded-lg overflow-hidden">
+    <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
       <Form
         onSubmit={handleSubmit}
-        className="p-8 w-full xl:max-w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+        className="p-8 w-full lg:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
       />
       <Image
         priority
-        className="object-contain w-1/2 hidden lg:block"
+        className="w-1/2 hidden lg:block object-cover"
         src="/images/lights.png"
         alt="cjs-lights"
         width={366}

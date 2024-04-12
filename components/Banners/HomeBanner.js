@@ -1,10 +1,10 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import Modal from '@/components/Modal'
 import Image from 'next/image'
 import { useState } from 'react'
 import { arrowDown } from '@/utils/data/svgData'
+import MediaModal from '@/components/media-modal'
 
 export function HomeBanner() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -31,7 +31,7 @@ export function HomeBanner() {
         <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div>
       </motion.div>
       <AnimatePresence initial={false} mode="wait">
-        {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+        {modalOpen && <MediaModal modalOpen={modalOpen} handleClose={close} />}
       </AnimatePresence>
     </>
   )
