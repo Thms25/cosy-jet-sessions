@@ -22,7 +22,7 @@ export default function DynamicBanner({ title, subtitle, caption }) {
   return (
     <>
       <section>
-        <div className="m-auto p-4 md:p-12 md:flex items-start justify-around lg:text-right">
+        <div className="m-auto p-4 md:p-12 md:flex items-start justify-center">
           <motion.div
             onClick={() => (modalOpen ? close() : open())}
             className="w-1/2 h-full m-auto cursor-pointer"
@@ -36,9 +36,9 @@ export default function DynamicBanner({ title, subtitle, caption }) {
               height={751}
             />
           </motion.div>
-          <div className="w-1/2 m-auto">
+          <div className="w-1/2 m-auto lg:text-right ">
             <h2 className="lg:text-lg text-cjsBrown font-title">{title}</h2>
-            <h4 className="text-md text-cjsPink font-title my-4">{subtitle}</h4>
+            <h4 className="text-md text-cjsPink font-title my-2">{subtitle}</h4>
           </div>
         </div>
         <p className="text-sm text-cjsBrown font-main mb-6">{caption}</p>

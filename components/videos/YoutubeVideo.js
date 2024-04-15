@@ -25,9 +25,9 @@ export default function YoutubeVideo({
   const opts = {
     height: height,
     width: width,
-    playerVars: {
-      autoplay: 0,
-    },
+    // playerVars: {
+    //   autoplay: 0,
+    // },
   }
 
   return (

@@ -30,8 +30,33 @@ export async function getArtist(id) {
       },
     })
 
+    // const token = await getSpotifyToken()
+    // console.log(token)
+
+    // const spotifyRes = await fetch(
+    //   `${process.env.SPOTIFY_API_URL}/search/${artist.name}`,
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.SPOTIFY_TOKEN}`,
+    //     },
+    //   },
+    // )
+
     return artist
   } catch (error) {
     throw new Error(error)
   }
+}
+
+async function getSpotifyToken() {
+  const token = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
+    },
+    next: {
+      revalidate: 60 * 60, // 1 hour,
+    },
+  })
+  return token
 }
