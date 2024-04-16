@@ -22,7 +22,7 @@ export default async function Artist({ params }) {
       {artist?.videos && (
         <div>
           <div>
-            <h1 className="text-xl font-title mt-8 mx-6 tracking-wider">
+            <h1 className="text-4xl font-title mt-8 mx-6 tracking-wider">
               {artist.name}
             </h1>
           </div>

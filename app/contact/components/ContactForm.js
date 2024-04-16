@@ -51,7 +51,7 @@ const Form = ({ className, onSubmit }) => {
       }}
       className={`${className} text-left`}
     >
-      <h3 className="text-md font-bold mb-6 text-center">Contact us</h3>
+      <h3 className="text-lg font-bold mb-6 text-center">Leave us a message</h3>
 
       {/* Name input */}
       <div className="mb-6">
