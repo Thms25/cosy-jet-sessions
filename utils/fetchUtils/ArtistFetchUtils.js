@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { getSpotifyArtist, getSpotifyToken } from './spotify-api-utils'
 
 const prisma = new PrismaClient()
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
@@ -30,8 +31,8 @@ export async function getArtist(id) {
       },
     })
 
-    // const token = await getSpotifyToken()
-    // console.log(token)
+    const { access_token } = await getSpotifyToken()
+    const artist_data = await getSpotifyArtist(access_token, artist.name)
 
     // const spotifyRes = await fetch(
     //   `${process.env.SPOTIFY_API_URL}/search/${artist.name}`,
@@ -46,17 +47,4 @@ export async function getArtist(id) {
   } catch (error) {
     throw new Error(error)
   }
-}
-
-async function getSpotifyToken() {
-  const token = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`,
-    },
-    next: {
-      revalidate: 60 * 60, // 1 hour,
-    },
-  })
-  return token
 }

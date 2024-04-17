@@ -42,6 +42,8 @@ module.exports = {
         '4xl': 'clamp(1.625rem, 1.75vw, 1.75rem)', // 26px to 28px
         '5xl': 'clamp(1.75rem, 1.85vw, 1.875rem)', // 28px to 30px
         '6xl': 'clamp(1.875rem, 1.95vw, 2rem)', // 30px to 32px
+        '7xl': 'clamp(2rem, 2vw, 2.125rem)', // 32px to 34px
+        '8xl': 'clamp(2.125rem, 2.05vw, 2.25rem)', // 34px to 36px
       },
       dropShadow: {
         xs: '0 1px 1px rgba(0, 0, 0, 0.05)',

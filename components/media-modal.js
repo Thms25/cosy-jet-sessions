@@ -41,7 +41,7 @@ export default function MediaModal({ handleClose }) {
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
-        className="fixed z-50 grid items-center p-12 bg-cjsWhite border border-cjsBrown text-cjsBrown min-w-32 max-w-96 rounded-lg shadow-md"
+        className="fixed z-50 grid items-center p-12 bg-cjsWhite border border-cjsBrown text-cjsBrown min-w-36 xl:w-1/3 rounded-lg shadow-md"
         onClick={e => e.stopPropagation()}
         variants={DropIn}
         initial="init"
@@ -50,7 +50,7 @@ export default function MediaModal({ handleClose }) {
         exit="exit"
       >
         <div className="w-full">
-          <h1 className="text-md tracking-wider">FOLLOW US HERE</h1>
+          <h1 className="text-lg tracking-wider">FOLLOW US HERE</h1>
           <div className="w-6 h-6 mx-auto my-8 animate-bounce">{arrowDown}</div>
           <ul onClick={handleClose} className="flex justify-evenly w-full">
             {mediaLinks.map(media => (
@@ -58,7 +58,7 @@ export default function MediaModal({ handleClose }) {
                 key={media.name}
                 href={media.link}
                 target="_blank"
-                className="text-cjsBrown text-xs border border-cjsBrown rounded-full px-3 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:bg-cjsBrown hover:text-cjsWhite mx-2 lg:mx-1"
+                className="text-cjsBrown text-sm border border-cjsBrown rounded-full px-3 py-2 shadow-sm hover:border-cjsBrown transition duration-300 hover:bg-cjsBrown hover:text-cjsWhite mx-2"
               >
                 <li>{media.name}</li>
               </Link>

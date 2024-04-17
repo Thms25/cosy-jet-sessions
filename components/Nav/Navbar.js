@@ -9,6 +9,8 @@ import Image from 'next/image'
 import NavDropdown from './NavDropdown'
 import { usePathname } from 'next/navigation'
 
+import { useWindowSize } from '@/hooks/useWindowSize'
+
 // Auth
 // import { signIn, signOut, useSession } from 'next-auth/react'
 
@@ -19,10 +21,10 @@ const navItems = [
     title: 'Home',
     link: '/',
   },
-  // {
-  //   title: 'About',
-  //   link: '/about',
-  // },
+  {
+    title: 'About',
+    link: '/about',
+  },
   {
     title: 'Discover',
     link: '/discover',
@@ -48,9 +50,9 @@ const navItems = [
 export default function Navbar() {
   // const { data: session } = useSession()
   // const smallScreen = window.innerWidth < 640
-  const smallScreen = false
+  const { width } = useWindowSize()
+  const smallScreen = width < 640
   const pathname = usePathname()
-  console.log(pathname)
 
   return (
     <nav className="bg-cjsWhite bg-opacity-80 w-full fixed top-0 z-10 flex justify-between items-center text-cjsBorwn px-8 py-3">
@@ -95,7 +97,7 @@ export default function Navbar() {
               <Link
                 aria-disabled={pathname === item.link}
                 href={item.link}
-                className={`font-secondary text-xs tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm ${
+                className={`font-secondary text-md tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm ${
                   pathname === item.link ? 'text-cjsBrown' : 'text-cjsPink'
                 }`}
               >

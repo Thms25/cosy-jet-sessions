@@ -55,7 +55,7 @@ const Form = ({ className, onSubmit }) => {
 
       {/* Name input */}
       <div className="mb-6">
-        <p className="text-sm mb-2">Hi 👋! My name is...</p>
+        <p className="text-md mb-2">Hi 👋! My name is...</p>
         <input
           required
           value={formData.name}
@@ -68,7 +68,7 @@ const Form = ({ className, onSubmit }) => {
 
       {/* Mail input */}
       <div className="mb-6">
-        <p className="text-sm mb-2">My email is...</p>
+        <p className="text-md mb-2">My email is...</p>
         <input
           required
           value={formData.email}
@@ -81,7 +81,7 @@ const Form = ({ className, onSubmit }) => {
 
       {/* Message */}
       <div className="mb-6">
-        <p className="text-sm mb-2">Your message...</p>
+        <p className="text-md mb-2">Your message...</p>
         <textarea
           value={formData.message}
           onChange={e => setFormData({ ...formData, message: e.target.value })}
@@ -100,7 +100,7 @@ const Form = ({ className, onSubmit }) => {
             scale: 0.95,
           }}
           type="submit"
-          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-sm text-center rounded-lg w-full py-2 font-semibold`}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
         >
           Submit
         </motion.button>

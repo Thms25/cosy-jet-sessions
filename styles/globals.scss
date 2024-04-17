@@ -40,14 +40,13 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
-  // font-family: 'DM Serif Display', serif; // tiltes
-  // font-family: 'Roboto', sans-serif; // caption
-  // font-family: 'Montserrat', sans-serif; // secondar
   font-family: 'Lato', sans-serif; // primary
-
   a {
     text-decoration: none;
     color: var(--cjsWhite);
+  }
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -119,4 +118,12 @@ body {
     // transform: translateX(-50%);
   }
 
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
