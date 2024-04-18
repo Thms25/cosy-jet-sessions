@@ -18,7 +18,7 @@ export default function Homeview() {
       {/* <WhoWeAre /> */}
 
       <div className="p-8 md:p-16">
-        <SmoothCarousel slides={popularVideos} />
+        {/* <SmoothCarousel slides={popularVideos} /> */}
       </div>
     </section>
   )

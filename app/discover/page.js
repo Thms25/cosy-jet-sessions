@@ -13,7 +13,8 @@ import DynamicBanner from '@/components/Banners/DynamicBanner'
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
 
 export default async function Discover() {
-  const artists = await getArtists()
+  const { artists, all_artists } = await getArtists()
+  console.log('all_artists: ', all_artists)
   const notionData = await getNotionDiscover()
 
   return (
