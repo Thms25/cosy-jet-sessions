@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import { Reveal } from './animations/Reveal'
 
 export const WhoWeAre = () => {
   return (
@@ -100,9 +101,11 @@ const OverlayCopy = ({ subheading, heading }) => {
       ref={targetRef}
       className="absolute left-0 top-0 flex h-screen w-full flex-col items-center justify-center text-cjsWhite"
     >
-      <p className="mb-2 text-center text-xl md:mb-4 md:text-3xl">
-        {subheading}
-      </p>
+      <Reveal>
+        <p className="mb-2 text-center text-xl md:mb-4 md:text-3xl">
+          {subheading}
+        </p>
+      </Reveal>
       <p className="text-center text-4xl font-bold md:text-8xl">{heading}</p>
     </motion.div>
   )

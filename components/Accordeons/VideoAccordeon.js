@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import YoutubeVideo from '@/components/videos/YoutubeVideo'
+import { Reveal } from '../animations/Reveal'
 
 export default function VideoAccordeon({ videos }) {
   const [selected, setSelected] = useState(0)
@@ -41,11 +42,13 @@ export default function VideoAccordeon({ videos }) {
                 key={index}
                 className=" text-left p-2 w-[720px] h-[360px] overflow-y-scroll hide-scrollbar"
               >
-                {video.description.split('\n').map((line, index) => (
-                  <p key={index} className="text-sm font-caption">
-                    {line === '' ? <br /> : line}
-                  </p>
-                ))}
+                <Reveal dly={0.1} initX={0} initY={0} duration={1}>
+                  {video.description.split('\n').map((line, index) => (
+                    <p key={index} className="text-sm font-caption">
+                      {line === '' ? <br /> : line}
+                    </p>
+                  ))}
+                </Reveal>
               </motion.div>
             ) : undefined
           })}
