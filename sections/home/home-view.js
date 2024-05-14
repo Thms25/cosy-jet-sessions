@@ -13,14 +13,6 @@ export default function Homeview({ content }) {
   // console.log('content: ', content)
   return (
     <section className="hide-scrollbar">
-      {/* <div className="w-full h-screen text-cjsBrown text-4xl font-bold flex justify-center items-center">
-        hello 1
-      </div>
-      <Reveal>
-        <div className="w-full h-screen text-cjsBrown text-4xl font-bold flex justify-center items-center">
-          hello 2
-        </div>
-      </Reveal> */}
       <header className="h-screen">
         <HomeBanner />
       </header>
