@@ -17,7 +17,6 @@ export function Reveal({
   const controls = useAnimation()
 
   useEffect(() => {
-    console.log('isInView: ', isInView)
     if (isInView) {
       controls.start('visible')
     }
