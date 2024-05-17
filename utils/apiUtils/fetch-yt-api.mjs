@@ -13,8 +13,6 @@ const firebaseConfig = {
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 }
 
-console.log('firebaseConfig: ', firebaseConfig)
-
 const firebaseApp = initializeApp(firebaseConfig)
 const db = getFirestore(firebaseApp)
 
@@ -25,6 +23,9 @@ import {
   deleteDoc,
   doc,
   getDoc,
+  addDoc,
+  query,
+  where,
 } from 'firebase/firestore'
 
 import { google } from 'googleapis'
@@ -89,31 +90,45 @@ function getArtistName(title) {
 
 async function findOrCreateArtist(artistName) {
   const artistCollection = collection(db, 'artists')
-  const artistDoc = doc(artistCollection, artistName)
-  const artistSnapshot = await getDoc(artistDoc)
 
-  if (!artistSnapshot.exists()) {
-    const artist = {
-      name: artistName,
-      // Add any other artist properties you need here
-    }
-    await setDoc(artistDoc, artist)
-    return artist
+  // Query the collection for documents where the name field matches artistName
+  const q = query(artistCollection, where('name', '==', artistName))
+  const artistSnapshot = await getDocs(q)
+
+  if (!artistSnapshot.empty) {
+    const doc = artistSnapshot.docs[0]
+    return { id: doc.id, ...doc.data() }
   } else {
-    return artistSnapshot.data()
+    const docRef = await addDoc(artistCollection, { name: artistName })
+
+    // Return the id of the new document and the data you just added
+    return { id: docRef.id, name: artistName }
   }
 }
 
 async function addVideo(video) {
-  const videoCollection = collection(db, 'videos')
-  await setDoc(doc(videoCollection, video.id), video)
+  try {
+    const videoCollection = collection(db, 'videos')
+    await setDoc(doc(videoCollection, video.id), video)
+    console.log('Video added successfully')
+  } catch (error) {
+    console.error('Error adding video: ', error.message)
+  }
 }
 
 async function addShort(short) {
-  const shortsCollection = collection(db, 'shorts')
-  await setDoc(doc(shortsCollection, short.id), short)
+  try {
+    const shortsCollection = collection(db, 'shorts')
+    await setDoc(doc(shortsCollection, short.id), short)
+    console.log('Short video added successfully')
+  } catch (error) {
+    console.error('Error adding short video: ', error.message)
+  }
 }
 
+// -------------------------------------------------------------
+
+const VIDEOS = []
 const SHORTS = []
 const ARTISTS = []
 
@@ -135,51 +150,10 @@ async function fetchYtApi(nextPageToken = null) {
 
     const { data } = await google.youtube('v3').search.list(options)
 
-    const videos = []
-
-    console.log('data: ', data)
-
-    for (const video of data.items) {
-      decodeHtml(video.snippet.title).includes('#')
-        ? SHORTS.push(video)
-        : videos.push(video)
-    }
-
-    // data.items.forEach(video => {
-    //   decodeHtml(video.snippet.title).includes('#')
-    //     ? SHORTS.push(video)
-    //     : videos.push(video)
-    // })
-
-    console.log('\nStarting full videos\n')
-
-    for (const video of videos) {
-      if (video.id.kind === 'youtube#video') {
-        let { title, publishedAt } = video.snippet
-        title = decodeHtml(title)
-
-        console.log('\nTitle: ', title)
-
-        const videoId = video.id.videoId
-        const description = await getFullDescription(videoId)
-        const thumbnailUrl = video.snippet.thumbnails.high.url
-        const artistName = getArtistName(title)
-
-        const artist = await findOrCreateArtist(artistName)
-
-        ARTISTS.push(artist.name)
-
-        const video = {
-          id: videoId,
-          title: title,
-          description: description,
-          thumbnail: thumbnailUrl,
-          publishedAt: publishedAt,
-          artistRef: doc(db, 'artists', artist.id),
-        }
-
-        await addVideo(video)
-      }
+    for (const item of data.items) {
+      decodeHtml(item.snippet.title).includes('#')
+        ? SHORTS.push(item)
+        : VIDEOS.push(item)
     }
 
     if (data.nextPageToken) {
@@ -191,19 +165,56 @@ async function fetchYtApi(nextPageToken = null) {
   }
 }
 
+async function addFullVideos(videos) {
+  console.log('\nStarting full videos\n')
+
+  for (const vid of videos) {
+    const { kind, videoId } = vid.id
+    const { snippet } = vid
+    if (kind === 'youtube#video') {
+      let { title, publishedAt } = snippet
+      title = decodeHtml(title)
+
+      console.log('\nVideo Title: ', title)
+
+      const description = await getFullDescription(videoId)
+
+      const thumbnailUrl = snippet.thumbnails.high.url
+      const artistName = getArtistName(title)
+
+      const artist = await findOrCreateArtist(artistName)
+      console.log('Artist: ', artist)
+
+      ARTISTS.push(artist.name)
+
+      const video = {
+        id: videoId,
+        title: title,
+        thumbnail: thumbnailUrl,
+        publishedAt: publishedAt,
+        description: description,
+        artistRef: doc(db, 'artists', artist.id),
+      }
+
+      await addVideo(video)
+    }
+  }
+}
+
 async function addShorts(shorts) {
   try {
     console.log('\nStarting shorts\n')
 
-    for (const video of shorts) {
-      if (video.id.kind === 'youtube#video') {
-        let { title, publishedAt } = video.snippet
+    for (const vid of shorts) {
+      const { kind, videoId } = vid.id
+      const { snippet } = vid
+      if (kind === 'youtube#video') {
+        let { title, publishedAt } = snippet
         title = decodeHtml(title)
 
-        console.log('Title: ', title)
+        console.log('Short video title: ', title)
 
-        const videoId = video.id.videoId
-        const thumbnailUrl = video.snippet.thumbnails.high.url
+        const thumbnailUrl = snippet.thumbnails.high.url
 
         let artistName = ARTISTS.find(artist => title.includes(artist))
         if (!artistName) {
@@ -217,7 +228,6 @@ async function addShorts(shorts) {
         const video = {
           id: videoId,
           title: title,
-          description: description,
           thumbnail: thumbnailUrl,
           publishedAt: publishedAt,
           artistRef: doc(db, 'artists', artist.id),
@@ -235,6 +245,7 @@ async function addShorts(shorts) {
 
 await deleteExistingData()
 await fetchYtApi()
+await addFullVideos(VIDEOS)
 await addShorts(SHORTS)
 
 console.log('\n\nArtist and Video saved to the database.\n')
