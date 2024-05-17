@@ -16,8 +16,7 @@ import DynamicBanner from '@/components/Banners/DynamicBanner'
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
 
 export default async function Discover() {
-  const { artists, all_artists } = await getArtists()
-  console.log('all_artists: ', all_artists)
+  const artists = await getArtists()
   const content = await getNotionContent('discover')
 
   return (
@@ -34,10 +33,10 @@ export default async function Discover() {
               <Link href={`/artist/${artist.id}`}>
                 <div className={styles.backgroundDiv}>
                   <h3 className="">{artist.name}</h3>
-                  {artist.videos[0]?.thumbnail && (
+                  {artist.image && (
                     <Image
                       priority
-                      src={artist.videos[0].thumbnail}
+                      src={artist.image}
                       alt={`${artist.name}_thumbnail`}
                       width={480}
                       height={360}

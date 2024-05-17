@@ -88,7 +88,7 @@ function getArtistName(title) {
   }
 }
 
-async function findOrCreateArtist(artistName) {
+async function findOrCreateArtist(artistName, img, date) {
   const artistCollection = collection(db, 'artists')
 
   // Query the collection for documents where the name field matches artistName
@@ -97,12 +97,18 @@ async function findOrCreateArtist(artistName) {
 
   if (!artistSnapshot.empty) {
     const doc = artistSnapshot.docs[0]
-    return { id: doc.id, ...doc.data() }
+    // return { id: doc.id, ...doc.data() }
+    return doc
   } else {
-    const docRef = await addDoc(artistCollection, { name: artistName })
+    const docRef = await addDoc(artistCollection, {
+      name: artistName,
+      image: img,
+      perf_date: date,
+      // slug: artistName.toLowerCase().replace(/ /g, ''),
+    })
 
     // Return the id of the new document and the data you just added
-    return { id: docRef.id, name: artistName }
+    return docRef
   }
 }
 
@@ -182,8 +188,12 @@ async function addFullVideos(videos) {
       const thumbnailUrl = snippet.thumbnails.high.url
       const artistName = getArtistName(title)
 
-      const artist = await findOrCreateArtist(artistName)
-      console.log('Artist: ', artist)
+      const artist = await findOrCreateArtist(
+        artistName,
+        thumbnailUrl,
+        publishedAt,
+      )
+      console.log('Artist: ', artist.name)
 
       ARTISTS.push(artist.name)
 
@@ -221,7 +231,11 @@ async function addShorts(shorts) {
           artistName = 'Unknown Artist'
         }
 
-        const artist = await findOrCreateArtist(artistName)
+        const artist = await findOrCreateArtist(
+          artistName,
+          thumbnailUrl,
+          publishedAt,
+        )
 
         ARTISTS.push(artist.name)
 

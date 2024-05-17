@@ -17,6 +17,7 @@ export async function generateMetadata({ params }) {
 
 export default async function Artist({ params }) {
   const artist = await getArtist(params.artistId)
+  // console.log('Artist: ', artist)
 
   return (
     <div className="p-16">

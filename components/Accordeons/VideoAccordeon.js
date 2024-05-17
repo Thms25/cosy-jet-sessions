@@ -23,7 +23,7 @@ export default function VideoAccordeon({ videos }) {
                 className="w-full"
               >
                 <YoutubeVideo
-                  videoId={video.videoId}
+                  videoId={video.id}
                   width={720}
                   height={480}
                   iframeClassName="artistPageVideo"
