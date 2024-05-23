@@ -22,7 +22,7 @@ export default async function Artist({ params }) {
   console.log('Artist: ', artist)
 
   return (
-    <div className="p-16 flex justify-between">
+    <div className="p-16">
       {artist?.videos && (
         <div>
           <Reveal initY={50} initX={0}>
@@ -30,14 +30,20 @@ export default async function Artist({ params }) {
               {artist.name}
             </h1>
           </Reveal>
-
-          <VideoAccordeon videos={artist.videos} />
+          <div className="flex justify-between mx-12">
+            <div className="w-2/3 flex justify-center">
+              <VideoAccordeon videos={artist.videos} />
+            </div>
+            <div className="mt-3  w-1/3 mx-auto">
+              <h4 className="text-xl font-subtitle mb-4">
+                Listen to {artist.name} on Spotify
+              </h4>
+              <SpotifyPlayer artist={artist} />
+              {/* <SpotifyLogin /> */}
+            </div>
+          </div>
         </div>
       )}
-      <div className="mt-24 p-8 w-full">
-        <SpotifyPlayer artist={artist} />
-        {/* <SpotifyLogin /> */}
-      </div>
     </div>
   )
 }
