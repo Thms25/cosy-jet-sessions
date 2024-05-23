@@ -2,13 +2,19 @@ import { Client } from '@notionhq/client'
 
 export const revalidate = 60 * 60 * 24 * 7 // 1 week
 
-export async function getNotionDiscover() {
+const IDS = {
+  discover: process.env.NOTION_DISCOVER_ID,
+  about: process.env.NOTION_ABOUT_ID,
+  home: process.env.NOTION_HOME_ID,
+}
+
+export async function getNotionContent(slug) {
   try {
     const notion = new Client({
       auth: process.env.NOTION_SECRET,
     })
     const { results: blocks } = await notion.blocks.children.list({
-      block_id: process.env.NOTION_DISCOVER_ID,
+      block_id: IDS[slug],
     })
 
     const data = blocks.map(block => {

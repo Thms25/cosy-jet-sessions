@@ -1,10 +1,11 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import Modal from '@/components/Modal'
 import Image from 'next/image'
 import { useState } from 'react'
 import { arrowDown } from '@/utils/data/svgData'
+import { cjsTextSvg } from '@/public/assets/svg/cjs_text_svg'
+import MediaModal from '@/components/media-modal'
 
 export function HomeBanner() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -19,19 +20,13 @@ export function HomeBanner() {
           modalOpen ? close() : open()
         }}
       >
-        <Image
-          //   id={styles.cjsBanner}
-          className="object-contain w-full h-2/3"
-          priority
-          src="/images/cjs-banner.png"
-          alt="cjs-banner"
-          width={1710}
-          height={751}
-        />
-        <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div>
+        <div className="w-1/2 mx-auto my-8 p-4 md:p-24 xl:p-32">
+          {cjsTextSvg}
+        </div>
+        <div className="w-8 h-8 animate-bounce mx-auto mt-24">{arrowDown}</div>
       </motion.div>
       <AnimatePresence initial={false} mode="wait">
-        {modalOpen && <Modal modalOpen={modalOpen} handleClose={close} />}
+        {modalOpen && <MediaModal modalOpen={modalOpen} handleClose={close} />}
       </AnimatePresence>
     </>
   )

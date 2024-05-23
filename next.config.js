@@ -8,5 +8,10 @@ module.exports = {
       'lh3.googleusercontent.com',
     ],
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
   transpilePackages: ['three'],
 }

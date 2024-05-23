@@ -1,32 +1,32 @@
-import { CiInstagram, CiYoutube, CiMail } from "react-icons/ci";
-import { FaTiktok } from "react-icons/fa";
+import { CiInstagram, CiYoutube, CiMail } from 'react-icons/ci'
+import { FaTiktok } from 'react-icons/fa'
 
-import Link from "next/link";
+import Link from 'next/link'
 
-import Image from "next/image";
+import Image from 'next/image'
 
 const socialLinks = [
   {
     icon: <CiInstagram />,
-    link: "https://www.instagram.com/cosyjetsessions",
+    link: 'https://www.instagram.com/cosyjetsessions',
   },
   {
     icon: <CiYoutube />,
-    link: "https://www.youtube.com/@cosyjetsessions",
+    link: 'https://www.youtube.com/@cosyjetsessions',
   },
   {
     icon: <FaTiktok />,
-    link: "https://www.tiktok.com/@cosyjetsessions",
+    link: 'https://www.tiktok.com/@cosyjetsessions',
   },
   {
     icon: <CiMail />,
-    link: "mailto:contact@cosyjetsessions.com",
+    link: 'mailto:contact@cosyjetsessions.com',
   },
-];
+]
 
 export default function Footer() {
   return (
-    <footer className="z-20 w-full px-8 py-1 border-t border-cjsBrown shadow flex items-center justify-between">
+    <footer className="z-20 w-full px-6 border-t border-cjsBrown flex items-center justify-between">
       <Link href="/contact" className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -47,13 +47,13 @@ export default function Footer() {
           Contact us
         </p>
       </Link>
-      <ul className="flex justify-evenly items-center text-sm w-full md:w-1/2 lg:w-1/3">
+      <ul className="flex justify-evenly items-center text-xs w-full md:w-1/2 lg:w-1/3">
         {socialLinks.map((social, index) => (
           <li key={index}>
             <Link
               target="_blank"
               href={social.link}
-              className="text-cjsBrown px-3"
+              className="text-cjsBrown px-3 "
             >
               {social.icon}
             </Link>
@@ -61,5 +61,5 @@ export default function Footer() {
         ))}
       </ul>
     </footer>
-  );
+  )
 }

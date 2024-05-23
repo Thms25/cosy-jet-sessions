@@ -1,6 +1,9 @@
 // Utils
 import { getArtists } from '@/utils/fetchUtils/ArtistFetchUtils'
-import { getNotionDiscover } from '@/utils/fetchUtils/NotionFetchUtils'
+import {
+  getNotionContent,
+  getNotionDiscover,
+} from '@/utils/fetchUtils/NotionFetchUtils'
 
 // components
 import Link from 'next/link'
@@ -14,15 +17,14 @@ export const revalidate = 60 * 60 * 24 * 7 // 1 week
 
 export default async function Discover() {
   const artists = await getArtists()
-  const notionData = await getNotionDiscover()
+  const content = await getNotionContent('discover')
 
-  // return <DiscoverView artists={artists} notionData={notionData} />
   return (
     <section className="py-24">
       <DynamicBanner
-        title={notionData.Title}
-        subtitle={notionData.Subtitle}
-        caption={notionData.Caption}
+        title={content.title}
+        subtitle={content.subtitle}
+        caption={content.caption}
       />
       <div className="grid p-4 md:p-12 gap-2 lg:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {artists?.map(artist => {
@@ -31,10 +33,10 @@ export default async function Discover() {
               <Link href={`/artist/${artist.id}`}>
                 <div className={styles.backgroundDiv}>
                   <h3 className="">{artist.name}</h3>
-                  {artist.videos[0]?.thumbnail && (
+                  {artist.image && (
                     <Image
                       priority
-                      src={artist.videos[0].thumbnail}
+                      src={artist.image}
                       alt={`${artist.name}_thumbnail`}
                       width={480}
                       height={360}

@@ -40,14 +40,13 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
-  // font-family: 'DM Serif Display', serif; // tiltes
-  // font-family: 'Roboto', sans-serif; // caption
-  // font-family: 'Montserrat', sans-serif; // secondar
   font-family: 'Lato', sans-serif; // primary
-
   a {
     text-decoration: none;
     color: var(--cjsWhite);
+  }
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
@@ -76,11 +75,19 @@ body {
 
 .swiper {
   max-width: 800px;
-  height: 500px;
+  @media screen and (max-width: 880px){
+    height: 350px;
+  }
+  @media screen and (max-width: 640px){
+    height: 290px;
+  }
+  @media screen and (min-width: 880px){
+    height: 444px;
+  }
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
   .swiper-wrapper {
     width: 100%;
     height: 100%;
@@ -91,14 +98,14 @@ body {
     height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: start;
   }
 
 
   .button-next,
   .button-prev {
     position: absolute;
-    top: 50%;
+    top: 47%;
     color: rgba(var(--cjsBrownRGB), 0.6);
     color: rgba(var(--cjsBrownRGB), 0.6);
     cursor: pointer;
@@ -111,12 +118,48 @@ body {
   }
 
   .button-next {
-    right: 10px;
+    @media screen and (max-width: 1000px){
+      right: 20px;
+    }
+    @media screen and (max-width: 880px){
+      right: 85px;
+    }
+    @media screen and (max-width: 760px){
+      right: 40px;
+    }
+    @media screen and (max-width: 640px){
+      right: 20px;
+    }
+    @media screen and (min-width: 1000px){
+      right: 10px;
+    }
     // transform: translateX(50%);
   }
   .button-prev {
-    left: 10px;
+    @media screen and (max-width: 1000px){
+      left: 20px;
+    }
+    @media screen and (max-width: 880px){
+      left: 85px;
+    }
+    @media screen and (max-width: 760px){
+      left: 40px;
+    }
+    @media screen and (max-width: 640px){
+      left: 20px;
+    }
+    @media screen and (min-width: 1000px){
+      left: 10px;
+    }
     // transform: translateX(-50%);
   }
 
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
