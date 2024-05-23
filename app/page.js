@@ -1,9 +1,11 @@
 // Components
 import Homeview from '@/sections/home/home-view'
+import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 
 // ---------------------------------------------------------------------
 
-export default function Home() {
+export default async function Home() {
   // Home vuew
-  return <Homeview />
+  const content = await getNotionContent('home')
+  return <Homeview content={content} />
 }

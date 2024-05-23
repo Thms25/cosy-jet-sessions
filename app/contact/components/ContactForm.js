@@ -12,17 +12,21 @@ import { useState } from 'react'
 
 export default function ContactForm() {
   const handleSubmit = async data => {
-    const res = await sendEmail(data)
+    try {
+      await sendEmail(data)
+    } catch (error) {
+      console.error(error)
+    }
   }
   return (
-    <div className="w-full md:w-2/3 mx-auto shadow-lg flex flex-col-reverse lg:flex-row rounded-lg overflow-hidden">
+    <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
       <Form
         onSubmit={handleSubmit}
-        className="p-8 w-full xl:max-w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+        className="p-8 w-full lg:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
       />
       <Image
         priority
-        className="object-contain w-1/2 hidden lg:block"
+        className="w-1/2 hidden lg:block object-cover"
         src="/images/lights.png"
         alt="cjs-lights"
         width={366}
@@ -47,11 +51,11 @@ const Form = ({ className, onSubmit }) => {
       }}
       className={`${className} text-left`}
     >
-      <h3 className="text-md font-bold mb-6 text-center">Contact us</h3>
+      <h3 className="text-lg font-bold mb-6 text-center">Leave us a message</h3>
 
       {/* Name input */}
       <div className="mb-6">
-        <p className="text-sm mb-2">Hi 👋! My name is...</p>
+        <p className="text-md mb-2">Hi 👋! My name is...</p>
         <input
           required
           value={formData.name}
@@ -64,7 +68,7 @@ const Form = ({ className, onSubmit }) => {
 
       {/* Mail input */}
       <div className="mb-6">
-        <p className="text-sm mb-2">My email is...</p>
+        <p className="text-md mb-2">My email is...</p>
         <input
           required
           value={formData.email}
@@ -77,7 +81,7 @@ const Form = ({ className, onSubmit }) => {
 
       {/* Message */}
       <div className="mb-6">
-        <p className="text-sm mb-2">Your message...</p>
+        <p className="text-md mb-2">Your message...</p>
         <textarea
           value={formData.message}
           onChange={e => setFormData({ ...formData, message: e.target.value })}
@@ -96,7 +100,7 @@ const Form = ({ className, onSubmit }) => {
             scale: 0.95,
           }}
           type="submit"
-          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-sm text-center rounded-lg w-full py-2 font-semibold`}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
         >
           Submit
         </motion.button>

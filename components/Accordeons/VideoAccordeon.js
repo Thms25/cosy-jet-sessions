@@ -3,14 +3,15 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import YoutubeVideo from '@/components/videos/YoutubeVideo'
+import { Reveal } from '../animations/Reveal'
 
 export default function VideoAccordeon({ videos }) {
   const [selected, setSelected] = useState(0)
 
   return (
-    <section className="mx-auto max-w-full flex-col-reverse items-start gap-6 py-4 md:flex-row md:gap-12 md:px-8">
+    <section className="mx-auto">
       <Tabs selected={selected} setSelected={setSelected} videos={videos} />
-      <div className="flex justify-between">
+      <div className="">
         <AnimatePresence mode="wait">
           {videos.map((video, index) => {
             return selected === index ? (
@@ -22,7 +23,7 @@ export default function VideoAccordeon({ videos }) {
                 className="w-full"
               >
                 <YoutubeVideo
-                  videoId={video.videoId}
+                  videoId={video.id}
                   width={720}
                   height={480}
                   iframeClassName="artistPageVideo"
@@ -39,13 +40,15 @@ export default function VideoAccordeon({ videos }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 key={index}
-                className="w-full text-left px-4 h-[480px] overflow-y-scroll"
+                className=" text-left p-2 w-[720px] h-[360px] overflow-y-scroll hide-scrollbar"
               >
-                {video.description.split('\n').map((line, index) => (
-                  <p key={index} className="">
-                    {line === '' ? <br /> : line}
-                  </p>
-                ))}
+                <Reveal dly={0.1} initX={0} initY={0} duration={1}>
+                  {video.description.split('\n').map((line, index) => (
+                    <p key={index} className="text-sm font-caption">
+                      {line === '' ? <br /> : line}
+                    </p>
+                  ))}
+                </Reveal>
               </motion.div>
             ) : undefined
           })}
@@ -81,7 +84,7 @@ const Tab = ({ selected, title, setSelected, tabNum }) => {
         className="relative z-0 flex w-full transition-colors md:flex-col mb-1"
       >
         <span
-          className={`max-w-full text-start text-sm tracking-wider transition-colors ${
+          className={`max-w-full text-start text-lg font-caption tracking-wider transition-colors ${
             selected
               ? 'text-cjsBrown'
               : 'text-cjsPink group-hover:text-cjsBrown'

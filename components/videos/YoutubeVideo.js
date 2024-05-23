@@ -10,24 +10,23 @@ export default function YoutubeVideo({
   width = '520',
   // onVideoLoaded,
 }) {
-  const videoOnReady = event => {
-    const player = event.target
-    // console.log(event.target);
-    // player.seekTo(0);
-    // player.playVideo();
-    // onVideoLoaded(true);
-  }
+  // const videoOnReady = event => {
+  //   // console.log(event.target)
+  //   event.target.pauseVideo()
+  //   // player.seekTo(0);
+  //   // player.playVideo();
+  // }
 
-  // const videoOnPlay = (event) => {
-  //   const player = event.target;
-  // };
+  // const videoOnPlay = event => {
+  //   event.target.playVideo()
+  // }
 
   const opts = {
     height: height,
     width: width,
-    playerVars: {
-      autoplay: 0,
-    },
+    // playerVars: {
+    //   autoplay: 0,
+    // },
   }
 
   return (
@@ -35,7 +34,7 @@ export default function YoutubeVideo({
       id="yt-video"
       videoId={videoId}
       opts={opts}
-      onReady={videoOnReady}
+      // onReady={videoOnReady}
       // onPlay={videoOnPlay}
       iframeClassName={styles[iframeClassName]}
       loading="lazy"
