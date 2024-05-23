@@ -38,6 +38,7 @@
     "react-signature-canvas": "^1.0.6",
     "react-youtube": "^10.1.0",
     "sass": "^1.63.6",
+    "spotify-web-api-node": "^5.0.2",
     "swiper": "^11.0.5",
     "three": "^0.160.1",
     "vercel": "^32.5.5",
