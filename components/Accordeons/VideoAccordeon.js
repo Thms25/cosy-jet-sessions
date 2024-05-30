@@ -4,12 +4,18 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 import YoutubeVideo from '@/components/videos/YoutubeVideo'
 import { Reveal } from '../animations/Reveal'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 export default function VideoAccordeon({ videos }) {
   const [selected, setSelected] = useState(0)
+  const { width } = useWindowSize()
+
+  const isSmall = width < 768
+  const isMedium = width < 1024
+  const isLarge = width < 1280
 
   return (
-    <section className="mx-auto">
+    <section className="px-4">
       <Tabs selected={selected} setSelected={setSelected} videos={videos} />
       <div className="">
         <AnimatePresence mode="wait">
@@ -20,12 +26,11 @@ export default function VideoAccordeon({ videos }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 key={index}
-                className="w-full"
+                className="w-full px-2 md:px-2"
               >
                 <YoutubeVideo
                   videoId={video.id}
-                  width={720}
-                  height={480}
+                  height={isSmall ? 300 : isMedium ? 440 : isLarge ? 360 : 440}
                   iframeClassName="artistPageVideo"
                 />
               </motion.div>
@@ -40,9 +45,10 @@ export default function VideoAccordeon({ videos }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 key={index}
-                className=" text-left p-2 w-[720px] h-[360px] overflow-y-scroll hide-scrollbar"
+                className="text-left p-4 h-[360px] overflow-y-scroll hide-scrollbar"
               >
                 <Reveal dly={0.1} initX={0} initY={0} duration={1}>
+                  {/* <h4 className="text-lg w-1/2 text-left">{video.title}</h4> */}
                   {video.description.split('\n').map((line, index) => (
                     <p key={index} className="text-sm font-caption">
                       {line === '' ? <br /> : line}
@@ -60,7 +66,7 @@ export default function VideoAccordeon({ videos }) {
 
 const Tabs = ({ selected, setSelected, videos }) => {
   return (
-    <div className="w-full flex  md:w-fit pb-2">
+    <div className="w-fit flex py-2">
       {videos.map((video, index) => {
         return (
           <Tab
