@@ -12,7 +12,7 @@ import { LuListMusic } from 'react-icons/lu'
 import { MdOutlineQuestionAnswer } from 'react-icons/md'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 export default function ContactDropdown() {
   const [selected, setSelected] = useState(null)
@@ -31,7 +31,7 @@ export default function ContactDropdown() {
     <div className="flex bg-cjsWhite  text-cjsBrown justify-center">
       <div
         onMouseLeave={() => handleSetSelected(null)}
-        className="relative flex h-fit gap-2"
+        className="relative flex h-fit"
       >
         {TABS.map(t => {
           return (
@@ -47,7 +47,7 @@ export default function ContactDropdown() {
         })}
 
         <AnimatePresence>
-          {selected && <Content dir={dir} selected={selected} />}
+          {selected && <ContactContent dir={dir} selected={selected} />}
         </AnimatePresence>
       </div>
     </div>
@@ -55,13 +55,15 @@ export default function ContactDropdown() {
 }
 
 const Tab = ({ children, tab, handleSetSelected, selected }) => {
+  const pathname = usePathname()
+
   return (
     <button
       id={`shift-tab-${tab}`}
       onMouseEnter={() => handleSetSelected(tab)}
       onClick={() => handleSetSelected(tab)}
-      className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-sm transition-colors ${
-        selected === tab ? ' bg-cjsBrown text-cjsWhite' : 'text-cjsBrown'
+      className={`flex items-center font-secondary text-md tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm ${
+        pathname.includes('contact') ? 'text-cjsBrown' : 'text-cjsPink'
       }`}
     >
       <span>{children}</span>
@@ -74,7 +76,25 @@ const Tab = ({ children, tab, handleSetSelected, selected }) => {
   )
 }
 
-const Content = ({ selected, dir }) => {
+const ContactContent = ({ selected, dir }) => {
+  const subMenus = [
+    {
+      text: 'Apply for a session',
+      icon: <LuListMusic />,
+      Link: '/contact/apply',
+    },
+    {
+      text: 'Sponsorship & Partnership',
+      icon: <FiBarChart2 />,
+      Link: '/contact/partnership',
+    },
+    {
+      text: 'Just a quick question',
+      icon: <MdOutlineQuestionAnswer />,
+      Link: '/contact/message',
+    },
+  ]
+  const router = useRouter()
   return (
     <motion.div
       id="overlay-content"
@@ -106,48 +126,24 @@ const Content = ({ selected, dir }) => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.25, ease: 'easeInOut' }}
               >
-                <t.Component />
+                <div className="grid grid-cols-3 gap-4 divide-x divide-cjsBrown">
+                  {subMenus.map((s, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => router.push(s.Link)}
+                      className="flex w-full flex-col items-center justify-center py-2 transition duration-200 hover:font-bold text-cjsBrown"
+                    >
+                      {s.icon}
+                      <span className="text-xs">{s.text}</span>
+                    </button>
+                  ))}
+                </div>
               </motion.div>
             )}
           </div>
         )
       })}
     </motion.div>
-  )
-}
-
-const ContactContent = () => {
-  const subMenus = [
-    {
-      text: 'Apply for a session',
-      icon: <LuListMusic />,
-      Link: '/contact',
-    },
-    {
-      text: 'Sponsorship & Partnership',
-      icon: <FiBarChart2 />,
-      Link: '/contact',
-    },
-    {
-      text: 'Just a quick question',
-      icon: <MdOutlineQuestionAnswer />,
-      Link: '/contact',
-    },
-  ]
-  const router = useRouter()
-  return (
-    <div className="grid grid-cols-3 gap-4 divide-x divide-cjsBrown">
-      {subMenus.map((s, idx) => (
-        <button
-          key={idx}
-          onClick={() => router.push(s.Link)}
-          className="flex w-full flex-col items-center justify-center py-2 transition duration-200 hover:font-bold text-cjsBrown"
-        >
-          {s.icon}
-          <span className="text-xs">{s.text}</span>
-        </button>
-      ))}
-    </div>
   )
 }
 

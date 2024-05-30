@@ -81,7 +81,7 @@ export default function Navbar() {
           className="hidden sm:flex justify-evenly"
         >
           {navItems.map(item => (
-            <li className="px-3 lg:px-4" key={item.title}>
+            <li className="px-3 lg:px-4 2xl:px-6" key={item.title}>
               {item.component ? (
                 <item.component />
               ) : (

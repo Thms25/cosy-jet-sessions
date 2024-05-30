@@ -27,7 +27,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="z-20 w-full px-6 border-t border-cjsBrown flex items-center justify-between">
-      <Link href="/contact" className="flex items-center">
+      <Link href="/contact/message" className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
