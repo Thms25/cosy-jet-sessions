@@ -1,6 +1,9 @@
-import ContactForm from './contact-form'
-import ContactView from './contact-view'
+import MessageForm from './message-form'
 
 export default function MessageView() {
-  return <ContactForm />
+  return (
+    <section className="w-3/4 p-16">
+      <MessageForm />
+    </section>
+  )
 }

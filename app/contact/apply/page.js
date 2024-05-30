@@ -1,5 +1,5 @@
-import MessageView from '@/sections/contact/message-view'
+import ApplyView from '@/sections/contact/apply-view'
 
 export default function page() {
-  return <MessageView />
+  return <ApplyView />
 }
