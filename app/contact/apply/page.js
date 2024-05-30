@@ -1,9 +1,5 @@
-import ContactForm from '../components/ContactForm'
+import MessageView from '@/sections/contact/message-view'
 
 export default function page() {
-  return (
-    <div>
-      <ContactForm />
-    </div>
-  )
+  return <MessageView />
 }

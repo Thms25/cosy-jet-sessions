@@ -1,7 +1,7 @@
 'use client'
 
 // section
-import ContactForm from '@/app/contact/components/ContactForm'
+import ContactForm from './contact-form'
 
 // Hooks
 import { useState } from 'react'
