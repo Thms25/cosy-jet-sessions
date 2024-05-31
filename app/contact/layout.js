@@ -1,3 +1,3 @@
 export default function layout({ children }) {
-  return <div className="py-16">{children}</div>
+  return <div className="">{children}</div>
 }
