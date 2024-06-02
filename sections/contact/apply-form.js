@@ -680,7 +680,6 @@ function StepFinish({ setStep }) {
 
       {/* Submit */}
       <div className="mt-8">
-        <button onClick={() => setStep(-2)}>back one step</button>
         <motion.button
           onClick={() => router.push('/')}
           whileHover={{

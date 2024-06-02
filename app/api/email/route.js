@@ -24,25 +24,7 @@ export async function POST(request) {
 
     const client = new postmark.ServerClient(process.env.EMAIL_KEY)
 
-    const message = `
-      Artist name: \n${name}\n\n
-      Email: \n${email}\n\n
-      Phone: \n${tel}\n\n
-      Music genre: \n${music_genre}\n\n
-      Bio: \n${bio}\n\n
-      Live Performance: \n${live}\n\n
-      Motivations and Intentions: \n${motivation}\n\n
-      Upcoming news: \n${news}\n\n
-      Instagram: \n${instagram}\n\n
-      Youtube: \n${youtube}\n\n
-      Tiktok: \n${tiktok}\n\n
-      Spotify: \n${spotify}\n\n
-      Willing to collab on insta: \n${collab}\n\n
-      Willing to engage with audience: \n${engagement}\n\n
-      Willing to keep calendar week for sessions: \n${calendar}\n\n
-      Prefered dates to shre the videos: \n${period}\n\n
-      Added comments: \n${other}\n\n
-      `
+    const message = `Artist name: \n${name}\n\nEmail: \n${email}\n\nPhone: \n${tel}\n\nMusic genre: \n${music_genre}\n\nBio: \n${bio}\n\nLive Performance: \n${live}\n\nMotivations and Intentions: \n${motivation}\n\nUpcoming news: \n${news}\n\nInstagram: \n${instagram}\n\nYoutube: \n${youtube}\n\nTiktok:\n${tiktok}\n\nSpotify: \n${spotify}\n\nWilling to collab on insta: \n${collab}\n\nWilling to engage with audience: \n${engagement}\n\nWilling to keep calendar week for sessions: \n${calendar}\n\nPrefered dates to shre the videos: \n${period}\n\nAdded comments: \n${other}\n\n`
 
     let content = {
       From: process.env.CJS_EMAIL, // sender email address
@@ -54,7 +36,7 @@ export async function POST(request) {
 
     client.sendEmail(content)
 
-    console.log('Email sent!')
+    // console.log('Email sent!')
 
     return new Response('Email sent!', {
       headers: { 'Content-Type': 'application.json' },
