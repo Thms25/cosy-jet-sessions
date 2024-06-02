@@ -16,7 +16,6 @@ import { useState } from 'react'
 export default function ApplyForm() {
   const handleSubmit = async data => {
     try {
-      console.log(data)
       await sendEmail(data)
       handleSetStep(1)
     } catch (error) {

@@ -15,9 +15,9 @@ export default async function ApplyView() {
 
   return (
     <main className="">
-      {/* <div className="mt-16 sm:mt-24">
+      <div className="mt-16 sm:mt-24">
         <FormBanner images={images} />
-      </div> */}
+      </div>
       {/* <header className="relative w-full mt-16 sm:mt-12 grid place-items-center">
         <div
           className="absolute inset-0"

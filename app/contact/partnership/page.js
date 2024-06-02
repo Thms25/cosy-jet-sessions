@@ -1,5 +1,5 @@
-import MessageView from '@/sections/contact/message-view'
+import PartnershipView from '@/sections/contact/partnership-view'
 
 export default function page() {
-  return <MessageView />
+  return <PartnershipView />
 }

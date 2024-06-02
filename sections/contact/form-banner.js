@@ -62,7 +62,7 @@ function generateSquares(squareData) {
       transition={{ duration: 1, type: 'spring' }}
       className="w-full h-full rounded-md shadow-sm"
       style={{
-        backgroundImage: `url(${sq.src})`,
+        backgroundImage: `url(${sq.src})` || '',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

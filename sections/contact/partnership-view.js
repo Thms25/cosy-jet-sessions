@@ -1,6 +1,6 @@
 import MessageForm from './message-form'
 
-export default function MessageView() {
+export default function PartnershipView() {
   return (
     <section className="">
       <header className="relative w-full mt-16 sm:mt-12 grid place-items-center mb-16">
@@ -15,10 +15,10 @@ export default function MessageView() {
         ></div>
         <div className="z-10 text-center p-20 sm:p-24 xl:p-32 w-full">
           <h1 className="text-8xl text-cjsWhite tracking-wider drop-shadow-md">
-            Leave us a message
+            Partnership Inquiry
           </h1>
           <h3 className="text-cjsWhite text-xl tracking-wide">
-            We will get back to you as soon as possible
+            Let's work together
           </h3>
         </div>
       </header>
