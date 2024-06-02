@@ -18,6 +18,7 @@ export default function ApplyForm() {
     try {
       console.log(data)
       await sendEmail(data)
+      handleSetStep(1)
     } catch (error) {
       console.error(error)
     }
@@ -73,6 +74,18 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
     music_genre: '',
     bio: '',
     tel: '',
+    live: '',
+    motivation: '',
+    news: '',
+    instagram: '',
+    youtube: '',
+    tiktok: '',
+    spotify: '',
+    collab: false,
+    engagement: false,
+    calendar: false,
+    period: '',
+    other: '',
   })
   const stepChange = val => {
     onStepChange(val)
@@ -85,7 +98,25 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
       onSubmit={e => {
         e.preventDefault()
         onSubmit(formData)
-        alert("Thanks for your message! We'll be in touch soon.")
+        setFormData({
+          name: '',
+          email: '',
+          music_genre: '',
+          bio: '',
+          tel: '',
+          live: '',
+          motivation: '',
+          news: '',
+          instagram: '',
+          youtube: '',
+          tiktok: '',
+          spotify: '',
+          collab: false,
+          engagement: false,
+          calendar: false,
+          period: '',
+          other: '',
+        })
       }}
       className={`${className} text-left`}
     >
@@ -136,7 +167,7 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
       )}
       {stepsComplete === 5 && (
         <Reveal>
-          <StepFinish />
+          <StepFinish setStep={stepChange} />
         </Reveal>
       )}
     </form>
@@ -570,7 +601,7 @@ function StepFive({ setStep, data, submitData }) {
     ) {
       return
     }
-    setStep(1)
+    // setStep(1)
     submitData(formData)
   }
   return (
@@ -636,7 +667,7 @@ function StepFive({ setStep, data, submitData }) {
   )
 }
 
-function StepFinish() {
+function StepFinish({ setStep }) {
   const router = useRouter()
   return (
     <div>
@@ -649,6 +680,7 @@ function StepFinish() {
 
       {/* Submit */}
       <div className="mt-8">
+        <button onClick={() => setStep(-2)}>back one step</button>
         <motion.button
           onClick={() => router.push('/')}
           whileHover={{
