@@ -4,10 +4,11 @@ import YouTube from 'react-youtube'
 import styles from '@/styles/videos.module.scss'
 
 export default function YoutubeVideo({
-  videoId,
-  iframeClassName,
+  videoId = 'abc123',
+  iframeClassName = 'artistPageVideo',
   height = '360',
-  width = '520',
+  width = '100%',
+  autoplay = 0,
   // onVideoLoaded,
 }) {
   // const videoOnReady = event => {
@@ -24,9 +25,12 @@ export default function YoutubeVideo({
   const opts = {
     height: height,
     width: width,
-    // playerVars: {
-    //   autoplay: 0,
-    // },
+    playerVars: {
+      autoplay: autoplay,
+      controls: 1,
+      showInfo: 0,
+      modestbranding: 0,
+    },
   }
 
   return (

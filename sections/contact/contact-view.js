@@ -1,7 +1,7 @@
 'use client'
 
 // section
-import ContactForm from '@/app/contact/components/ContactForm'
+import ContactForm from './contact-form'
 
 // Hooks
 import { useState } from 'react'
@@ -10,16 +10,16 @@ import { motion } from 'framer-motion'
 export default function ContactView() {
   const tabs = [
     {
+      text: 'Just a question',
+      content: <ContactForm />,
+    },
+    {
       text: 'Apply for a session',
       content: <div>Apply for a session</div>,
     },
     {
       text: 'Sponsorship & Partnership',
       content: <div>Sponsorship & Partnership</div>,
-    },
-    {
-      text: 'Just a question',
-      content: <ContactForm />,
     },
   ]
   const [tab, setTab] = useState(0)

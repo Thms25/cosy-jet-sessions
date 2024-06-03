@@ -10,7 +10,7 @@ import NavDropdown from './NavDropdown'
 import { usePathname } from 'next/navigation'
 
 import { useWindowSize } from '@/hooks/useWindowSize'
-import { NavTwo } from './Navbar_two'
+import ContactDropdown from './ContactDropdown'
 
 // Auth
 // import { signIn, signOut, useSession } from 'next-auth/react'
@@ -41,6 +41,7 @@ const navItems = [
   {
     title: 'Contact',
     link: '/contact',
+    component: ContactDropdown,
   },
 ]
 
@@ -80,16 +81,20 @@ export default function Navbar() {
           className="hidden sm:flex justify-evenly"
         >
           {navItems.map(item => (
-            <li className="px-3 lg:px-4" key={item.title}>
-              <Link
-                aria-disabled={pathname === item.link}
-                href={item.link}
-                className={`font-secondary text-md tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm ${
-                  pathname === item.link ? 'text-cjsBrown' : 'text-cjsPink'
-                }`}
-              >
-                {item.title}
-              </Link>
+            <li className="px-3 lg:px-4 2xl:px-6" key={item.title}>
+              {item.component ? (
+                <item.component />
+              ) : (
+                <Link
+                  aria-disabled={pathname === item.link}
+                  href={item.link}
+                  className={`font-secondary text-md tracking-wide hover:text-cjsBrown transition duration-250 drop-shadow-sm ${
+                    pathname === item.link ? 'text-cjsBrown' : 'text-cjsPink'
+                  }`}
+                >
+                  {item.title}
+                </Link>
+              )}
             </li>
           ))}
         </motion.ul>
