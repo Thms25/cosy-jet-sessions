@@ -20,7 +20,7 @@ export default async function Discover() {
   const content = await getNotionContent('discover')
 
   return (
-    <section className="p-4 sm:p-2  lg:py-24 2xl:px-32">
+    <section className="">
       <DynamicBanner
         title={content.title}
         subtitle={content.subtitle}
