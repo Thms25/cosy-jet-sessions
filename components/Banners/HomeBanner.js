@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { arrowDown } from '@/utils/data/svgData'
 import { cjsTextSvg } from '@/public/assets/svg/cjs_text_svg'
 import MediaModal from '@/components/media-modal'
+import { Link as ScrollLink } from 'react-scroll'
 
 export function HomeBanner() {
   const [modalOpen, setModalOpen] = useState(false)
@@ -23,7 +24,16 @@ export function HomeBanner() {
         <div className="w-1/2 mx-auto my-8 p-4 md:p-24 xl:p-32">
           {cjsTextSvg}
         </div>
-        <div className="w-8 h-8 animate-bounce mx-auto mt-24">{arrowDown}</div>
+        <ScrollLink
+          to="slogan"
+          smooth={true}
+          duration={500}
+          className=" text-cjsBrown z-50 cursor-pointer"
+        >
+          <div className="w-8 h-8 animate-bounce mx-auto mt-24">
+            {arrowDown}
+          </div>
+        </ScrollLink>
       </motion.div>
       <AnimatePresence initial={false} mode="wait">
         {modalOpen && <MediaModal modalOpen={modalOpen} handleClose={close} />}

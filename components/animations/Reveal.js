@@ -32,6 +32,7 @@ export function Reveal({
         }}
         initial="hidden"
         animate={controls}
+        exit={{ opacity: 0 }}
         transition={{ duration: duration, delay: dly }}
       >
         {children}

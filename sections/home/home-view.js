@@ -10,14 +10,13 @@ import { popularVideos } from '@/utils/data/videoData'
 // ---------------------------------------------------------------------
 
 export default function Homeview({ content }) {
-  // console.log('content: ', content)
   return (
     <section className="hide-scrollbar">
       <header className="h-screen">
         <HomeBanner />
       </header>
 
-      <div className="p-8 md:p-16">
+      <div className="p-8 md:p-16" id="slogan">
         <Reveal dly={0.5} duration={1} initS={0.8}>
           <h1 className="text-4xl font-title mt-8 mx-6 tracking-wider">
             {content.slogan}

@@ -10,7 +10,7 @@ import Image from 'next/image'
 // Hooks
 import { useState } from 'react'
 
-export default function ContactForm() {
+export default function MessageForm() {
   const handleSubmit = async data => {
     try {
       await sendEmail(data)
@@ -19,14 +19,14 @@ export default function ContactForm() {
     }
   }
   return (
-    <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
+    <div className="w-full h-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
       <Form
         onSubmit={handleSubmit}
-        className="p-8 w-full lg:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+        className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
       />
       <Image
         priority
-        className="w-1/2 hidden lg:block object-cover"
+        className="w-1/2 hidden md:block object-cover"
         src="/images/lights.png"
         alt="cjs-lights"
         width={366}
