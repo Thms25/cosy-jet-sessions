@@ -16,7 +16,7 @@ export default function NavDropdown({ navItems }) {
   const router = useRouter()
 
   return (
-    <div className="flex items-center justify-center bg-cjsWhite">
+    <div className="flex items-center justify-center bg-cjsWhite z-50">
       <motion.div animate={open ? 'open' : 'closed'} className="relative">
         <button
           onClick={() => setOpen(pv => !pv)}
@@ -34,20 +34,37 @@ export default function NavDropdown({ navItems }) {
           className="flex flex-col gap-2 p-4 rounded-lg bg-cjsWhite shadow-xl absolute left-[50%] w-96  overflow-hidden text-cjsBrown"
         >
           {navItems.map(item => (
-            <motion.li
-              key={item.title}
-              variants={itemVariants}
-              onClick={() => {
-                router.push(item.link)
-                setOpen(false)
-              }}
-              className="text-sm flex items-center gap-2 w-full p-4 font-medium whitespace-nowrap rounded-md transition cursor-pointer"
-            >
-              {/* <motion.span variants={actionIconVariants}>
-                <FiEdit />
-              </motion.span> */}
-              <span>{item.title}</span>
-            </motion.li>
+            <>
+              {item.children ? (
+                <>
+                  {item.children.map(child => (
+                    <motion.li
+                      key={child.title}
+                      variants={itemVariants}
+                      onClick={() => {
+                        router.push(child.link)
+                        setOpen(false)
+                      }}
+                      className="text-sm flex items-center gap-2 w-full p-4 font-medium whitespace-nowrap rounded-md transition cursor-pointer"
+                    >
+                      <span>{child.title}</span>
+                    </motion.li>
+                  ))}
+                </>
+              ) : (
+                <motion.li
+                  key={item.title}
+                  variants={itemVariants}
+                  onClick={() => {
+                    router.push(item.link)
+                    setOpen(false)
+                  }}
+                  className="text-sm flex items-center gap-2 w-full p-4 font-medium whitespace-nowrap rounded-md transition cursor-pointer"
+                >
+                  <span>{item.title}</span>
+                </motion.li>
+              )}
+            </>
           ))}
         </motion.ul>
       </motion.div>

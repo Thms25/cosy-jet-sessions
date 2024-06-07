@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation'
 // Hooks
 import { useState } from 'react'
 
-export default function ApplyForm() {
+export default function ApplyForm({ content }) {
   const handleSubmit = async data => {
     try {
       await sendEmail(data)
@@ -38,10 +38,7 @@ export default function ApplyForm() {
   return (
     <section>
       <p className="text-md mx-auto p-4 w-full md:w-3/5">
-        The following questions are very important in the process of selecting
-        the upcoming artists for our sessions, please take the time to fill them
-        out carefully. We will read every answer carefully and get back to you
-        as soon as possible.
+        {content.apply_form_intro}
       </p>
 
       <StepProgress steps={stepsComplete} numSteps={numSteps} />
