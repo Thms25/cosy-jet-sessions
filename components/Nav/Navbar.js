@@ -26,22 +26,24 @@ const navItems = [
     title: 'Discover',
     link: '/discover',
   },
-  // {
-  //   title: 'Playlists',
-  //   link: '/',
-  // },
-  // {
-  //   title: "Events",
-  //   link: "/events",
-  // },
-  // {
-  //   title: 'Shop',
-  //   link: '/shop',
-  // },
   {
     title: 'Contact',
     link: '/contact',
     component: ContactDropdown,
+    children: [
+      {
+        title: 'Apply for a session',
+        link: '/contact/apply',
+      },
+      {
+        title: 'Sponsorship & Partnership',
+        link: '/contact/partnership',
+      },
+      {
+        title: 'Just a quick question',
+        link: '/contact/message',
+      },
+    ],
   },
 ]
 

@@ -1,3 +1,4 @@
+import Container from '@/components/layouts/Container'
 import MessageForm from './message-form'
 
 export default function MessageView() {

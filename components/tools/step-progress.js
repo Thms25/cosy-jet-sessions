@@ -29,7 +29,7 @@ const Steps = ({ numSteps, stepsComplete }) => {
           <div key={stepNum}>
             <div className="relative">
               <div
-                className={`w-10 h-10 flex items-center justify-center shrink-0 border-2 rounded-full font-semibold text-sm relative z-10 transition-colors duration-300 ${
+                className={`w-10 h-10 flex items-center justify-center shrink-0 border-2 rounded-full font-semibold text-sm relative  transition-colors duration-300 ${
                   isActive
                     ? 'border-cjsBrown bg-cjsBrown text-cjsWhite'
                     : 'border-cjsBrown text-cjsBrown'

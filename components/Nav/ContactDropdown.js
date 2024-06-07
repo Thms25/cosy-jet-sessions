@@ -1,13 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import {
-  FiArrowRight,
-  FiBarChart2,
-  FiChevronDown,
-  FiHome,
-  FiPieChart,
-} from 'react-icons/fi'
+import { useState } from 'react'
+import { FiBarChart2, FiChevronDown } from 'react-icons/fi'
 import { LuListMusic } from 'react-icons/lu'
 import { MdOutlineQuestionAnswer } from 'react-icons/md'
 
@@ -31,7 +25,7 @@ export default function ContactDropdown() {
     <div className="flex bg-cjsWhite  text-cjsBrown justify-center">
       <div
         onMouseLeave={() => handleSetSelected(null)}
-        className="relative flex h-fit"
+        className="relative flex h-fit z-50"
       >
         {TABS.map(t => {
           return (
@@ -40,6 +34,7 @@ export default function ContactDropdown() {
               selected={selected}
               handleSetSelected={handleSetSelected}
               tab={t.id}
+              onClick={handleSetSelected}
             >
               Contact
             </Tab>
@@ -110,7 +105,7 @@ const ContactContent = ({ selected, dir }) => {
         opacity: 0,
         y: 8,
       }}
-      className="absolute right-0 top-[calc(100%_+_24px)] w-96 rounded-lg border border-cjsBrown bg-cjsWhite p-4"
+      className="absolute right-0 top-[calc(100%_+_24px)] w-96 rounded-lg border border-cjsBrown bg-cjsWhite p-4 z-50"
     >
       <div className="absolute -top-[24px] left-0 right-0 h-[24px]" />
 
