@@ -5,20 +5,20 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 
-export default function FromBanner({ images }) {
+export default function FromBanner({ images, content }) {
   return (
     <div>
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
         <div>
           <h3 className="text-3xl md:text-5xl font-semibold font-subtitle tracking-wide">
-            Apply For A Session
+            {content.apply_title}
           </h3>
           <p className="md:text-lg text-cjsPink font-caption  my-2">
-            Become a part of the cosy family
+            {content.apply_subtitle}
           </p>
           <ScrollLink to="form" smooth={true} duration={500}>
             <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
-              Start Process
+              {content.apply_cta}
             </button>
           </ScrollLink>
         </div>

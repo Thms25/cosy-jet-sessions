@@ -2,7 +2,8 @@ import Image from 'next/image'
 import ApplyForm from './apply-form'
 import { getArtists } from '@/utils/fetchUtils/ArtistFetchUtils'
 import FormBanner from './form-banner'
-import { arrowDown } from '@/utils/data/svgData'
+// import { arrowDown } from '@/utils/data/svgData'
+import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 
 export default async function ApplyView() {
   const artists = await getArtists()
@@ -12,11 +13,12 @@ export default async function ApplyView() {
       id: index,
     }
   })
+  const content = await getNotionContent('contact')
 
   return (
     <main className="">
       <div className="mt-16 sm:mt-24">
-        <FormBanner images={images} />
+        <FormBanner images={images} content={content} />
       </div>
       {/* <header className="relative w-full mt-16 sm:mt-12 grid place-items-center">
         <div
@@ -39,7 +41,7 @@ export default async function ApplyView() {
       </header> */}
 
       <section className="mt-12 p-12" id="form">
-        <ApplyForm />
+        <ApplyForm content={content} />
       </section>
     </main>
   )

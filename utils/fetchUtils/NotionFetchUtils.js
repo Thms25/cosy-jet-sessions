@@ -6,6 +6,7 @@ const IDS = {
   discover: process.env.NOTION_DISCOVER_ID,
   about: process.env.NOTION_ABOUT_ID,
   home: process.env.NOTION_HOME_ID,
+  contact: process.env.NOTION_CONTACT_ID,
 }
 
 export async function getNotionContent(slug) {
