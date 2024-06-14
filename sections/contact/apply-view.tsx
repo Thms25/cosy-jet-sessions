@@ -1,7 +1,19 @@
 import ApplyForm from './apply-form'
 import FormBanner from './form-banner'
 
-export default function ApplyView({ artists, images, content }) {
+type ApplyViewProps = {
+  // artists: Array<{ name: string; image: string }>
+  // images: Array<{ src: string; id: string }>
+  artists: any
+  images: any
+  content: any
+}
+
+export default function ApplyView({
+  artists,
+  images,
+  content,
+}: ApplyViewProps) {
   return (
     <main>
       <div className="mt-16 sm:mt-24">

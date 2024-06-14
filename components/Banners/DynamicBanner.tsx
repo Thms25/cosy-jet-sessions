@@ -1,7 +1,7 @@
 'use client'
 
 // Hooks
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 // Utils
 import { arrowDown } from '@/utils/data/svgData'
@@ -55,7 +55,7 @@ export default function DynamicBanner({ title, subtitle, caption }) {
         <Reveal dly={1.5} initX={0} initY={30}>
           <p className="text-md text-cjsBrown font-caption mb-6">{caption}</p>
         </Reveal>
-        <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div>
+        {/* <div className="w-8 h-8 animate-bounce m-auto">{arrowDown}</div> */}
       </section>
       <AnimatePresence initial={false} mode="wait">
         {modalOpen && <MediaModal modalOpen={modalOpen} handleClose={close} />}

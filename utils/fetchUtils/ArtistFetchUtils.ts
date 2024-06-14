@@ -1,4 +1,4 @@
-import { getSpotifyArtist, getSpotifyToken } from './spotify-api-utils'
+// import { getSpotifyArtist, getSpotifyToken } from './spotify-api-utils'
 import { db } from '@/utils/firebase/firebase-config'
 import {
   collection,

@@ -1,10 +1,15 @@
 'use client'
 
+// Hooks
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
+import { useWindowSize } from '@/hooks/useWindowSize'
+
+// Components
 import YoutubeVideo from '@/components/videos/YoutubeVideo'
 import { Reveal } from '../animations/Reveal'
-import { useWindowSize } from '@/hooks/useWindowSize'
+
+// --------------------------------------------------------
 
 export default function VideoAccordeon({ videos }) {
   const [selected, setSelected] = useState(0)

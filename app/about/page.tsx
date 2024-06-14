@@ -1,7 +1,7 @@
 import styles from '../../styles/about.module.scss'
-import AboutStory from '@/components/AboutStory'
+// import AboutStory from '@/components/AboutStory'
 import DynamicBanner from '@/components/Banners/DynamicBanner'
-import { Reveal } from '@/components/animations/Reveal'
+// import { Reveal } from '@/components/animations/Reveal'
 import { WhoWeAre } from '@/components/who-we-are'
 import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 

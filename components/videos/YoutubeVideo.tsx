@@ -3,6 +3,15 @@
 import YouTube from 'react-youtube'
 import styles from '@/styles/videos.module.scss'
 
+type YoutubeVideoProps = {
+  videoId: string
+  iframeClassName?: string
+  height?: string | number
+  width?: string
+  autoplay?: number
+  // onVideoLoaded: () => void,
+}
+
 export default function YoutubeVideo({
   videoId = 'abc123',
   iframeClassName = 'artistPageVideo',
@@ -10,7 +19,7 @@ export default function YoutubeVideo({
   width = '100%',
   autoplay = 0,
   // onVideoLoaded,
-}) {
+}: YoutubeVideoProps) {
   // const videoOnReady = event => {
   //   // console.log(event.target)
   //   event.target.pauseVideo()
