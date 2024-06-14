@@ -1,5 +1,7 @@
 'use client'
 
+import React from 'react'
+
 import { useRouter } from 'next/navigation'
 
 export default function NotFound() {
@@ -12,7 +14,6 @@ export default function NotFound() {
         <button
           onClick={() => router.back()}
           className="text-cjsWhite rounded-lg shadow-sm px-4 py-2 bg-cjsBrown hover:bg-cjsPink transition duration-250 mt-4"
-          href="/"
         >
           Go Back
         </button>

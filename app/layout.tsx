@@ -1,14 +1,17 @@
+import React from 'react'
+
 // Styles
 import '../styles/globals.scss'
 
 // Auth
-import { getServerSession } from 'next-auth'
-import { AuthOptions } from './api/auth/[...nextauth]/route'
+// import { getServerSession } from 'next-auth'
+// import { AuthOptions } from './api/auth/[...nextauth]/route'
+// import Provider from '@/components/auth/Provider'
 
 // Components
-import Provider from '@/components/auth/Provider'
-import Navbar from '@/components/Nav/Navbar'
-import Footer from '@/components/Footer'
+import Navbar from '../components/layouts/Nav/Navbar'
+import Footer from '../components/layouts/Footer'
+import { type } from 'os'
 // import { findUser } from "@/utils/fetchUtils/UserFetchUtils";
 
 export const metadata = {
@@ -21,7 +24,11 @@ export const metadata = {
   },
 }
 
-export default async function RootLayout({ children }) {
+type Props = {
+  children: React.ReactNode
+}
+
+export default async function RootLayout({ children }: Props) {
   // const session = await getServerSession(AuthOptions)
   // const user = await findUser(session?.user?.email);
 

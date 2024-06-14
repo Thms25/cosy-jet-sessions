@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { CiInstagram, CiYoutube, CiMail } from 'react-icons/ci'
 import { FaTiktok } from 'react-icons/fa'
 

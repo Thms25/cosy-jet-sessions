@@ -1,5 +1,6 @@
 'use client'
 
+import { Button } from '@/components/animations/Button'
 import { arrowDown } from '@/utils/data/svgData'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
@@ -17,9 +18,11 @@ export default function FromBanner({ images, content }) {
             {content.apply_subtitle}
           </p>
           <ScrollLink to="form" smooth={true} duration={500}>
-            <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
-              {content.apply_cta}
-            </button>
+            <Button>
+              <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
+                {content.apply_cta}
+              </button>
+            </Button>
           </ScrollLink>
         </div>
         <ShuffleGrid imgs={images} />

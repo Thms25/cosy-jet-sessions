@@ -1,7 +1,8 @@
-// Components
-import Homeview from '@/sections/home/home-view'
-import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
+import React from 'react'
 
+// Components
+import Homeview from '../sections/home/home-view'
+import { getNotionContent } from '../utils/fetchUtils/NotionFetchUtils'
 // ---------------------------------------------------------------------
 
 export default async function Home() {

@@ -1,15 +1,20 @@
 'use client'
 
+// Hooks
+import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
-import { useState } from 'react'
-import { arrowDown } from '@/utils/data/svgData'
-import { cjsTextSvg } from '@/public/assets/svg/cjs_text_svg'
-import MediaModal from '@/components/media-modal'
 import { Link as ScrollLink } from 'react-scroll'
 
+// Components
+import Image from 'next/image'
+import MediaModal from '../../components/media-modal'
+
+// Asstes
+import { arrowDown } from '../../utils/data/svgData'
+import { cjsTextSvg } from '../../public/assets/svg/cjs_text_svg'
+
 export function HomeBanner() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
   const close = () => setModalOpen(false)
   const open = () => setModalOpen(true)
 

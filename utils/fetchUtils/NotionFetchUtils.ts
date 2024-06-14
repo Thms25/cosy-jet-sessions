@@ -9,7 +9,7 @@ const IDS = {
   contact: process.env.NOTION_CONTACT_ID,
 }
 
-export async function getNotionContent(slug) {
+export async function getNotionContent(slug: string) {
   try {
     const notion = new Client({
       auth: process.env.NOTION_SECRET,
@@ -20,7 +20,7 @@ export async function getNotionContent(slug) {
 
     const data = blocks.map(block => {
       try {
-        if (block.type == 'paragraph') {
+        if ('type' in block && block.type == 'paragraph') {
           const text = block.paragraph.rich_text[0].plain_text
           const [key, value] = text.split(': ')
 
