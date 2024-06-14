@@ -20,8 +20,11 @@ export async function getArtists() {
     artist_data.forEach(doc => {
       artists.push({ ...doc.data(), id: doc.id })
     })
-
-    return artists.sort((a, b) => new Date(b.perf_date) - new Date(a.perf_date))
+    return artists.sort(
+      (a, b) =>
+        new Date(b.perf_date).getTime() - new Date(a.perf_date).getTime(),
+    )
+    // return artists.sort((a, b) => new Date(b.perf_date) - new Date(a.perf_date))
   } catch (error) {
     throw new Error(error)
   }
