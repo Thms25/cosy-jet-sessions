@@ -1,9 +1,6 @@
 // Utils
 import { getArtists } from '@/utils/fetchUtils/ArtistFetchUtils'
-import {
-  getNotionContent,
-  getNotionDiscover,
-} from '@/utils/fetchUtils/NotionFetchUtils'
+import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 
 // components
 import Link from 'next/link'

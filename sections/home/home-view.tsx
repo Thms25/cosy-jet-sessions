@@ -9,7 +9,13 @@ import { popularVideos } from '@/utils/data/videoData'
 
 // ---------------------------------------------------------------------
 
-export default function Homeview({ content }) {
+type HomeViewProps = {
+  content: {
+    slogan: string
+    description: string
+  }
+}
+export default function Homeview({ content }: HomeViewProps) {
   return (
     <section className="hide-scrollbar">
       <header className="h-screen">

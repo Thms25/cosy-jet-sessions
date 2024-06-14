@@ -1,22 +1,27 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import Image from 'next/image'
+// Hooks
 import { useState } from 'react'
-import { arrowDown } from '@/utils/data/svgData'
-import { cjsTextSvg } from '@/public/assets/svg/cjs_text_svg'
-import MediaModal from '@/components/media-modal'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link as ScrollLink } from 'react-scroll'
 
+// Components
+import MediaModal from '@/components/media-modal'
+// import Image from 'next/image'
+
+// Asstes
+import { arrowDown } from '@/utils/data/svgData'
+import { cjsTextSvg } from '@/public/assets/svg/cjs_text_svg'
+
 export function HomeBanner() {
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
   const close = () => setModalOpen(false)
   const open = () => setModalOpen(true)
 
   return (
     <>
       <motion.div
-        className="h-screen pt-32"
+        className="mt-72 sm:mt-48 md:mt-32"
         onClick={() => {
           modalOpen ? close() : open()
         }}
@@ -30,7 +35,7 @@ export function HomeBanner() {
           duration={500}
           className=" text-cjsBrown z-50 cursor-pointer"
         >
-          <div className="w-8 h-8 animate-bounce mx-auto mt-24">
+          <div className="w-6 h-6 animate-bounce mx-auto mt-48 md:mt-24 opacity-50">
             {arrowDown}
           </div>
         </ScrollLink>

@@ -1,11 +1,21 @@
 'use client'
 
+import { Button } from '@/components/animations/Button'
 import { arrowDown } from '@/utils/data/svgData'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
 
-export default function FromBanner({ images, content }) {
+type FromBannerProps = {
+  images: { id: string; src: string }[]
+  content: {
+    apply_title: string
+    apply_subtitle: string
+    apply_cta: string
+  }
+}
+
+export default function FromBanner({ images, content }: FromBannerProps) {
   return (
     <div>
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
@@ -17,9 +27,11 @@ export default function FromBanner({ images, content }) {
             {content.apply_subtitle}
           </p>
           <ScrollLink to="form" smooth={true} duration={500}>
-            <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
-              {content.apply_cta}
-            </button>
+            <Button>
+              <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
+                {content.apply_cta}
+              </button>
+            </Button>
           </ScrollLink>
         </div>
         <ShuffleGrid imgs={images} />

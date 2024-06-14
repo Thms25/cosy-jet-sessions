@@ -13,7 +13,7 @@ export function Reveal({
   initS = 0.95,
 }) {
   const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, threshold: 1 })
+  const isInView = useInView(ref, { once: true })
   const controls = useAnimation()
 
   useEffect(() => {

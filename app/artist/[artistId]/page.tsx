@@ -4,21 +4,58 @@ import { getArtist } from '@/utils/fetchUtils/ArtistFetchUtils'
 // Components
 import VideoAccordeon from '@/components/Accordeons/VideoAccordeon'
 import { Reveal } from '@/components/animations/Reveal'
-import SpotifyLogin from '@/components/spotify/spotify-login'
+// import SpotifyLogin from '@/components/spotify/spotify-login'
 import SpotifyPlayer from '@/components/spotify/spotify-player'
 
-export const revalidate = 7 * 24 * 60 * 60 // 1 week
+// --------------------------------------------------------
 
-export async function generateMetadata({ params }) {
-  const artist = await getArtist(params.artistId)
-  return {
-    title: `CJS - ${artist.name}`,
-    description: artist.bio || 'Artist page',
+type ArtistPageProps = {
+  params: {
+    artistId: string
   }
 }
 
-export default async function Artist({ params }) {
-  const artist = await getArtist(params.artistId)
+interface Artist {
+  name: string
+  perf_date?: string | Date
+  image?: string
+  spotify_id?: string
+  videos: {
+    id: string
+    title: string
+    image: string
+    publishedAt: string
+    description?: string
+  }[]
+}
+
+export const revalidate = 7 * 24 * 60 * 60 // 1 week
+
+export async function generateMetadata({ params }: ArtistPageProps) {
+  const artistData = (await getArtist(params.artistId)) as Artist
+  const artist: Artist = {
+    name: artistData.name || '',
+    perf_date: artistData.perf_date || '',
+    image: artistData.image || '',
+    spotify_id: artistData.spotify_id || '',
+    videos: artistData.videos || [],
+  }
+  return {
+    title: `CJS - ${artist.name}`,
+    description: `Check out ${artist.name} on CJS`,
+  }
+}
+
+export default async function Artist({ params }: ArtistPageProps) {
+  const artistData = (await getArtist(params.artistId)) as Artist
+
+  const artist: Artist = {
+    name: artistData.name || '',
+    perf_date: artistData.perf_date || '',
+    image: artistData.image || '',
+    spotify_id: artistData.spotify_id || '',
+    videos: artistData.videos || [],
+  }
 
   return (
     <div className="p-4 md:p-12 lg:p-16 2xl:px-48">

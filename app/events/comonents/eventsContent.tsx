@@ -1,69 +1,69 @@
-"use client";
+'use client'
 
 // Hooks
-import { useState } from "react";
+import { useState } from 'react'
 
-import Image from "next/image";
+import Image from 'next/image'
 
 const pastEvents = [
   {
-    title: "Jazmyn @ CJS",
-    description: "Description for Event 1",
-    date: "October 15, 2023",
+    title: 'Jazmyn @ CJS',
+    description: 'Description for Event 1',
+    date: 'October 15, 2023',
     location: "Cosy Jet Sessions' studio",
   },
   {
-    title: "Root Mean Square @ CJS",
-    description: "Description for Event 2",
-    date: "September 5, 2023",
+    title: 'Root Mean Square @ CJS',
+    description: 'Description for Event 2',
+    date: 'September 5, 2023',
     location: "Cosy Jet Sessions' studio",
   },
   {
-    title: "Ozya @ CJS",
-    description: "Description for Event 1",
-    date: "October 15, 2023",
+    title: 'Ozya @ CJS',
+    description: 'Description for Event 1',
+    date: 'October 15, 2023',
     location: "Cosy Jet Sessions' studio",
   },
   {
-    title: "Colt @ CJS",
-    description: "Description for Event 2",
-    date: "September 5, 2023",
+    title: 'Colt @ CJS',
+    description: 'Description for Event 2',
+    date: 'September 5, 2023',
     location: "Cosy Jet Sessions' studio",
   },
   // Add more events as needed
-];
+]
 const upcomgEvents = [
   {
-    title: "Mia Lena @ CJS",
-    description: "Description for Event 1",
-    date: "December 15, 2023",
+    title: 'Mia Lena @ CJS',
+    description: 'Description for Event 1',
+    date: 'December 15, 2023',
     location: "Cosy Jet Sessions' studio",
   },
   {
-    title: "Staace @ CJS",
-    description: "Description for Event 2",
-    date: "January 5, 2024",
+    title: 'Staace @ CJS',
+    description: 'Description for Event 2',
+    date: 'January 5, 2024',
     location: "Cosy Jet Sessions' studio",
   },
   // Add more events as needed
-];
+]
 const eventTabs = [
   {
-    title: "Upcoming",
+    title: 'Upcoming',
     events: upcomgEvents,
   },
   {
-    title: "Past",
+    title: 'Past',
     events: pastEvents,
   },
   {
-    title: "All",
+    title: 'All',
     events: upcomgEvents.concat(pastEvents),
   },
-];
+]
 
 export default function EventsContent() {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(0)
 
   return (
     <section className="mt-24 p-8">
@@ -75,7 +75,7 @@ export default function EventsContent() {
                 <a
                   href="#"
                   className={`inline-flex items-center px-4 py-3 text-cjsWhite bg-cjsBrown ${
-                    selected === index ? "bg-opacity-100" : "bg-opacity-70"
+                    selected === index ? 'bg-opacity-100' : 'bg-opacity-70'
                   } rounded-lg active w-full hover:bg-opacity-100 transition duration-300`}
                   aria-current="page"
                 >
@@ -91,7 +91,7 @@ export default function EventsContent() {
                   {tab.title}
                 </a>
               </li>
-            );
+            )
           })}
         </ul>
 
@@ -102,7 +102,7 @@ export default function EventsContent() {
                 className="px-8 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 m-auto"
                 key={index}
               >
-                {tab.events.map((event) => (
+                {tab.events.map(event => (
                   <EventCard
                     key={event.title}
                     title={event.title}
@@ -113,14 +113,28 @@ export default function EventsContent() {
                 ))}
               </div>
             )
-          );
+          )
         })}
       </div>
     </section>
-  );
+  )
 }
 
-const EventCard = ({ title, description, date, location, imageUimgrl }) => {
+type EventCardProps = {
+  title: string
+  description: string
+  date: string
+  location: string
+  imageUimgrl?: string
+}
+
+const EventCard = ({
+  title,
+  description,
+  date,
+  location,
+  imageUimgrl,
+}: EventCardProps) => {
   return (
     <div className="bg-white shadow-lg rounded-lg overflow-hidden">
       <Image
@@ -142,5 +156,5 @@ const EventCard = ({ title, description, date, location, imageUimgrl }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

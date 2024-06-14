@@ -1,20 +1,36 @@
 'use client'
 
-import { Reveal } from '@/components/animations/Reveal'
-import StepProgress from '@/components/tools/step-progress'
+// Hooks
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+
+// Utils
 import { sendEmail } from '@/utils/fetchUtils/EmailFetchUtils'
+
 // Animate
 import { motion } from 'framer-motion'
 
 // Components
+import { Reveal } from '@/components/animations/Reveal'
+import StepProgress from '@/components/tools/step-progress'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
 
-// Hooks
-import { useState } from 'react'
+type ApplyFormProps = {
+  content: {
+    apply_form_intro: string
+  }
+}
 
-export default function ApplyForm({ content }) {
-  const handleSubmit = async data => {
+interface EmailData {
+  email: string
+  subject: string
+  message: string
+}
+
+// ---------------------------------------------------------------------
+
+export default function ApplyForm({ content }: ApplyFormProps) {
+  const handleSubmit = async (data: EmailData) => {
     try {
       await sendEmail(data)
       handleSetStep(1)
@@ -25,7 +41,7 @@ export default function ApplyForm({ content }) {
   const [stepsComplete, setStepsComplete] = useState(0)
   const numSteps = 5
 
-  const handleSetStep = num => {
+  const handleSetStep = (num: number) => {
     if (
       (stepsComplete === 0 && num === -1) ||
       (stepsComplete === numSteps && num === 1)

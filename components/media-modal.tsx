@@ -1,7 +1,8 @@
 import Backdrop from './Backdrop'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { arrowDown } from '@/utils/data/svgData'
+// import { arrowDown } from '@/utils/data/svgData'
+import { arrowDown } from '../utils/data/svgData'
 
 const DropIn = {
   init: {
@@ -37,7 +38,12 @@ const mediaLinks = [
   },
 ]
 
-export default function MediaModal({ handleClose }) {
+type MediaModalProps = {
+  modalOpen: boolean
+  handleClose: () => void
+}
+
+export default function MediaModal({ handleClose }: MediaModalProps) {
   return (
     <Backdrop onClick={handleClose}>
       <motion.div
@@ -46,7 +52,8 @@ export default function MediaModal({ handleClose }) {
         variants={DropIn}
         initial="init"
         animate="anim"
-        transition="trs"
+        // transition="trs"
+        transition={{ duration: 0.4, type: 'ease' }}
         exit="exit"
       >
         <div className="w-full">
