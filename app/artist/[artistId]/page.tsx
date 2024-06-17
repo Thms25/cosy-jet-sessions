@@ -29,7 +29,7 @@ interface Artist {
   }[]
 }
 
-export const revalidate = 7 * 24 * 60 * 60 // 1 week
+export const revalidate = 60 * 60 * 24 // 24 hours
 
 export async function generateMetadata({ params }: ArtistPageProps) {
   const artistData = (await getArtist(params.artistId)) as Artist
