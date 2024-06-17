@@ -16,15 +16,22 @@ export async function getArtists() {
     const artist_collection = collection(db, 'artists')
     const artist_data = await getDocs(artist_collection)
 
+    const videos = await getVideos()
+
     const artists = []
     artist_data.forEach(doc => {
-      artists.push({ ...doc.data(), id: doc.id })
+      const artist = { ...doc.data(), id: doc.id }
+
+      const artist_videos = videos.filter(
+        video => video.artistRef.path === doc.ref.path,
+      )
+
+      artists.push({ ...artist, videos: artist_videos })
     })
     return artists.sort(
       (a, b) =>
         new Date(b.perf_date).getTime() - new Date(a.perf_date).getTime(),
     )
-    // return artists.sort((a, b) => new Date(b.perf_date) - new Date(a.perf_date))
   } catch (error) {
     throw new Error(error)
   }
@@ -56,6 +63,36 @@ export async function getArtist(id) {
     })
 
     return { ...artistData, videos: videosData }
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export async function getVideos() {
+  try {
+    const videos_collection = collection(db, 'videos')
+    const videos_data = await getDocs(videos_collection)
+
+    const videos = []
+    videos_data.forEach(doc => {
+      videos.push(doc.data())
+    })
+    return videos
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export async function getShorts() {
+  try {
+    const shorts_collection = collection(db, 'shorts')
+    const shorts_data = await getDocs(shorts_collection)
+
+    const shorts = []
+    shorts_data.forEach(doc => {
+      shorts.push(doc.data())
+    })
+    return shorts
   } catch (error) {
     throw new Error(error)
   }
