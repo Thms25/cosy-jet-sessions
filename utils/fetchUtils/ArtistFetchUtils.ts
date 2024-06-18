@@ -24,6 +24,7 @@ export const getArtists = cache(
   ['artists'],
   {
     tags: ['artists'],
+    revalidate: 60 * 60 * 24, // 24 hours
   },
 )
 
@@ -53,10 +54,17 @@ export async function getAllArtists() {
   }
 }
 
-export const getArtist = cache(async (id: string) => {
-  const artist = await getOneArtist(id)
-  return artist
-})
+export const getArtist = cache(
+  async (id: string) => {
+    const artist = await getOneArtist(id)
+    return artist
+  },
+  ['artist'],
+  {
+    tags: ['artist'],
+    revalidate: 60 * 60 * 24 * 7, // 7 days
+  },
+)
 
 export async function getOneArtist(id: string) {
   try {
@@ -97,6 +105,7 @@ export const getVideos = cache(
   ['videos'],
   {
     tags: ['videos'],
+    revalidate: 60 * 60 * 24, // 24 hours
   },
 )
 
@@ -123,6 +132,7 @@ export const getShorts = cache(
   ['shorts'],
   {
     tags: ['shorts'],
+    revalidate: 60 * 60 * 24, // 24 hours
   },
 )
 
