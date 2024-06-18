@@ -22,14 +22,14 @@ export default function Homeview({ content }: HomeViewProps) {
         <HomeBanner />
       </header>
 
-      <div className="p-8 md:p-16" id="slogan">
-        <Reveal dly={0.5} duration={1} initS={0.8}>
-          <h1 className="text-4xl font-title mt-8 mx-6 tracking-wider">
+      <div className="p-4 sm:p-8 md:p-16" id="slogan">
+        <Reveal dly={0.4} duration={1} initS={0.9}>
+          <h1 className="text-2xl md:text-4xl font-title mt-8 mx-6 tracking-wider">
             {content.slogan}
           </h1>
         </Reveal>
-        <Reveal dly={0.7} duration={1} initS={0.9}>
-          <h1 className="text-lg w-1/2 mx-auto font-title mt-8 tracking-wider">
+        <Reveal dly={0.6} duration={1} initS={0.9}>
+          <h1 className="text-md md:text-lg w-1/2 mx-auto font-title mt-8 tracking-wider">
             {content.description}
           </h1>
         </Reveal>

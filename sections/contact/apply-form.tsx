@@ -52,14 +52,14 @@ export default function ApplyForm({ content }: ApplyFormProps) {
   }
 
   return (
-    <section>
+    <section className="mb-12">
       <p className="text-md mx-auto p-4 w-full md:w-3/5">
         {content.apply_form_intro}
       </p>
 
       <StepProgress steps={stepsComplete} numSteps={numSteps} />
 
-      <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg">
+      <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
         <Form
           stepsComplete={stepsComplete}
           onSubmit={handleSubmit}

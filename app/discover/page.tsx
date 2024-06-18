@@ -10,7 +10,7 @@ import DynamicBanner from '@/components/Banners/DynamicBanner'
 
 // ----------------------------------------------------------------------------
 
-export const revalidate = 60 * 60 * 24 * 7 // 1 week
+export const revalidate = 60 * 60 * 24 // 24 hours
 
 export default async function Discover() {
   const artists = await getArtists()
