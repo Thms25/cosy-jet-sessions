@@ -1,48 +1,29 @@
+// Components
 import { Button } from '@/components/animations/Button'
 
-type Artist = {
-  name: string
-  id: string
-  bio: string
-  image: string
-  videos: any[]
-}
+// Assets
+import { editPencil, searchIcon } from '@/utils/data/svgData'
+
+// Types
 
 type AdminTableProps = {
   header: string[]
   rows: any[][]
 }
 
+// ----------------------------------------------------------
+
 export default function AdminTable({ header, rows }: AdminTableProps) {
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-cjsWhite text-cjsBrown border border-cjsBrown p-4">
+    <div className="hide-scrollbar flex flex-col  overflow-x-auto  h-[400px] shadow-md rounded-lg bg-cjsWhite text-cjsBrown border border-cjsBrown p-4">
       <div className="pb-4 ">
-        <label htmlFor="table-search" className="sr-only">
-          Search
-        </label>
-        <div className="relative mt-1">
-          <div className="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none text-cjsBrown">
-            <svg
-              className="w-4 h-4"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
-          </div>
+        <div className="flex justify-start items-center gap-2 px-4 text-cjsBrown">
+          <div className="">{searchIcon}</div>
           <input
             type="text"
             id="table-search"
-            className="block pt-2 ps-10 text-sm 0 rounded-lg w-80 bg-cjsWhite  focus:none focus:outline-none placeholder:text-cjsBrown placeholder:text-opacity-50"
-            placeholder="Search for an artist"
+            className="text-sm  w-full bg-cjsWhite  focus:none focus:outline-none placeholder:text-cjsBrown placeholder:text-opacity-40"
+            placeholder="Search for anything..."
           />
         </div>
       </div>
@@ -50,7 +31,11 @@ export default function AdminTable({ header, rows }: AdminTableProps) {
         <thead className="text-xs uppercase ">
           <tr>
             {header.map((item, index) => (
-              <th key={index} scope="col" className="px-6 py-3">
+              <th
+                key={index}
+                scope="col"
+                className="px-4 py-1 overflow-ellipsis"
+              >
                 {item}
               </th>
             ))}
@@ -58,15 +43,18 @@ export default function AdminTable({ header, rows }: AdminTableProps) {
         </thead>
 
         <tbody>
-          {/* Repeat the following block for each row */}
-
           {rows.map((row: any, index: number) => (
-            <tr className="bg-cjsWhite border-b hover:bg-gray-50">
-              <td className="px-6 py-4">{row[0]}</td>
-              <td className="px-6 py-4">{row[1]}</td>
-              <td className="px-6 py-4">{row[2]}</td>
-              <td className="px-6 py-4 cursor-pointer">
-                <Button>Edit</Button>
+            <tr
+              key={index}
+              className="bg-cjsBrown bg-opacity-0 border-b hover:bg-opacity-5"
+            >
+              {row.map((item: any, index: number) => (
+                <td key={index} className="px-2 py-1">
+                  {item}
+                </td>
+              ))}
+              <td className="px-2 py-1 cursor-pointer">
+                <Button>{editPencil}</Button>
               </td>
             </tr>
           ))}

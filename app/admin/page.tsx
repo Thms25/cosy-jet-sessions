@@ -11,13 +11,16 @@ export const revalidate = 60 * 60 * 24 // 24 hours
 // ----------------------------------------------------------
 
 export default async function page() {
-  const artists = await getArtists()
-  const videos = await getVideos()
-  const shorts = await getShorts()
+  // const artists = await getArtists()
+  // const videos = await getVideos()
+  // const shorts = await getShorts()
+  return <h1>Admin</h1>
 
-  return (
-    <Container>
-      <AdminView artists={artists} videos={videos} shorts={shorts} />
-    </Container>
-  )
+  // return (
+  // <AdminView
+  // artists={artists}
+  // videos={videos}
+  // shorts={shorts}
+  // />
+  // )
 }

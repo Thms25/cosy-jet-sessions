@@ -3,6 +3,8 @@
 // import { AuthOptions } from '../api/auth/[...nextauth]/route'
 // import Provider from '@/components/auth/Provider'
 
+import Container from '@/components/layouts/Container'
+
 // Components
 // import { findUser } from '@/utils/fetchUtils/UserFetchUtils'
 
@@ -18,7 +20,7 @@ export default async function Layout({ children }: Props) {
   return (
     <main>
       {/* <Provider session={session}> */}
-      {children}
+      <Container>{children}</Container>
       {/* </Provider> */}
     </main>
   )
