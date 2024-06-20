@@ -2,15 +2,13 @@
 import '../styles/globals.scss'
 
 // Auth
-// import { getServerSession } from 'next-auth'
-// import { AuthOptions } from './api/auth/[...nextauth]/route'
-// import Provider from '@/components/auth/Provider'
+import Provider from '@/components/auth/Provider'
+import { AuthOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getServerSession } from 'next-auth'
 
 // Components
 import Navbar from '../components/layouts/Nav/Navbar'
 import Footer from '../components/layouts/Footer'
-import { type } from 'os'
-// import { findUser } from "@/utils/fetchUtils/UserFetchUtils";
 
 export const metadata = {
   title: 'Cosy Jet Sessions',
@@ -27,17 +25,16 @@ type Props = {
 }
 
 export default async function RootLayout({ children }: Props) {
-  // const session = await getServerSession(AuthOptions)
-  // const user = await findUser(session?.user?.email);
+  const session = await getServerSession(AuthOptions)
 
   return (
     <html>
       <body>
-        {/* <Provider session={session}> */}
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        {/* </Provider> */}
+        <Provider session={session}>
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </Provider>
       </body>
     </html>
   )

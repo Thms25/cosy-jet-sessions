@@ -16,7 +16,7 @@ export default function ApplyView({
 }: ApplyViewProps) {
   return (
     <main>
-      <div className="mt-16 sm:mt-24">
+      <div className="pt-16 sm:pt-24 h-screen">
         <FormBanner images={images} content={content} />
       </div>
 

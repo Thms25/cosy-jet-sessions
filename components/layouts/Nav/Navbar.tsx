@@ -12,9 +12,6 @@ import { usePathname } from 'next/navigation'
 import { useWindowSize } from '../../../hooks/useWindowSize'
 import ContactDropdown from './ContactDropdown'
 
-// Auth
-// import { signIn, signOut, useSession } from 'next-auth/react'
-
 // --------------------------------------------------------------
 
 const navItems = [

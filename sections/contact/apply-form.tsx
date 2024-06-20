@@ -105,6 +105,7 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
   const handleGetData = data => {
     setFormData({ ...formData, ...data })
   }
+
   return (
     <form
       onSubmit={e => {
@@ -209,13 +210,13 @@ function StepOne({ setStep, data, submitData }) {
 
       {/* Name input */}
       <div className="mb-6">
-        <p className="text-md mb-2">Artist name</p>
+        <p className="text-md mb-2">Artist</p>
         <input
           required
           value={formData.name}
           onChange={e => setFormData({ ...formData, name: e.target.value })}
           type="text"
-          placeholder="Your name..."
+          placeholder="Artist name..."
           className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
         />
       </div>

@@ -1,3 +1,5 @@
+import Login from '@/components/auth/Login'
+import Logout from '@/components/auth/Logout'
 import Container from '@/components/layouts/Container'
 import AdminView from '@/sections/admin/admin-view'
 import {
@@ -6,21 +8,44 @@ import {
   getVideos,
 } from '@/utils/fetchUtils/ArtistFetchUtils'
 
+// Auth
+import { getServerSession } from 'next-auth'
+import { AuthOptions } from '@/app/api/auth/[...nextauth]/route'
+import { redirect } from 'next/dist/server/api-utils'
+import { useRouter } from 'next/router'
+import AccessDenied from '@/components/layouts/error/acces-denied'
+
 export const revalidate = 60 * 60 * 24 // 24 hours
 
 // ----------------------------------------------------------
 
 export default async function page() {
-  // const artists = await getArtists()
+  const session = (await getServerSession(AuthOptions)) as any
+  const isAdmin = session?.user?.role === 'admin'
+
+  const artists = isAdmin ? await getArtists() : []
   // const videos = await getVideos()
   // const shorts = await getShorts()
-  return <h1>Admin</h1>
 
-  // return (
-  // <AdminView
-  // artists={artists}
-  // videos={videos}
-  // shorts={shorts}
-  // />
-  // )
+  return (
+    <div className="p-8 md:p-16">
+      {session && <h1>{session.user.name}</h1>}
+      {session ? (
+        <>
+          <Logout />
+          {isAdmin ? (
+            <AdminView
+              artists={artists}
+              // videos={videos}
+              // shorts={shorts}
+            />
+          ) : (
+            <AccessDenied />
+          )}
+        </>
+      ) : (
+        <Login />
+      )}
+    </div>
+  )
 }

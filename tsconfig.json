@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/artist/[artistId]/page.js"  ],
+, "app/artist/[artistId]/page.js", "app/api/auth/[...nextauth]/route.ts"  ],
   "exclude": [
     "node_modules"
   ]

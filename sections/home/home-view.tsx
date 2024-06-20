@@ -22,24 +22,25 @@ export default function Homeview({ content }: HomeViewProps) {
         <HomeBanner />
       </header>
 
-      <div className="p-4 sm:p-8 md:p-16" id="slogan">
+      <div
+        className="px-8 my-8 w-full md:w-1/2 flex flex-col items-center justify-center mx-auto"
+        id="slogan"
+      >
         <Reveal dly={0.4} duration={1} initS={0.9}>
           <h1 className="text-2xl md:text-4xl font-title mt-8 mx-6 tracking-wider">
             {content.slogan}
           </h1>
         </Reveal>
         <Reveal dly={0.6} duration={1} initS={0.9}>
-          <h1 className="text-md md:text-lg w-1/2 mx-auto font-title mt-8 tracking-wider">
+          <h1 className="text-sm md:text-md mx-auto font-title mt-4 tracking-wider">
             {content.description}
           </h1>
         </Reveal>
       </div>
 
-      <div className="p-2 md:p-8 xl:p-16">
-        <Reveal dly={1} initS={0.9} duration={1.5}>
-          <SmoothCarousel slides={popularVideos} />
-        </Reveal>
-      </div>
+      <Reveal dly={1} initS={0.9} duration={1.5}>
+        <SmoothCarousel slides={popularVideos} />
+      </Reveal>
     </section>
   )
 }
