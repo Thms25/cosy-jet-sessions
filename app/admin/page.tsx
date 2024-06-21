@@ -10,9 +10,8 @@ import {
 
 // Auth
 import { getServerSession } from 'next-auth'
-import { AuthOptions } from '@/app/api/auth/[...nextauth]/route'
-import { redirect } from 'next/dist/server/api-utils'
-import { useRouter } from 'next/router'
+import { authOptions } from '@/utils/auth/auth-options'
+// import { useRouter } from 'next/router'
 import AccessDenied from '@/components/layouts/error/acces-denied'
 
 export const revalidate = 60 * 60 * 24 // 24 hours
@@ -20,7 +19,7 @@ export const revalidate = 60 * 60 * 24 // 24 hours
 // ----------------------------------------------------------
 
 export default async function page() {
-  const session = (await getServerSession(AuthOptions)) as any
+  const session = (await getServerSession(authOptions)) as any
   const isAdmin = session?.user?.role === 'admin'
 
   const artists = isAdmin ? await getArtists() : []

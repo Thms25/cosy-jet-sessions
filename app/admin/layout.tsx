@@ -1,6 +1,6 @@
 // Auth
 // import { getServerSession } from 'next-auth'
-// import { AuthOptions } from '../api/auth/[...nextauth]/route'
+// import { authOptions } from '@/utils/auth/auth-options'
 // import Provider from '@/components/auth/Provider'
 
 import Container from '@/components/layouts/Container'
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export default async function Layout({ children }: Props) {
-  // const session = await getServerSession(AuthOptions)
+  // const session = await getServerSession(authOptions)
   // console.log(session)
   //   const user = await findUser(session?.user?.email)
 

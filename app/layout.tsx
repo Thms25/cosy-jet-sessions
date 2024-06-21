@@ -3,7 +3,7 @@ import '../styles/globals.scss'
 
 // Auth
 import Provider from '@/components/auth/Provider'
-import { AuthOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/utils/auth/auth-options'
 import { getServerSession } from 'next-auth'
 
 // Components
@@ -25,7 +25,7 @@ type Props = {
 }
 
 export default async function RootLayout({ children }: Props) {
-  const session = await getServerSession(AuthOptions)
+  const session = await getServerSession(authOptions)
 
   return (
     <html>
