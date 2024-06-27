@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from '@/components/animations/Button'
-import { arrowDown } from '@/utils/data/svgData'
 import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Link as ScrollLink } from 'react-scroll'
@@ -12,6 +11,7 @@ type FromBannerProps = {
     apply_title: string
     apply_subtitle: string
     apply_cta: string
+    apply_form_intro: string
   }
 }
 
@@ -36,16 +36,9 @@ export default function FromBanner({ images, content }: FromBannerProps) {
         </div>
         <ShuffleGrid imgs={images} />
       </section>
-      <div className="w-full h-12 flex justify-center items-center">
-        <ScrollLink
-          to="form"
-          smooth={true}
-          duration={500}
-          className="w-6 h-6 mx-auto animate-bounce cursor-pointer text-cjsBrown"
-        >
-          {arrowDown}
-        </ScrollLink>
-      </div>
+      <p className="text-md mx-auto p-4 w-full md:w-3/5">
+        {content.apply_form_intro}
+      </p>
     </div>
   )
 }
@@ -74,7 +67,7 @@ function generateSquares(squareData) {
       transition={{ duration: 1, type: 'spring' }}
       className="w-full h-full rounded-md shadow-sm"
       style={{
-        backgroundImage: `url(${sq.src})` || '',
+        backgroundImage: `url(${sq.src || ''})` || '',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}

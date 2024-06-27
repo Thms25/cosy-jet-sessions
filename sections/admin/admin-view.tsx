@@ -25,22 +25,22 @@ export default function AdminView({ artists, videos, shorts }: AdminViewProps) {
     artist.spotify_id,
   ])
 
-  // const videos_header = ['Title', 'Date', 'Artist']
-  // const videos_rows = videos.map(video => [
-  //   video.title,
-  //   format(new Date(video.publishedAt), 'do MMM yy'),
-  //   video.artistRef.name || 'No artist',
-  // ])
+  const videos_header = ['Title', 'Date', 'Artist']
+  const videos_rows = videos.map(video => [
+    video.title,
+    format(new Date(video.publishedAt), 'do MMM yy'),
+    video.artistRef.name || 'No artist',
+  ])
 
-  // const shorts_header = ['Title', 'Date', 'Artist']
-  // const shorts_rows = shorts.map(video => [
-  //   video.title,
-  //   format(new Date(video.publishedAt), 'do MMM yy'),
-  //   video.artistRef.name || 'No artist',
-  // ])
+  const shorts_header = ['Title', 'Date', 'Artist']
+  const shorts_rows = shorts.map(video => [
+    video.title,
+    format(new Date(video.publishedAt), 'do MMM yy'),
+    video.artistRef.name || 'No artist',
+  ])
 
   return (
-    <section className="py-12">
+    <section className="">
       <div className="mt-4 mb-12">
         <h1 className="text-6xl mb-2">Manage your data</h1>
         <h3 className="text-2xl mb-4">
@@ -57,12 +57,12 @@ export default function AdminView({ artists, videos, shorts }: AdminViewProps) {
           <Reveal duration={1} dly={0.4}>
             <AdminTable header={artist_header} rows={artist_rows} />
           </Reveal>
-          {/* <Reveal duration={1} dly={0.6}>
+          <Reveal duration={1} dly={0.6}>
             <AdminTable header={videos_header} rows={videos_rows} />
           </Reveal>
           <Reveal duration={1} dly={0.8}>
             <AdminTable header={shorts_header} rows={shorts_rows} />
-          </Reveal> */}
+          </Reveal>
         </div>
       </div>
     </section>

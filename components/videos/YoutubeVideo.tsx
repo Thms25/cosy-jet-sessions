@@ -7,7 +7,7 @@ type YoutubeVideoProps = {
   videoId: string
   iframeClassName?: string
   height?: string | number
-  width?: string
+  width?: string | number
   autoplay?: number
   // onVideoLoaded: () => void,
 }

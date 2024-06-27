@@ -20,7 +20,7 @@ export default function ApplyView({
         <FormBanner images={images} content={content} />
       </div>
 
-      <section className="mt-12 p-12" id="form">
+      <section className="p-12" id="form">
         <ApplyForm content={content} />
       </section>
     </main>

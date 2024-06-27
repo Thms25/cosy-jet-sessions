@@ -14,6 +14,8 @@ import { motion } from 'framer-motion'
 import { Reveal } from '@/components/animations/Reveal'
 import StepProgress from '@/components/tools/step-progress'
 import Image from 'next/image'
+import Input from '@/components/form/Input'
+import { FormProvider, useForm } from 'react-hook-form'
 
 type ApplyFormProps = {
   content: {
@@ -30,14 +32,14 @@ interface EmailData {
 // ---------------------------------------------------------------------
 
 export default function ApplyForm({ content }: ApplyFormProps) {
-  const handleSubmit = async (data: EmailData) => {
-    try {
-      await sendEmail(data)
-      handleSetStep(1)
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  // const handleSubmit = async (data: EmailData) => {
+  //   try {
+  //     await sendEmail(data, 'apply')
+  //     handleSetStep(1)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
   const [stepsComplete, setStepsComplete] = useState(0)
   const numSteps = 5
 
@@ -50,22 +52,24 @@ export default function ApplyForm({ content }: ApplyFormProps) {
     }
     setStepsComplete(pv => pv + num)
   }
+  const methods = useForm()
+  const onSubmit = methods.handleSubmit(data => console.log(data))
 
   return (
-    <section className="mb-12">
-      <p className="text-md mx-auto p-4 w-full md:w-3/5">
-        {content.apply_form_intro}
-      </p>
-
+    <section className="">
       <StepProgress steps={stepsComplete} numSteps={numSteps} />
 
       <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
-        <Form
-          stepsComplete={stepsComplete}
-          onSubmit={handleSubmit}
-          onStepChange={handleSetStep}
-          className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
-        />
+        <FormProvider {...methods}>
+          <Form
+            stepsComplete={stepsComplete}
+            onSubmit={methods.handleSubmit(onSubmit)}
+            // onSubmit={handleSubmit}
+            onStepChange={handleSetStep}
+            className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+          />
+        </FormProvider>
+
         <Image
           priority
           className="w-1/2 hidden md:block object-cover"
@@ -208,88 +212,68 @@ function StepOne({ setStep, data, submitData }) {
         Step 1: Artist Information
       </h3>
 
-      {/* Name input */}
-      <div className="mb-6">
-        <p className="text-md mb-2">Artist</p>
-        <input
-          required
-          value={formData.name}
-          onChange={e => setFormData({ ...formData, name: e.target.value })}
-          type="text"
-          placeholder="Artist name..."
-          className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
-        />
-      </div>
+      <Input
+        id="name"
+        type="text"
+        label="Artist"
+        placeholder="Artist name..."
+        required
+        onChange={e => setFormData({ ...formData, name: e.target.value })}
+      />
 
-      {/* Mail input */}
-      <div className="mb-6">
-        <p className="text-md mb-2">Email</p>
-        <input
-          required
-          value={formData.email}
-          onChange={e => setFormData({ ...formData, email: e.target.value })}
-          type="text"
-          placeholder="Your email..."
-          className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
-        />
-      </div>
+      <Input
+        id="email"
+        type="email"
+        label="Email"
+        placeholder="Your email..."
+        required
+        onChange={e => setFormData({ ...formData, email: e.target.value })}
+      />
 
-      {/* Tel input */}
-      <div className="mb-6">
-        <p className="text-md mb-2">Phone Number</p>
-        <input
-          required
-          value={formData.tel}
-          onChange={e => setFormData({ ...formData, tel: e.target.value })}
-          type="number"
-          placeholder="Your number..."
-          className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
-        />
-      </div>
+      <Input
+        id="tel"
+        type="number"
+        label="Phone Number"
+        placeholder="Your number..."
+        required
+        onChange={e => setFormData({ ...formData, tel: e.target.value })}
+      />
 
-      {/* Music Genre input */}
-      <div className="mb-6">
-        <p className="text-md mb-2">Music genre</p>
-        <input
-          required
-          value={formData.music_genre}
-          onChange={e =>
-            setFormData({ ...formData, music_genre: e.target.value })
-          }
-          type="text"
-          placeholder="Your type of music..."
-          className={` bg-cjsPink text-xs placeholder-white/70 p-2 rounded-md w-full focus:outline-0`}
-        />
-      </div>
+      <Input
+        id="music_genre"
+        type="text"
+        label="Music genre"
+        placeholder="Your type of music..."
+        required
+        onChange={e =>
+          setFormData({ ...formData, music_genre: e.target.value })
+        }
+      />
 
-      {/* Bio */}
-      <div className="mb-6">
-        <p className="text-md mb-2">Short bio</p>
-        <textarea
-          required
-          value={formData.bio}
-          onChange={e => setFormData({ ...formData, bio: e.target.value })}
-          placeholder="Feel free to ask any questions"
-          className={`bg-cjsPink text-xs min-h-[150px] resize-none placeholder-cjsWhite p-2 rounded-md w-full focus:outline-0`}
-        />
-      </div>
+      <Input
+        id="bio"
+        type="textarea"
+        label="Short bio"
+        placeholder="Feel free to ask any questions"
+        required
+        onChange={e => setFormData({ ...formData, bio: e.target.value })}
+        className="min-h-[100px] resize-none"
+      />
 
       {/* Submit */}
-      <div>
-        <motion.button
-          onClick={() => completeStep()}
-          whileHover={{
-            scale: 1.01,
-          }}
-          whileTap={{
-            scale: 0.95,
-          }}
-          // type="submit"
-          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
-        >
-          Complete Step 1
-        </motion.button>
-      </div>
+      <motion.button
+        type="submit"
+        onClick={() => completeStep()}
+        whileHover={{
+          scale: 1.01,
+        }}
+        whileTap={{
+          scale: 0.95,
+        }}
+        className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+      >
+        Complete Step 1
+      </motion.button>
     </div>
   )
 }
@@ -297,12 +281,7 @@ function StepOne({ setStep, data, submitData }) {
 function StepTwo({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
+    if (!formData.live || !formData.motivation || !formData.news) {
       return
     }
     setStep(1)
@@ -388,10 +367,10 @@ function StepThree({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
     if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
+      !formData.instagram ||
+      !formData.youtube ||
+      !formData.tiktok ||
+      !formData.spotify
     ) {
       return
     }
@@ -492,14 +471,6 @@ function StepThree({ setStep, data, submitData }) {
 function StepFour({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
-      return
-    }
     setStep(1)
     submitData(formData)
   }
@@ -606,15 +577,9 @@ function StepFour({ setStep, data, submitData }) {
 function StepFive({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
+    if (!formData.period || !formData.other) {
       return
     }
-    // setStep(1)
     submitData(formData)
   }
   return (

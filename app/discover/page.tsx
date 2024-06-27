@@ -6,6 +6,7 @@ import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 import Link from 'next/link'
 import styles from '@/styles/discover.module.scss'
 import Image from 'next/image'
+import DiscoverBanner from '@/components/Banners/DiscoverBanner'
 import DynamicBanner from '@/components/Banners/DynamicBanner'
 
 // ----------------------------------------------------------------------------
@@ -23,6 +24,13 @@ export default async function Discover() {
         subtitle={content.subtitle}
         caption={content.caption}
       />
+      {/* <DiscoverBanner
+        title={content.title}
+        subtitle={content.subtitle}
+        caption={content.caption}
+        videoID={content.videoID}
+        artists={artists}
+      /> */}
       <div className="grid p-4 md:p-12 gap-2 lg:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {artists?.map(artist => {
           return (

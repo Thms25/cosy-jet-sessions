@@ -1,6 +1,9 @@
-const postmark = require('postmark')
+// const postmark = require('postmark')
+import postmark from 'postmark'
 
-export async function POST(request) {
+import { NextRequest, NextResponse } from 'next/server'
+
+export async function POST(request: NextRequest) {
   try {
     const {
       name,
