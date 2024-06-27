@@ -6,6 +6,7 @@ type InputProps = {
   required: boolean
   onChange?: (e: any) => void
   className?: string
+  error?: string
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   required = false,
   className,
   onChange,
+  error,
 }: InputProps) {
   return (
     <div className="mb-4">
@@ -42,6 +44,7 @@ export default function Input({
           onChange={onChange}
         />
       )}
+      {error && <p className="">{error}</p>}
     </div>
   )
 }

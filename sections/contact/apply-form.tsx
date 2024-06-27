@@ -11,11 +11,12 @@ import { sendEmail } from '@/utils/fetchUtils/EmailFetchUtils'
 import { motion } from 'framer-motion'
 
 // Components
+import { useForm, FormProvider } from 'react-hook-form'
 import { Reveal } from '@/components/animations/Reveal'
 import StepProgress from '@/components/tools/step-progress'
 import Image from 'next/image'
 import Input from '@/components/form/Input'
-import { FormProvider, useForm } from 'react-hook-form'
+import { ApplyStepOne } from './apply-steps/apply-step-one'
 
 type ApplyFormProps = {
   content: {
@@ -32,7 +33,23 @@ interface EmailData {
 // ---------------------------------------------------------------------
 
 export default function ApplyForm({ content }: ApplyFormProps) {
-  // const handleSubmit = async (data: EmailData) => {
+  const methods = useForm({
+    defaultValues: {
+      email: '',
+      subject: '',
+      message: '',
+    },
+  })
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods
+
+  console.log('methods: ', methods)
+
+  // const onSubmit = async (data: EmailData) => {
   //   try {
   //     await sendEmail(data, 'apply')
   //     handleSetStep(1)
@@ -40,6 +57,17 @@ export default function ApplyForm({ content }: ApplyFormProps) {
   //     console.error(error)
   //   }
   // }
+
+  const onSubmit = handleSubmit(async data => {
+    console.log(data)
+    try {
+      await sendEmail(data, 'apply')
+      handleSetStep(1)
+    } catch (error) {
+      console.error(error)
+    }
+  })
+
   const [stepsComplete, setStepsComplete] = useState(0)
   const numSteps = 5
 
@@ -52,9 +80,6 @@ export default function ApplyForm({ content }: ApplyFormProps) {
     }
     setStepsComplete(pv => pv + num)
   }
-  const methods = useForm()
-  const onSubmit = methods.handleSubmit(data => console.log(data))
-
   return (
     <section className="">
       <StepProgress steps={stepsComplete} numSteps={numSteps} />
@@ -62,9 +87,12 @@ export default function ApplyForm({ content }: ApplyFormProps) {
       <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
         <FormProvider {...methods}>
           <Form
+            register={register}
+            errors={errors}
             stepsComplete={stepsComplete}
-            onSubmit={methods.handleSubmit(onSubmit)}
-            // onSubmit={handleSubmit}
+            // onSubmit={e => e.preventDefault()}
+            // onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit}
             onStepChange={handleSetStep}
             className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
           />
@@ -83,7 +111,14 @@ export default function ApplyForm({ content }: ApplyFormProps) {
   )
 }
 
-const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
+const Form = ({
+  register,
+  errors,
+  className,
+  onSubmit,
+  onStepChange,
+  stepsComplete,
+}) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -139,11 +174,19 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
     >
       {stepsComplete === 0 && (
         <Reveal>
-          <StepOne
+          <ApplyStepOne
             data={formData}
             setStep={stepChange}
             submitData={handleGetData}
+            register={register}
+            errors={errors}
           />
+          {/* <StepOne
+            register={register}
+            data={formData}
+            setStep={stepChange}
+            submitData={handleGetData}
+          /> */}
         </Reveal>
       )}
       {stepsComplete === 1 && (
@@ -191,7 +234,7 @@ const Form = ({ className, onSubmit, onStepChange, stepsComplete }) => {
   )
 }
 
-function StepOne({ setStep, data, submitData }) {
+function StepOne({ register, setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
     if (
@@ -227,6 +270,13 @@ function StepOne({ setStep, data, submitData }) {
         label="Email"
         placeholder="Your email..."
         required
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email address',
+          },
+        })}
         onChange={e => setFormData({ ...formData, email: e.target.value })}
       />
 

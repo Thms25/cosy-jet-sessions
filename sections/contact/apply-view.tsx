@@ -17,7 +17,7 @@ export default function ApplyView({
   return (
     <main>
       <div className="pt-16 sm:pt-24 h-screen">
-        <FormBanner images={images} content={content} />
+        {/* <FormBanner images={images} content={content} /> */}
       </div>
 
       <section className="p-12" id="form">

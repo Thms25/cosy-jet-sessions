@@ -2,7 +2,6 @@ import ContactBanner from './contact-banner'
 import MessageForm from './message-form'
 
 export default function PartnershipView({ content }) {
-  console.log(content)
   return (
     <>
       <ContactBanner

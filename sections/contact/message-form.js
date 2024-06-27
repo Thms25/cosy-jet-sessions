@@ -13,7 +13,7 @@ import { useState } from 'react'
 export default function MessageForm() {
   const handleSubmit = async data => {
     try {
-      await sendEmail(data)
+      await sendEmail(data, message)
     } catch (error) {
       console.error(error)
     }
