@@ -20,8 +20,8 @@ const navItems = [
     link: '/about',
   },
   {
-    title: 'Discover',
-    link: '/discover',
+    title: 'Artists',
+    link: '/artists',
   },
   {
     title: 'Contact',

@@ -1,4 +1,3 @@
-// import { getSpotifyArtist, getSpotifyToken } from './spotify-api-utils'
 import { unstable_cache as cache } from 'next/cache'
 
 import { db } from '@/utils/firebase/firebase-config'

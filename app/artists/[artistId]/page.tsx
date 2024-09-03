@@ -1,5 +1,6 @@
 // Utils
 import { getArtist } from '@/utils/fetchUtils/ArtistFetchUtils'
+import { getSpotifyArtist } from '@/utils/fetchUtils/spotify-api-utils'
 
 // Components
 import ArtistView from '@/sections/artist/artist-view'
@@ -53,6 +54,9 @@ export default async function Artist({ params }: ArtistPageProps) {
     spotify_id: artistData.spotify_id || '',
     videos: artistData.videos || [],
   }
+
+  // const spotify_data = await getSpotifyArtist(artist.name)
+  // console.log(spotify_data)
 
   return (
     <div className="p-4 md:p-12 lg:p-16 2xl:px-48">

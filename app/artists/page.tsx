@@ -6,14 +6,14 @@ import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 import Link from 'next/link'
 import styles from '@/styles/discover.module.scss'
 import Image from 'next/image'
-import DiscoverBanner from '@/components/Banners/DiscoverBanner'
+// import DiscoverBanner from '@/components/Banners/DiscoverBanner'
 import DynamicBanner from '@/components/Banners/DynamicBanner'
 
 // ----------------------------------------------------------------------------
 
 export const revalidate = 60 * 60 * 24 // 24 hours
 
-export default async function Discover() {
+export default async function Artists() {
   const artists = await getArtists()
   const content = await getNotionContent('discover')
 
@@ -35,7 +35,7 @@ export default async function Discover() {
         {artists?.map(artist => {
           return (
             <div key={artist.id} className={styles.artistCard}>
-              <Link href={`/artist/${artist.id}`}>
+              <Link href={`/artists/${artist.id}`}>
                 <div className={styles.backgroundDiv}>
                   <h3 className="">{artist.name}</h3>
                   {artist.image && (

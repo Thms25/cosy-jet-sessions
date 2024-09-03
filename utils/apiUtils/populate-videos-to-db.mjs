@@ -31,6 +31,57 @@ import {
 import { google } from 'googleapis'
 const youtube = google.youtube('v3')
 
+// -------------------------------------------------------------
+
+const TOKEN_URL = process.env.SPOTIFY_TOKEN_URL
+const ID = process.env.SPOTIFY_CLIENT_ID
+const SECRET = process.env.SPOTIFY_CLIENT_SECRET
+const REDIRECT = process.env.SPOTIFY_REDIRECT_URI
+const API = process.env.SPOTIFY_API_URL
+
+const spotify_token_res = await fetch(TOKEN_URL, {
+  method: 'POST',
+  body: 'grant_type=client_credentials',
+
+  headers: {
+    'content-type': 'application/x-www-form-urlencoded',
+    Authorization: 'Basic ' + btoa(`${ID}:${SECRET}`),
+  },
+  next: {
+    revalidate: 60 * 60, // 1 hour,
+  },
+})
+const spotify_token = await spotify_token_res.json()
+
+async function getSpotifyArtist(name) {
+  let query = name.replace(' ', '%20')
+  try {
+    const res = await fetch(
+      `${API}/search?q=${query}&type=artist&market=BE&limit=20&offset=0`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${spotify_token.access_token}`,
+        },
+      },
+    )
+
+    const data = await res.json()
+    const artists = data.artists.items
+    return artists[0]
+  } catch (error) {
+    console.log('spotify error: ', error)
+
+    return {
+      id: null,
+      external_urls: { spotify: null },
+      popularity: null,
+    }
+  }
+}
+
+// -------------------------------------------------------------
+
 async function deleteExistingData() {
   console.log('starting deleting existing data \n')
 
@@ -97,17 +148,19 @@ async function findOrCreateArtist(artistName, img, date) {
 
   if (!artistSnapshot.empty) {
     const doc = artistSnapshot.docs[0]
-    // return { id: doc.id, ...doc.data() }
     return doc
   } else {
+    const spotify_data = await getSpotifyArtist(artistName)
+    console.log('Spotify data: ', spotify_data)
+
     const docRef = await addDoc(artistCollection, {
       name: artistName,
       image: img,
       perf_date: date,
-      // slug: artistName.toLowerCase().replace(/ /g, ''),
+      spotify_id: spotify_data.id,
+      spotify_link: spotify_data.external_urls.spotify,
+      spotify_popularity: spotify_data.popularity,
     })
-
-    // Return the id of the new document and the data you just added
     return docRef
   }
 }
@@ -193,7 +246,9 @@ async function addFullVideos(videos) {
         thumbnailUrl,
         publishedAt,
       )
-      console.log('Artist: ', artist.name)
+      console.log('Artist doc: ', artist)
+
+      console.log('Artist: ', artistName)
 
       ARTISTS.push(artist.name)
 
