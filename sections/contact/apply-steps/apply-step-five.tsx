@@ -1,15 +1,16 @@
+// Components
 import Input from '@/components/form/Input'
+
+// Hooks
 import { useState } from 'react'
 
-function ApplyStepOne({ register, setStep, data, submitData }) {
+// Animate
+import { motion } from 'framer-motion'
+
+export function ApplyStepFive({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
+    if (!formData.period) {
       return
     }
     setStep(1)
@@ -19,79 +20,60 @@ function ApplyStepOne({ register, setStep, data, submitData }) {
   return (
     <div>
       <h3 className="text-lg font-bold mb-6 text-center">
-        Step 1: Artist Information
+        Step 5: Last Details
       </h3>
 
+      {/* Period input */}
       <Input
-        id="name"
+        id="period"
+        value={formData.period}
         type="text"
-        label="Artist"
-        placeholder="Artist name..."
         required
-        onChange={e => setFormData({ ...formData, name: e.target.value })}
+        onChange={e => setFormData({ ...formData, period: e.target.value })}
+        placeholder="Type in dates here..."
+        label="Ideal Date periods to share the videos"
       />
 
+      {/* Other */}
       <Input
-        id="email"
-        type="email"
-        label="Email"
-        placeholder="Your email..."
-        required
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
-          },
-        })}
-        error={errors.email && errors.email.message}
-        onChange={e => setFormData({ ...formData, email: e.target.value })}
-      />
-
-      <Input
-        id="tel"
-        type="number"
-        label="Phone Number"
-        placeholder="Your number..."
-        required
-        onChange={e => setFormData({ ...formData, tel: e.target.value })}
-      />
-
-      <Input
-        id="music_genre"
-        type="text"
-        label="Music genre"
-        placeholder="Your type of music..."
-        required
-        onChange={e =>
-          setFormData({ ...formData, music_genre: e.target.value })
-        }
-      />
-
-      <Input
-        id="bio"
+        id="other"
+        value={formData.other}
         type="textarea"
-        label="Short bio"
-        placeholder="Feel free to ask any questions"
         required
-        onChange={e => setFormData({ ...formData, bio: e.target.value })}
-        className="min-h-[100px] resize-none"
+        onChange={e => setFormData({ ...formData, other: e.target.value })}
+        placeholder="Feel free to add anything you want to share with us"
+        label="Something to add ?"
+        className="min-h-[150px]"
       />
 
       {/* Submit */}
-      <motion.button
-        type="submit"
-        onClick={() => completeStep()}
-        whileHover={{
-          scale: 1.01,
-        }}
-        whileTap={{
-          scale: 0.95,
-        }}
-        className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
-      >
-        Complete Step 1
-      </motion.button>
+      <div className="grid grid-cols-1 gap-3">
+        <motion.button
+          onClick={() => setStep(-1)}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Go Back
+        </motion.button>
+        <motion.button
+          type="submit"
+          onClick={() => completeStep()}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Complete Application !
+        </motion.button>
+      </div>
     </div>
   )
 }

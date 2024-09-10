@@ -1,4 +1,5 @@
 import Input from '@/components/form/Input'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 function ApplyStepOne({ register, setStep, data, submitData }) {
@@ -44,7 +45,7 @@ function ApplyStepOne({ register, setStep, data, submitData }) {
             message: 'Invalid email address',
           },
         })}
-        error={errors.email && errors.email.message}
+        // error={errors.email && errors.email.message}
         onChange={e => setFormData({ ...formData, email: e.target.value })}
       />
 

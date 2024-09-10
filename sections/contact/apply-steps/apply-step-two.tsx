@@ -1,97 +1,90 @@
+// Components
 import Input from '@/components/form/Input'
+
+// Hooks
 import { useState } from 'react'
 
-function ApplyStepOne({ register, setStep, data, submitData }) {
+// Animate
+import { motion } from 'framer-motion'
+
+export function ApplyStepTwo({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
+
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
+    if (!formData.live || !formData.motivation || !formData.news) {
       return
     }
     setStep(1)
     submitData(formData)
   }
-
   return (
     <div>
       <h3 className="text-lg font-bold mb-6 text-center">
-        Step 1: Artist Information
+        Step 2: Build your case
       </h3>
 
+      {/* Live perf input */}
       <Input
-        id="name"
+        id="live"
+        value={formData.live}
         type="text"
-        label="Artist"
-        placeholder="Artist name..."
+        label="Link to a live performance"
+        placeholder="Paste link here..."
         required
-        onChange={e => setFormData({ ...formData, name: e.target.value })}
+        onChange={e => setFormData({ ...formData, live: e.target.value })}
       />
 
+      {/* Motivatiojs */}
       <Input
-        id="email"
-        type="email"
-        label="Email"
-        placeholder="Your email..."
-        required
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
-          },
-        })}
-        error={errors.email && errors.email.message}
-        onChange={e => setFormData({ ...formData, email: e.target.value })}
-      />
-
-      <Input
-        id="tel"
-        type="number"
-        label="Phone Number"
-        placeholder="Your number..."
-        required
-        onChange={e => setFormData({ ...formData, tel: e.target.value })}
-      />
-
-      <Input
-        id="music_genre"
-        type="text"
-        label="Music genre"
-        placeholder="Your type of music..."
-        required
-        onChange={e =>
-          setFormData({ ...formData, music_genre: e.target.value })
-        }
-      />
-
-      <Input
-        id="bio"
+        id="motivation"
+        value={formData.motivation}
         type="textarea"
-        label="Short bio"
-        placeholder="Feel free to ask any questions"
+        label="Motivations & intentions"
+        placeholder="Tell us why you want to join the family"
         required
-        onChange={e => setFormData({ ...formData, bio: e.target.value })}
-        className="min-h-[100px] resize-none"
+        onChange={e => setFormData({ ...formData, motivation: e.target.value })}
+        className="min-h-[150px]"
+      />
+
+      {/* news */}
+      <Input
+        id="news"
+        value={formData.news}
+        type="textarea"
+        label="Upcoming shows / releases, or any relevant event"
+        placeholder="What's coming up ?"
+        required
+        onChange={e => setFormData({ ...formData, news: e.target.value })}
+        className="min-h-[150px]"
       />
 
       {/* Submit */}
-      <motion.button
-        type="submit"
-        onClick={() => completeStep()}
-        whileHover={{
-          scale: 1.01,
-        }}
-        whileTap={{
-          scale: 0.95,
-        }}
-        className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
-      >
-        Complete Step 1
-      </motion.button>
+      <div className="grid grid-cols-2 gap-3">
+        <motion.button
+          onClick={() => setStep(-1)}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Go Back
+        </motion.button>
+        <motion.button
+          onClick={() => completeStep()}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Complete Step 2
+        </motion.button>
+      </div>
     </div>
   )
 }

@@ -7,9 +7,7 @@ import { useState } from 'react'
 // Animate
 import { motion } from 'framer-motion'
 
-export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
-  console.log('errors: ', errors)
-
+export function ApplyStepOne({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
     if (
@@ -32,6 +30,7 @@ export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
 
       <Input
         id="name"
+        value={formData.name}
         type="text"
         label="Artist"
         placeholder="Artist name..."
@@ -41,24 +40,18 @@ export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
 
       <Input
         id="email"
-        type="email"
+        value={formData.email}
+        type="text"
         label="Email"
         placeholder="Your email..."
-        // required
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
-          },
-        })}
-        error={errors.email && errors.email.message}
+        required
         onChange={e => setFormData({ ...formData, email: e.target.value })}
       />
 
       <Input
         id="tel"
-        type="number"
+        value={formData.tel}
+        type="text"
         label="Phone Number"
         placeholder="Your number..."
         required
@@ -67,6 +60,7 @@ export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
 
       <Input
         id="music_genre"
+        value={formData.music_genre}
         type="text"
         label="Music genre"
         placeholder="Your type of music..."
@@ -78,6 +72,7 @@ export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
 
       <Input
         id="bio"
+        value={formData.bio}
         type="textarea"
         label="Short bio"
         placeholder="Feel free to ask any questions"
@@ -88,7 +83,6 @@ export function ApplyStepOne({ register, errors, setStep, data, submitData }) {
 
       {/* Submit */}
       <motion.button
-        type="submit"
         onClick={() => completeStep()}
         whileHover={{
           scale: 1.01,

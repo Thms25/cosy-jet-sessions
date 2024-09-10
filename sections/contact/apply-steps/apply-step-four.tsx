@@ -1,17 +1,16 @@
+// Components
 import Input from '@/components/form/Input'
+
+// Hooks
 import { useState } from 'react'
 
-function ApplyStepOne({ register, setStep, data, submitData }) {
+// Animate
+import { motion } from 'framer-motion'
+import InputChecbox from '@/components/form/Input-checkbox'
+
+export function ApplyStepFour({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
   const completeStep = () => {
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.music_genre ||
-      !formData.bio
-    ) {
-      return
-    }
     setStep(1)
     submitData(formData)
   }
@@ -19,79 +18,60 @@ function ApplyStepOne({ register, setStep, data, submitData }) {
   return (
     <div>
       <h3 className="text-lg font-bold mb-6 text-center">
-        Step 1: Artist Information
+        Step 4: Our Requirements
       </h3>
 
-      <Input
-        id="name"
-        type="text"
-        label="Artist"
-        placeholder="Artist name..."
-        required
-        onChange={e => setFormData({ ...formData, name: e.target.value })}
+      {/* collab */}
+      <InputChecbox
+        value={formData.collab}
+        label="We ask the artist to do collab posts on instagram"
+        placeholder="I accept to collaborate on instagram posts"
+        onChange={e => setFormData({ ...formData, collab: e.target.value })}
       />
 
-      <Input
-        id="email"
-        type="email"
-        label="Email"
-        placeholder="Your email..."
-        required
-        {...register('email', {
-          required: 'Email is required',
-          pattern: {
-            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-            message: 'Invalid email address',
-          },
-        })}
-        error={errors.email && errors.email.message}
-        onChange={e => setFormData({ ...formData, email: e.target.value })}
+      {/* engagement */}
+      <InputChecbox
+        value={formData.engagement}
+        label="We need the artist to communicate on their social medias and engage with audience"
+        placeholder="I accept to collaborate on instagram posts"
+        onChange={e => setFormData({ ...formData, engagement: e.target.value })}
       />
 
-      <Input
-        id="tel"
-        type="number"
-        label="Phone Number"
-        placeholder="Your number..."
-        required
-        onChange={e => setFormData({ ...formData, tel: e.target.value })}
-      />
-
-      <Input
-        id="music_genre"
-        type="text"
-        label="Music genre"
-        placeholder="Your type of music..."
-        required
-        onChange={e =>
-          setFormData({ ...formData, music_genre: e.target.value })
-        }
-      />
-
-      <Input
-        id="bio"
-        type="textarea"
-        label="Short bio"
-        placeholder="Feel free to ask any questions"
-        required
-        onChange={e => setFormData({ ...formData, bio: e.target.value })}
-        className="min-h-[100px] resize-none"
+      {/* calendar */}
+      <InputChecbox
+        value={formData.calendar}
+        label="The artist's social media calendar must keep a week dedicated to the sessions and its promotion"
+        placeholder="I accept tokeep my calendar for cosy room"
+        onChange={e => setFormData({ ...formData, calendar: e.target.value })}
       />
 
       {/* Submit */}
-      <motion.button
-        type="submit"
-        onClick={() => completeStep()}
-        whileHover={{
-          scale: 1.01,
-        }}
-        whileTap={{
-          scale: 0.95,
-        }}
-        className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
-      >
-        Complete Step 1
-      </motion.button>
+      <div className="grid grid-cols-2 gap-3">
+        <motion.button
+          onClick={() => setStep(-1)}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Go Back
+        </motion.button>
+        <motion.button
+          onClick={() => completeStep()}
+          whileHover={{
+            scale: 1.01,
+          }}
+          whileTap={{
+            scale: 0.95,
+          }}
+          className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
+        >
+          Complete Step 4
+        </motion.button>
+      </div>
     </div>
   )
 }

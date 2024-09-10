@@ -1,5 +1,6 @@
 type InputProps = {
   id?: string
+  value: string
   type: string
   label?: string
   placeholder?: string
@@ -11,6 +12,7 @@ type InputProps = {
 
 export default function Input({
   id,
+  value,
   type,
   label,
   placeholder,
@@ -26,16 +28,19 @@ export default function Input({
           {label}
         </label>
       </div>
-      {type === 'textarea' ? (
+      {type === 'textarea' && (
         <textarea
-          required={required}
           id={id}
+          value={value}
+          required={required}
           className={`bg-cjsPink text-xs placeholder-cjsWhite p-2 rounded-md w-full focus:outline-0 ${className}`}
           placeholder={placeholder}
           onChange={onChange}
         />
-      ) : (
+      )}
+      {type === 'text' && (
         <input
+          value={value}
           required={required}
           id={id}
           type={type}
