@@ -13,5 +13,4 @@ module.exports = {
       fullUrl: true,
     },
   },
-  transpilePackages: ['three'],
 }

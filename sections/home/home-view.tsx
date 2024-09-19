@@ -1,7 +1,6 @@
 // Components
 import { HomeBanner } from '@/components/Banners/HomeBanner'
 import { Reveal } from '@/components/animations/Reveal'
-// import CanvasHome from '@/components/CanvasHome'
 import SmoothCarousel from '@/components/caroussels/SmoothCarousel'
 
 // Utils
