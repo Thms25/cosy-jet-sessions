@@ -49,7 +49,11 @@ export default function Input({
           onChange={onChange}
         />
       )}
-      {error && <p className="">{error}</p>}
+      {error && (
+        <p className="text-cjsWhite bg-red-700 py-1 px-2 uppercase mt-1 rounded-md text-xs">
+          {error}
+        </p>
+      )}
     </div>
   )
 }

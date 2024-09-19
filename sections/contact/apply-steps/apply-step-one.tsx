@@ -9,12 +9,14 @@ import { motion } from 'framer-motion'
 
 export function ApplyStepOne({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
+  const [error, setError] = useState(false)
   const completeStep = () => {
     if (
       !formData.name ||
       !formData.email ||
       !formData.music_genre ||
-      !formData.bio
+      !formData.bio ||
+      error
     ) {
       return
     }
@@ -45,7 +47,22 @@ export function ApplyStepOne({ setStep, data, submitData }) {
         label="Email"
         placeholder="Your email..."
         required
-        onChange={e => setFormData({ ...formData, email: e.target.value })}
+        error={
+          formData.email.match(
+            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+          ) || !formData.email
+            ? ''
+            : 'Invalid email'
+        }
+        onChange={e => {
+          e.target.value.match(
+            /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+          )
+            ? setError(false)
+            : setError(true)
+
+          setFormData({ ...formData, email: e.target.value })
+        }}
       />
 
       <Input
@@ -55,7 +72,18 @@ export function ApplyStepOne({ setStep, data, submitData }) {
         label="Phone Number"
         placeholder="Your number..."
         required
-        onChange={e => setFormData({ ...formData, tel: e.target.value })}
+        error={
+          formData.tel.match(/^\+?[0-9\s\-()]{7,15}$/) || !formData.tel
+            ? ''
+            : 'Invalid phone number'
+        }
+        onChange={e => {
+          e.target.value.match(/^\+?[0-9\s\-()]{7,15}$/)
+            ? setError(false)
+            : setError(true)
+
+          setFormData({ ...formData, tel: e.target.value })
+        }}
       />
 
       <Input
@@ -92,7 +120,7 @@ export function ApplyStepOne({ setStep, data, submitData }) {
         }}
         className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
       >
-        Complete Step 1
+        {error ? 'Please fill out the form correctly' : 'Complete Step 1'}
       </motion.button>
     </div>
   )

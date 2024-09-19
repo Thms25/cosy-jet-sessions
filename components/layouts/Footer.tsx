@@ -3,30 +3,32 @@ import { FaTiktok } from 'react-icons/fa'
 
 import Link from 'next/link'
 
-import Image from 'next/image'
-
 const socialLinks = [
   {
     icon: <CiInstagram />,
     link: 'https://www.instagram.com/cosyjetsessions',
+    target: '_blank',
   },
   {
     icon: <CiYoutube />,
     link: 'https://www.youtube.com/@cosyjetsessions',
+    target: '_blank',
   },
   {
     icon: <FaTiktok />,
     link: 'https://www.tiktok.com/@cosyjetsessions',
+    target: '_blank',
   },
   {
     icon: <CiMail />,
-    link: 'mailto:contact@cosyjetsessions.com',
+    link: '/contact/message',
+    target: '',
   },
 ]
 
 export default function Footer() {
   return (
-    <footer className=" z-50 w-full px-6  bg-cjsWhite bg-opacity-80 border-t  border-cjsBrown flex items-center justify-between">
+    <footer className="fixed bottom-0 z-50 w-full px-6  bg-cjsWhite  border-t  border-cjsBrown flex items-center justify-between">
       <Link href="/contact/message" className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +53,7 @@ export default function Footer() {
         {socialLinks.map((social, index) => (
           <li key={index}>
             <Link
-              target="_blank"
+              target={social.target}
               href={social.link}
               className="text-cjsBrown px-3 "
             >

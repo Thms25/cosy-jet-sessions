@@ -13,9 +13,17 @@ type FromBannerProps = {
     apply_cta: string
     apply_form_intro: string
   }
+  handdleShowForm: () => void
 }
 
-export default function FromBanner({ images, content }: FromBannerProps) {
+export default function FromBanner({
+  images,
+  content,
+  handdleShowForm,
+}: FromBannerProps) {
+  const handleClick = () => {
+    handdleShowForm()
+  }
   return (
     <div>
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
@@ -28,7 +36,10 @@ export default function FromBanner({ images, content }: FromBannerProps) {
           </p>
           <ScrollLink to="form" smooth={true} duration={500}>
             <Button>
-              <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
+              <button
+                onClick={() => handleClick()}
+                className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300"
+              >
                 {content.apply_cta}
               </button>
             </Button>

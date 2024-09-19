@@ -10,9 +10,13 @@ type FromBannerProps = {
     cta: string
     form_intro: string
   }
+  handleShowForm: () => void
 }
 
-export default function ContactBanner({ content }: FromBannerProps) {
+export default function ContactBanner({
+  content,
+  handleShowForm,
+}: FromBannerProps) {
   return (
     <header className=" h-screen mx-auto p-16 flex flex-col justify-center items-center">
       <div>
@@ -24,7 +28,10 @@ export default function ContactBanner({ content }: FromBannerProps) {
         </p>
         <ScrollLink to="form" smooth={true} duration={500}>
           <Button>
-            <button className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300">
+            <button
+              onClick={() => handleShowForm()}
+              className="border border-cjsBrown text-cjsBrown bg-cjsBrown bg-opacity-0 hover:bg-opacity-10 font-medium py-2 px-4 mt-4 rounded-lg  shadow-sm hover:shadow-md transition duration-300"
+            >
               {content.cta}
             </button>
           </Button>

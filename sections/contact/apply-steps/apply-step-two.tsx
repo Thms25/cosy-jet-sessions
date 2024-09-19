@@ -9,9 +9,10 @@ import { motion } from 'framer-motion'
 
 export function ApplyStepTwo({ setStep, data, submitData }) {
   const [formData, setFormData] = useState(data)
+  const [error, setError] = useState(false)
 
   const completeStep = () => {
-    if (!formData.live || !formData.motivation || !formData.news) {
+    if (!formData.live || !formData.motivation || !formData.news || error) {
       return
     }
     setStep(1)
@@ -31,7 +32,16 @@ export function ApplyStepTwo({ setStep, data, submitData }) {
         label="Link to a live performance"
         placeholder="Paste link here..."
         required
-        onChange={e => setFormData({ ...formData, live: e.target.value })}
+        error={
+          formData.live.match(/https?:\/\//) || !formData.live
+            ? ''
+            : 'Incorrect link format'
+        }
+        onChange={e => {
+          e.target.value.match(/https?:\/\//) ? setError(false) : setError(true)
+
+          setFormData({ ...formData, live: e.target.value })
+        }}
       />
 
       {/* Motivatiojs */}
@@ -82,7 +92,7 @@ export function ApplyStepTwo({ setStep, data, submitData }) {
           }}
           className={`bg-cjsPink hover:bg-cjsWhite hover:text-cjsBrown transition-colors duration-300 text-md text-center rounded-lg w-full py-2 font-semibold`}
         >
-          Complete Step 2
+          {error ? 'Error in the form' : 'Complete Step 2'}
         </motion.button>
       </div>
     </div>

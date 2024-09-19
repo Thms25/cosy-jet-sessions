@@ -1,3 +1,6 @@
+'use client'
+
+import { useState } from 'react'
 import ApplyForm from './apply-form'
 import FormBanner from './form-banner'
 
@@ -14,15 +17,22 @@ export default function ApplyView({
   images,
   content,
 }: ApplyViewProps) {
+  const [showForm, setShowForm] = useState(false)
   return (
     <main>
-      <div className="pt-16 sm:pt-24 h-screen">
-        <FormBanner images={images} content={content} />
-      </div>
-
-      <section className="p-12" id="form">
-        <ApplyForm content={content} />
-      </section>
+      {showForm ? (
+        <section className="p-12" id="form">
+          <ApplyForm content={content} />
+        </section>
+      ) : (
+        <div className="pt-16 sm:pt-24 h-screen">
+          <FormBanner
+            images={images}
+            content={content}
+            handdleShowForm={() => setShowForm(true)}
+          />
+        </div>
+      )}
     </main>
   )
 }

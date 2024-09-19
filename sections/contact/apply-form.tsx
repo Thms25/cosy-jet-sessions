@@ -20,6 +20,8 @@ import { ApplyStepTwo } from './apply-steps/apply-step-two'
 import { ApplyStepThree } from './apply-steps/apply-step-three'
 import { ApplyStepFour } from './apply-steps/apply-step-four'
 import { ApplyStepFive } from './apply-steps/apply-step-five'
+import { Button } from '@/components/animations/Button'
+import ApplyTemplate from '@/utils/data/emails/apply-template-email'
 
 type ApplyFormProps = {
   content: {
@@ -30,7 +32,31 @@ type ApplyFormProps = {
 // ---------------------------------------------------------------------
 
 export default function ApplyForm({ content }: ApplyFormProps) {
-  const [emaoilSent, setEmailSent] = useState(false)
+  // return (
+  //   <ApplyTemplate
+  //     data={{
+  //       name: 'Thomas',
+  //       email: 'thomas@test.be',
+  //       music_genre: 'pop rock',
+  //       bio: 'this is my bio',
+  //       tel: '123456789',
+  //       live: 'https://youtu.be/UrCqGDl1gO4?si=McOI3humwGDqPePR',
+  //       motivation: 'i am very motivated',
+  //       news: 'nothing new so far',
+  //       instagram: 'https://www.instagram.com/cosyjetsessions',
+  //       youtube: 'https://youtube.com/@cosyjetsessions?si=flTiVTyof63F95E9',
+  //       tiktok: 'https://www.tiktok.com/@cosyjetsessions',
+  //       spotify:
+  //         'https://open.spotify.com/artist/2i2zUTjbAJuVCLxPR5bHHx?si=QR8o3xZVQqqlrvThH2D3hA',
+  //       collab: true,
+  //       engagement: false,
+  //       calendar: true,
+  //       period: 'next month',
+  //       other: 'nope',
+  //     }}
+  //   />
+  // )
+  const [emailSent, setEmailSent] = useState(false)
 
   async function handleSubmit(data: any) {
     console.log('Data:', data)
@@ -56,31 +82,67 @@ export default function ApplyForm({ content }: ApplyFormProps) {
     }
     setStepsComplete(pv => pv + num)
   }
+
   return (
-    <section className="">
-      <StepProgress steps={stepsComplete} numSteps={numSteps} />
+    <Reveal>
+      <section className="">
+        {/* <Button>
+        <button
+          className="bg-cjsBrown text-cjsWhite p-4 rounded-lg text-2xl"
+          onClick={async () => {
+            await sendEmail(
+              {
+                name: 'Thomas',
+                email: 'thomas@test.be',
+                music_genre: 'pop rock',
+                bio: 'this is my bio',
+                tel: '123456789',
+                live: 'https://youtu.be/UrCqGDl1gO4?si=McOI3humwGDqPePR',
+                motivation: 'i am very motivated',
+                news: 'nothing new so far',
+                instagram: 'https://www.instagram.com/cosyjetsessions',
+                youtube:
+                  'https://youtube.com/@cosyjetsessions?si=flTiVTyof63F95E9',
+                tiktok: 'https://www.tiktok.com/@cosyjetsessions',
+                spotify:
+                  'https://open.spotify.com/artist/2i2zUTjbAJuVCLxPR5bHHx?si=QR8o3xZVQqqlrvThH2D3hA',
+                collab: true,
+                engagement: false,
+                calendar: true,
+                period: 'next month',
+                other: 'nope',
+              },
+              'apply',
+            )
+          }}
+        >
+          send email test
+        </button>
+      </Button> */}
+        <StepProgress steps={stepsComplete} numSteps={numSteps} />
 
-      <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
-        {/* <FormProvider {...methods}> */}
-        <Form
-          emailSent={emaoilSent}
-          stepsComplete={stepsComplete}
-          onSubmit={handleSubmit}
-          onStepChange={handleSetStep}
-          className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
-        />
-        {/* </FormProvider> */}
+        <div className="w-full md:w-2/3 mx-auto shadow-lg flex rounded-lg overflow-hidden">
+          {/* <FormProvider {...methods}> */}
+          <Form
+            emailSent={emailSent}
+            stepsComplete={stepsComplete}
+            onSubmit={handleSubmit}
+            onStepChange={handleSetStep}
+            className="p-8 w-full md:w-1/2 text-cjsWhite transition-colors duration-[750ms] bg-cjsBrown"
+          />
+          {/* </FormProvider> */}
 
-        <Image
-          priority
-          className="w-1/2 hidden md:block object-cover"
-          src="/images/lights.png"
-          alt="cjs-lights"
-          width={366}
-          height={603}
-        />
-      </div>
-    </section>
+          <Image
+            priority
+            className="w-1/2 hidden md:block object-cover"
+            src="/images/lights.png"
+            alt="cjs-lights"
+            width={366}
+            height={603}
+          />
+        </div>
+      </section>
+    </Reveal>
   )
 }
 
