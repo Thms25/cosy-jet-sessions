@@ -37,9 +37,11 @@ export default function Homeview({ content }: HomeViewProps) {
         </Reveal>
       </div>
 
-      <Reveal dly={1} initS={0.9} duration={1.5}>
-        <SmoothCarousel slides={popularVideos} />
-      </Reveal>
+      <div className="mb-20">
+        <Reveal dly={1} initS={0.9} duration={1.5}>
+          <SmoothCarousel slides={popularVideos} />
+        </Reveal>
+      </div>
     </section>
   )
 }

@@ -5,18 +5,11 @@ import ApplyForm from './apply-form'
 import FormBanner from './form-banner'
 
 type ApplyViewProps = {
-  // artists: Array<{ name: string; image: string }>
-  // images: Array<{ src: string; id: string }>
-  artists: any
   images: any
   content: any
 }
 
-export default function ApplyView({
-  artists,
-  images,
-  content,
-}: ApplyViewProps) {
+export default function ApplyView({ images, content }: ApplyViewProps) {
   const [showForm, setShowForm] = useState(false)
   return (
     <main>

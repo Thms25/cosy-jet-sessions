@@ -24,6 +24,12 @@ export default function FromBanner({
   const handleClick = () => {
     handdleShowForm()
   }
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    // Set isClient to true after the component mounts
+    setIsClient(true)
+  }, [])
   return (
     <div>
       <section className="w-full px-8 py-12 grid grid-cols-1 md:grid-cols-2 items-center gap-8 max-w-6xl mx-auto">
@@ -45,7 +51,7 @@ export default function FromBanner({
             </Button>
           </ScrollLink>
         </div>
-        <ShuffleGrid imgs={images} />
+        {isClient && <ShuffleGrid imgs={images} />}
       </section>
       <p className="text-md mx-auto p-4 w-full md:w-3/5">
         {content.apply_form_intro}

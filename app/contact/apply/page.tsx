@@ -11,5 +11,5 @@ export default async function page() {
     }
   })
   const content = await getNotionContent('contact')
-  return <ApplyView artists={artists} images={images} content={content} />
+  return <ApplyView images={images} content={content} />
 }
