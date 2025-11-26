@@ -2,9 +2,9 @@
 import { getArtists } from '@/utils/fetchUtils/ArtistFetchUtils'
 
 // components
-import Link from 'next/link'
 import styles from '@/styles/discover.module.scss'
-import Image from 'next/image'
+import { Reveal } from '@/components/animations/Reveal'
+import { SearchableArtists } from '@/components/discover/SearchableArtists'
 
 // ----------------------------------------------------------------------------
 
@@ -13,29 +13,26 @@ export default async function Discover() {
 
   return (
     <section className="">
-      <div className="grid p-4 md:p-12 gap-2 lg:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {artists?.map(artist => {
-          return (
-            <div key={artist.id} className={styles.artistCard}>
-              <Link href={`/artist/${artist.id}`}>
-                <div className={styles.backgroundDiv}>
-                  <h3 className="">{artist.name}</h3>
-                  {artist.image && (
-                    <Image
-                      priority
-                      src={artist.image}
-                      alt={`${artist.name}_thumbnail`}
-                      width={480}
-                      height={360}
-                      className={styles.backgroundImage}
-                    />
-                  )}
-                </div>
-              </Link>
-            </div>
-          )
-        })}
+      {/* Banner Section */}
+      <div className={styles.banner}>
+        <div className={styles.bannerContent}>
+          <Reveal initY={30} dly={0.2} duration={0.8}>
+            <h1 className={styles.bannerTitle}>Discover Artists</h1>
+          </Reveal>
+          <Reveal initY={20} dly={0.5} duration={0.8}>
+            <p className={styles.bannerSubtitle}>
+              Explore our collection of talented musicians and their cozy
+              sessions
+            </p>
+          </Reveal>
+          <Reveal initY={15} dly={0.8} duration={0.8} initS={0.9}>
+            <div className={styles.bannerDecor}></div>
+          </Reveal>
+        </div>
       </div>
+
+      {/* Search and Artists Grid */}
+      <SearchableArtists artists={artists} />
     </section>
   )
 }

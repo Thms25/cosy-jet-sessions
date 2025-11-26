@@ -1,5 +1,5 @@
 // import { getSpotifyArtist, getSpotifyToken } from './spotify-api-utils'
-import { unstable_cache as cache } from 'next/cache'
+import { cacheTag, cacheLife } from 'next/cache'
 
 import { db } from '@/utils/firebase/firebase-config'
 
@@ -12,21 +12,15 @@ import {
   where,
 } from 'firebase/firestore'
 
-export const revalidate = 60 * 60 * 24 // 24 hours
-
 // ----------------------------------------------------------
 
-export const getArtists = cache(
-  async () => {
-    const artists = await getAllArtists()
-    return artists
-  },
-  ['artists'],
-  {
-    tags: ['artists'],
-    revalidate: 60 * 60 * 24, // 24 hours
-  },
-)
+export async function getArtists() {
+  'use cache'
+  cacheTag('artists')
+  cacheLife('days')
+  const artists = await getAllArtists()
+  return artists
+}
 
 export async function getAllArtists() {
   try {
@@ -40,7 +34,7 @@ export async function getAllArtists() {
       const artist = { ...doc.data(), id: doc.id }
 
       const artist_videos = videos.filter(
-        video => video.artistRef.path === doc.ref.path,
+        video => video.artistRef === doc.ref.path,
       )
 
       artists.push({ ...artist, videos: artist_videos })
@@ -54,17 +48,13 @@ export async function getAllArtists() {
   }
 }
 
-export const getArtist = cache(
-  async (id: string) => {
-    const artist = await getOneArtist(id)
-    return artist
-  },
-  ['artist'],
-  {
-    tags: ['artist'],
-    revalidate: 60 * 60 * 24 * 7, // 7 days
-  },
-)
+export async function getArtist(id: string) {
+  'use cache'
+  cacheTag('artist')
+  cacheLife('weeks')
+  const artist = await getOneArtist(id)
+  return artist
+}
 
 export async function getOneArtist(id: string) {
   try {
@@ -97,17 +87,13 @@ export async function getOneArtist(id: string) {
   }
 }
 
-export const getVideos = cache(
-  async () => {
-    const videos = await getAllVideos()
-    return videos
-  },
-  ['videos'],
-  {
-    tags: ['videos'],
-    revalidate: 60 * 60 * 24, // 24 hours
-  },
-)
+export async function getVideos() {
+  'use cache'
+  cacheTag('videos')
+  cacheLife('days')
+  const videos = await getAllVideos()
+  return videos
+}
 
 export async function getAllVideos() {
   try {
@@ -116,7 +102,11 @@ export async function getAllVideos() {
 
     const videos = []
     videos_data.forEach(doc => {
-      videos.push(doc.data())
+      const data = doc.data()
+      videos.push({
+        ...data,
+        artistRef: data.artistRef?.path || null,
+      })
     })
     return videos
   } catch (error) {
@@ -124,17 +114,13 @@ export async function getAllVideos() {
   }
 }
 
-export const getShorts = cache(
-  async () => {
-    const shorts = await getAllShorts()
-    return shorts
-  },
-  ['shorts'],
-  {
-    tags: ['shorts'],
-    revalidate: 60 * 60 * 24, // 24 hours
-  },
-)
+export async function getShorts() {
+  'use cache'
+  cacheTag('shorts')
+  cacheLife('days')
+  const shorts = await getAllShorts()
+  return shorts
+}
 
 export async function getAllShorts() {
   try {
@@ -143,7 +129,11 @@ export async function getAllShorts() {
 
     const shorts = []
     shorts_data.forEach(doc => {
-      shorts.push(doc.data())
+      const data = doc.data()
+      shorts.push({
+        ...data,
+        artistRef: data.artistRef?.path || null,
+      })
     })
     return shorts
   } catch (error) {

@@ -1,3 +1,154 @@
+.banner {
+  position: relative;
+  width: 100%;
+  padding: 4rem 2rem;
+  overflow: hidden;
+
+  @media screen and (max-width: 768px) {
+    padding: 3rem 1.5rem;
+  }
+}
+
+.bannerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.bannerTitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--cjsBrown);
+  margin-bottom: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.bannerSubtitle {
+  font-family: 'Lato', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--cjsBrown);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+.bannerDecor {
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--cjsPink), var(--cjsYellow), transparent);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.searchSection {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem 1rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 1.5rem 1rem 0.5rem;
+  }
+}
+
+.searchContainer {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1.25rem;
+  width: 20px;
+  height: 20px;
+  color: var(--cjsBrown);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3.5rem;
+  font-size: 1rem;
+  font-family: 'Lato', sans-serif;
+  color: var(--cjsBrown);
+  background-color: rgba(var(--cjsWhiteRGB), 0.8);
+  border: 2px solid rgba(var(--cjsBrownRGB), 0.2);
+  border-radius: 50px;
+  outline: none;
+  transition: all 0.3s ease;
+
+  &::placeholder {
+    color: var(--cjsBrown);
+    opacity: 0.5;
+  }
+
+  &:focus {
+    border-color: var(--cjsPink);
+    background-color: rgba(var(--cjsWhiteRGB), 1);
+    box-shadow: 0 4px 12px rgba(var(--cjsPinkRGB), 0.15);
+  }
+
+  &:hover {
+    border-color: rgba(var(--cjsBrownRGB), 0.3);
+  }
+}
+
+.clearButton {
+  position: absolute;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--cjsBrownRGB), 0.1);
+  border: none;
+  border-radius: 50%;
+  color: var(--cjsBrown);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background-color: rgba(var(--cjsBrownRGB), 0.2);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.searchResults {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: var(--cjsBrown);
+  opacity: 0.7;
+  font-weight: 300;
+}
+
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--cjsBrown);
+  opacity: 0.6;
+  font-size: 1.1rem;
+}
+
 .artistCard {
   a {
     color: var(--cjsBrown);
