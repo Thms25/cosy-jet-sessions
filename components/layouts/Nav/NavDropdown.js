@@ -1,3 +1,5 @@
+'use client'
+
 import { FiEdit, FiChevronDown } from 'react-icons/fi'
 import { GiHamburgerMenu } from 'react-icons/gi'
 

@@ -7,9 +7,9 @@ import ArtistView from '@/sections/artist/artist-view'
 // --------------------------------------------------------
 
 type ArtistPageProps = {
-  params: {
+  params: Promise<{
     artistId: string
-  }
+  }>
 }
 
 interface Artist {
@@ -29,7 +29,8 @@ interface Artist {
 export const revalidate = 60 * 60 * 24 // 24 hours
 
 export async function generateMetadata({ params }: ArtistPageProps) {
-  const artistData = (await getArtist(params.artistId)) as Artist
+  const { artistId } = await params
+  const artistData = (await getArtist(artistId)) as Artist
   const artist: Artist = {
     name: artistData.name || '',
     perf_date: artistData.perf_date || '',
@@ -44,7 +45,8 @@ export async function generateMetadata({ params }: ArtistPageProps) {
 }
 
 export default async function Artist({ params }: ArtistPageProps) {
-  const artistData = (await getArtist(params.artistId)) as Artist
+  const { artistId } = await params
+  const artistData = (await getArtist(artistId)) as Artist
 
   const artist: Artist = {
     name: artistData.name || '',

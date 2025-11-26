@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import Image from "next/image";
-import styles from "../styles/about.module.scss";
-import { useInView } from "react-intersection-observer";
+import Image from 'next/image'
+import styles from '../styles/about.module.scss'
+import { useInView } from 'react-intersection-observer'
 
 export default function AboutStory() {
-  const { ref: ref1, inView: el1Visible } = useInView();
-  const { ref: ref2, inView: el2Visible } = useInView();
-  const { ref: ref3, inView: el3Visible } = useInView();
-  const { ref: ref4, inView: el4Visible } = useInView();
+  const { ref: ref1, inView: el1Visible } = useInView()
+  const { ref: ref2, inView: el2Visible } = useInView()
+  const { ref: ref3, inView: el3Visible } = useInView()
+  const { ref: ref4, inView: el4Visible } = useInView()
 
   return (
     <main className="p-12">
@@ -16,7 +16,7 @@ export default function AboutStory() {
         className={`p-12 flex ${el1Visible ? styles.appear : styles.disappear}`}
       >
         <div className="p-8 w-1/2">
-          <h3>
+          <h3 className="text-2xl font-bold">
             Cosy Jet Sessions is a unique music platform showcasing raw talent
             in a vintage and warm setting
           </h3>
@@ -85,7 +85,7 @@ export default function AboutStory() {
             hearts, make us reflect, and ultimately, bring us closer together..
           </p>
           <p>
-            {" "}
+            {' '}
             And so, Cosy Jet Sessions was born. It's more than just a media;
             it's a sanctuary for musicians to bare their souls, to share their
             artistry in a space that embraces them like an old friend. We are on
@@ -141,5 +141,5 @@ export default function AboutStory() {
         </div>
       </div>
     </main>
-  );
+  )
 }

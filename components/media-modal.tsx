@@ -1,3 +1,5 @@
+'use client'
+
 import Backdrop from './Backdrop'
 import { motion } from 'framer-motion'
 import Link from 'next/link'

@@ -1,17 +1,15 @@
 // Components
 import Homeview from '../sections/home/home-view'
-import { getNotionContent } from '../utils/fetchUtils/NotionFetchUtils'
 
 // types
 
 // ---------------------------------------------------------------------
 
-export default async function Home() {
-  // Home vuew
-  const data = await getNotionContent('home')
+export default function Home() {
   const content = {
-    slogan: data.slogan || '',
-    description: data.description || '',
+    slogan: 'Selected With Care',
+    description:
+      'Cosy Jet Sessions est la plateforme bruxelloise de référence pour découvrir des performances uniques dans un décor intimiste et réconfortant',
   }
   return <Homeview content={content} />
 }

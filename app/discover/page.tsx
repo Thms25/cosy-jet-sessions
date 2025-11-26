@@ -1,28 +1,18 @@
 // Utils
 import { getArtists } from '@/utils/fetchUtils/ArtistFetchUtils'
-import { getNotionContent } from '@/utils/fetchUtils/NotionFetchUtils'
 
 // components
 import Link from 'next/link'
 import styles from '@/styles/discover.module.scss'
 import Image from 'next/image'
-import DynamicBanner from '@/components/Banners/DynamicBanner'
 
 // ----------------------------------------------------------------------------
 
-export const revalidate = 60 * 60 * 24 // 24 hours
-
 export default async function Discover() {
   const artists = await getArtists()
-  const content = await getNotionContent('discover')
 
   return (
     <section className="">
-      <DynamicBanner
-        title={content.title}
-        subtitle={content.subtitle}
-        caption={content.caption}
-      />
       <div className="grid p-4 md:p-12 gap-2 lg:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {artists?.map(artist => {
           return (

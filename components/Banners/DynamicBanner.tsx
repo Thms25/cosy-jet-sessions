@@ -15,7 +15,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import MediaModal from '@/components/media-modal'
 import { Reveal } from '../animations/Reveal'
 
-export default function DynamicBanner({ title, subtitle, caption }) {
+export default function DynamicBanner({
+  title,
+  subtitle,
+  caption,
+}: {
+  title: string
+  subtitle: string
+  caption?: string
+}) {
   const [modalOpen, setModalOpen] = useState(false)
   const close = () => setModalOpen(false)
   const open = () => setModalOpen(true)
